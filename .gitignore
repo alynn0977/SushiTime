@@ -88,3 +88,4 @@ SushiTime/Logs/AssetImportWorker5.log
 SushiTime/Logs/AssetImportWorker6.log
 SushiTime/Logs/AssetImportWorker7.log
 SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe7.log
+*.log
