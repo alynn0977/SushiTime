@@ -13,6 +13,7 @@
 /SushiTime/Assets/Settings
 /SushiTime/Library
 /SushiTime/Temp
+/SushiTime/Logs
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -77,3 +78,13 @@ crashlytics-build.properties
 SushiTime/.vsconfig
 *.dwlt
 SushiTime/Assets/Settings.meta
+*.log
+SushiTime/Logs/AssetImportWorker0.log
+SushiTime/Logs/AssetImportWorker1.log
+SushiTime/Logs/AssetImportWorker2.log
+SushiTime/Logs/AssetImportWorker3.log
+SushiTime/Logs/AssetImportWorker4.log
+SushiTime/Logs/AssetImportWorker5.log
+SushiTime/Logs/AssetImportWorker6.log
+SushiTime/Logs/AssetImportWorker7.log
+SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe7.log
