@@ -14,6 +14,7 @@
 /SushiTime/Library
 /SushiTime/Temp
 /SushiTime/Logs
+/SushiTime/SushiTime/Logs
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -89,3 +90,6 @@ SushiTime/Logs/AssetImportWorker6.log
 SushiTime/Logs/AssetImportWorker7.log
 SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe7.log
 *.log
+SushiTime/Logs/AssetImportWorker0.log
+SushiTime/Logs/AssetImportWorker1.log
+SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe0.log
