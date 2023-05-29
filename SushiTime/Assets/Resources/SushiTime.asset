@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf626764bc79024d9fcf24cc2889df5, type: 3}
   m_Name: SushiTime
   m_EditorClassIdentifier: 
-  screens:
+  _screens:
   - {fileID: 11400000, guid: 04d9132af9fe02447bdf47e5c078a89a, type: 2}
   - {fileID: 11400000, guid: 9319d1eb59e672a4e827b36306b36cbf, type: 2}
