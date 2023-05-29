@@ -6,15 +6,11 @@ namespace Core
     using UnityEngine;
 
     /// <summary>
-    /// Gamemanager for the system. Tracks only the most universal
-    /// elements of any game (score, lives, time, and if it's paused).
+    /// Application manager for the system. Tracks only the most universal
+    /// elements of any application such as pausing and quitting.
     /// </summary>
-    public class GameManager : Singleton
+    public class AppManager : MonoBehaviour
     {
-        private int _score;
-        private int _lives;
-        private float _time;
-        private bool _isPaused;
         private void PauseGame()
         {
             // TODO: Write code that pauses the game.
