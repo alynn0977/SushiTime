@@ -672,7 +672,9 @@ MonoBehaviour:
     Sound...... Simi Virdi
 
     Jr.
-    Dev.... Simi Virdi'
+    Dev.... Simi Virdi
+
+    Food Expert Wytea'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7e0ffbf6118550469c9163548109741, type: 2}
   m_sharedMaterial: {fileID: -5433126387291429426, guid: e7e0ffbf6118550469c9163548109741, type: 2}
@@ -699,8 +701,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 23.23
+  m_fontSizeBase: 23.23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -84,6 +84,8 @@ namespace ScreenSystem
                     break;
                 }
             }
+
+            Debug.LogWarning($"Screen Name {searchByName} is not assigned to the screen array list.");
         }
 
         /// <summary>
