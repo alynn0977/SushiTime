@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
 public class ExitButton : MonoBehaviour
 {
-    private Button button;
-    
     /// <summary>
     /// Exit game or application.
     /// </summary>
@@ -18,10 +15,5 @@ public class ExitButton : MonoBehaviour
 #endif
         Application.Quit();
 
-    }
-
-    private void Awake()
-    {
-        button = GetComponent<Button>();
     }
 }

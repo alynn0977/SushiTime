@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 6479976166367586539}
   - component: {fileID: 6479976166367586538}
   - component: {fileID: 6479976166367586537}
-  - component: {fileID: 1568834112327631095}
+  - component: {fileID: 3112285911545296119}
   m_Layer: 5
   m_Name: HomeKey
   m_TagString: Untagged
@@ -636,19 +636,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1568834112327631095}
-        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
-        m_MethodName: ExitApplication
-        m_Mode: 1
+      - m_Target: {fileID: 3112285911545296119}
+        m_TargetAssemblyTypeName: ScreenSystem.CallHomeScreen, ScreenSystem
+        m_MethodName: OnCallHomeScreen
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &1568834112327631095
+--- !u!114 &3112285911545296119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6479976166367586535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba6cf0c1c0bc18418a634617904ce37, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b85333adf07ca74c94adf028cb7112a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8703632199922205590

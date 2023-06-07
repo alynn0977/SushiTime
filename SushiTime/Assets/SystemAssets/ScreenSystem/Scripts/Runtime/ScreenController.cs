@@ -1,6 +1,7 @@
 namespace ScreenSystem
 {
     using System;
+    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
@@ -9,28 +10,31 @@ namespace ScreenSystem
     /// </summary>
     public class ScreenController : MonoBehaviour
     {
+        private const string ModalScreen = "ModalHomeScreen";
+
         [SerializeField]
         private ScreenType[] _screens;
+        private Dictionary<int, ScreenType> _screensCache;
         private RectTransform _currentScreen;
         private RectTransform _homeScreen;
         private RectTransform _lastScreen;
         private Canvas _canvas;
-        
+        private List<RectTransform> _activeScreens = new();
 
         /// <summary>
         /// Get list screens available from Screen Controller.
         /// </summary>
-        public ScreenType[] GetScreens
+        public Dictionary<int, ScreenType> GetScreens
         {
             get
             {
-                if (_screens == null || _screens.Length <= 0)
+                if (_screensCache == null || _screensCache.Count <= 0)
                 {
                     Debug.LogWarning("[ScreenController] is unable to obtain Screen info.");
                     return null;
                 }
 
-                return _screens;
+                return _screensCache;
             }
         }
 
@@ -57,6 +61,12 @@ namespace ScreenSystem
         public void Initialize(string screenObject)
         {
             _screens = Resources.Load<ScreenArray>(screenObject).Screens;
+            _screensCache = new Dictionary<int, ScreenType>();
+            for (int i = 0; i < _screens.Length; i++)
+            {
+                _screensCache.Add(i, _screens[i]);
+            }
+
             InitializeHomeScreen();
         }
 
@@ -73,29 +83,57 @@ namespace ScreenSystem
                 return;
             }
 
-            foreach (ScreenType screenType in GetScreens)
+            // Iterate through the dictionary
+            foreach (var entry in _screensCache)
             {
-                if (screenType.name == searchByName)
-                {
-                    int i = Array.IndexOf(GetScreens, screenType);
-
-                    // Pass index off.
-                    GoToScreenIndex(i);
-                    break;
+                // Check if the value's string field matches the search string
+                if (entry.Value.ScreenName == searchByName)
+    {
+                    GoToScreenIndex(entry.Key);
+                    return;
                 }
             }
 
-            Debug.LogWarning($"Screen Name {searchByName} is not assigned to the screen array list.");
+            // The value was not found
+            Debug.LogWarning($"ScreenController could not find {searchByName}. Please add one to screen list.");
+
+        }
+
+        public void GoToHomeScreen(bool modalMode)
+        {
+            if (modalMode)
+            {
+                // TODO: Insert a modal mode sequence.
+                GoToScreen(ModalScreen);
+            }
+            else
+            {
+                CloseAllScreens();
+            }
+        }
+
+        private void CloseAllScreens()
+        {
+            
+            foreach(var screen in _activeScreens)
+            {
+                if (screen != null)
+                {
+                    Destroy(screen.gameObject);
+                }
+            }
+
+            _activeScreens.Clear();
         }
 
         /// <summary>
         /// Instantiate a game screen by index.
         /// </summary>
-        /// <param name="indexInArray">Index of the screen in the array.</param>
-        private void GoToScreenIndex(int indexInArray)
+        /// <param name="indexInCache">Index of the screen in the array.</param>
+        private void GoToScreenIndex(int indexInCache)
         {
             // Confirm index is valid.
-            if (IsValidIndex(indexInArray))
+            if (_screensCache.ContainsKey(indexInCache))
             {
                 if (_currentScreen != null)
                 {
@@ -104,7 +142,8 @@ namespace ScreenSystem
                 }
 
                 // Instantiate the object into a gameobject.
-                _currentScreen = Instantiate(GetScreens[indexInArray].ScreenPrefab).GetComponent<RectTransform>();
+                _currentScreen = Instantiate(GetScreens[indexInCache].ScreenPrefab).GetComponent<RectTransform>();
+                _activeScreens.Add(_currentScreen);
                 CenterAndParentScreen(_currentScreen);
             }
             else

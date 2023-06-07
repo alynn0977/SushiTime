@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 425866188777539381}
   m_Layer: 5
   m_Name: Credits
-  m_TagString: Untagged
+  m_TagString: Screen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
