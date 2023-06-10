@@ -653,11 +653,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Do you want to go to the Home screen? If you go Home now, you will lose
-    your progress.
+  m_text: 'Do you want to go Home?
 
 
-    Click "Okay" to leave, and "Cancel" to stay.'
+    All unsaved progress will be lost.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7e0ffbf6118550469c9163548109741, type: 2}
   m_sharedMaterial: {fileID: -5433126387291429426, guid: e7e0ffbf6118550469c9163548109741, type: 2}
