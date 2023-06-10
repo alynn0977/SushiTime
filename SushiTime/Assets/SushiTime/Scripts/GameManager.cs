@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
         screenController = ServiceLocator.GetService<ScreenController>();
         screenController.Initialize(screenTypeName);
         EventManager.Instance.AddListener<CallNewScreenGameEvent>(GameManagerOnNewScreen);
+        EventManager.Instance.AddListener<CallHomeScreenEvent>(GameManagerOnCallHome);
+    }
+
+    private void GameManagerOnCallHome(CallHomeScreenEvent e)
+    {
+        screenController.GoToHomeScreen(e.ModalMode);
     }
 
     private void GameManagerOnNewScreen(CallNewScreenGameEvent e)
