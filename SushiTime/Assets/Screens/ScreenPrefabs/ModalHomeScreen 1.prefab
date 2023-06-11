@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.5494838, b: 0.5494838, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Go back Home?
+  m_text: Go Home?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e05c7562825620346b7a328727771653, type: 2}
   m_sharedMaterial: {fileID: 4674158741032204320, guid: e05c7562825620346b7a328727771653, type: 2}
@@ -385,8 +385,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292737535
-  m_fontColor: {r: 1, g: 0.9764706, b: 0.8666667, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.4
+  m_fontSize: 34.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -653,10 +653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Do you want to go Home?
-
-
-    All unsaved progress will be lost.'
+  m_text: All unsaved progress will be lost if you Go Home.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7e0ffbf6118550469c9163548109741, type: 2}
   m_sharedMaterial: {fileID: -5433126387291429426, guid: e7e0ffbf6118550469c9163548109741, type: 2}
@@ -941,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CancelButton
       objectReference: {fileID: 0}
+    - target: {fileID: 207864277232087496, guid: 837288ebe71b5834ab2729d1ef9e0521, type: 3}
+      propertyPath: m_text
+      value: Stay
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 837288ebe71b5834ab2729d1ef9e0521, type: 3}
 --- !u!114 &425866187553717417 stripped
@@ -1053,6 +1054,10 @@ PrefabInstance:
     - target: {fileID: 8790375652650058222, guid: f0386bcee39f3204a855d3c0268a7d4f, type: 3}
       propertyPath: m_Name
       value: ForceHome
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790375652771693534, guid: f0386bcee39f3204a855d3c0268a7d4f, type: 3}
+      propertyPath: m_text
+      value: Go Home
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0386bcee39f3204a855d3c0268a7d4f, type: 3}
