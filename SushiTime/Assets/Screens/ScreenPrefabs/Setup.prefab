@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 425866188777539381}
   - component: {fileID: 1793362746984194337}
   - component: {fileID: 4047828035824360392}
+  - component: {fileID: 2518166213176144987}
   m_Layer: 5
   m_Name: Setup
   m_TagString: Screen
@@ -375,6 +376,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &2518166213176144987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21f2ec346204204fbbf27bbac86aca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: 2c96c5f512a902f499e6fc5d0786061f, type: 3}
 --- !u!1 &8374812120698724142
 GameObject:
   m_ObjectHideFlags: 0
