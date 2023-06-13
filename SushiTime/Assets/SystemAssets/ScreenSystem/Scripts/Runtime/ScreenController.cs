@@ -39,6 +39,14 @@ namespace ScreenSystem
         }
 
         /// <summary>
+        /// Read-only access of Home Screen assignment.
+        /// </summary>
+        public RectTransform GetHomeScreen
+        {
+            get => _homeScreen;
+        }
+
+        /// <summary>
         /// Get current canvas active in screen.
         /// </summary>
         public Canvas GetCanvas

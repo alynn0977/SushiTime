@@ -389,6 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundMusic: {fileID: 8300000, guid: 2c96c5f512a902f499e6fc5d0786061f, type: 3}
+  isFadeIn: 0
+  isFadeOut: 0
 --- !u!1 &8374812120698724142
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,14 +864,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4226750950899210995}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5255012468153241971}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
@@ -877,15 +887,31 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopMusicTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OnCallScreen
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AudioSystem.RequestMusicPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: ScreenSystem.CallNewScreen, ScreenSystem
       objectReference: {fileID: 0}
     - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1933059663635075668, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2043883437225555081, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
@@ -996,6 +1022,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenName: Dialogue01
+--- !u!114 &4226750950899210995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127593677141487512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe45eabf7efa2043a6d11fcb3b4483d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTrack: {fileID: 0}
 --- !u!224 &635292666286808820 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2043883437225555081, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}

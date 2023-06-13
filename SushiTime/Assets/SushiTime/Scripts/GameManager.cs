@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject audioPrefab;
 
-    private const string screenTypeName = "SushiTime";
-    private ScreenController screenController;
-    private AudioManager audioController;
-    private MusicPlayer musicPlayer;
+    private const string _screenTypeName = "SushiTime";
+    private ScreenController _screenController;
+    private AudioManager _audioController;
+    private MusicPlayer _musicPlayer;
+    private RectTransform _homeScreen;
 
     private void Start()
     {
@@ -24,33 +25,49 @@ public class GameManager : MonoBehaviour
         InitializeAudioController();
     }
 
+    #region Initialize
     private void InitializeScreenController()
     {
-        screenController = ServiceLocator.GetService<ScreenController>();
-        screenController.Initialize(screenTypeName);
+        _screenController = ServiceLocator.GetService<ScreenController>();
+        _screenController.Initialize(_screenTypeName);
         EventManager.Instance.AddListener<CallNewScreenGameEvent>(GameManagerOnNewScreen);
         EventManager.Instance.AddListener<CallHomeScreenEvent>(GameManagerOnCallHome);
+        _homeScreen = _screenController.GetHomeScreen;
     }
 
     private void InitializeAudioController()
     {
-        audioController = Instantiate(audioPrefab, this.transform.parent).GetComponent<AudioManager>();
-        musicPlayer = audioController.GetComponent<MusicPlayer>();
+        _audioController = Instantiate(audioPrefab, this.transform.parent).GetComponent<AudioManager>();
+        _musicPlayer = _audioController.GetComponent<MusicPlayer>();
         EventManager.Instance.AddListener<RequestMusicPlayerEvent>(GameManagerOnPlayMusic);
-    }
+        EventManager.Instance.AddListener<RequestMusicPlayerOffEvent>(GameManagerOnPlayMusicOff);
+    } 
+    #endregion
 
     private void GameManagerOnCallHome(CallHomeScreenEvent e)
     {
-        screenController.GoToHomeScreen(e.ModalMode);
+        _screenController.GoToHomeScreen(e.ModalMode);
+
+        // Handle Homescreen Restarting music.
+        if (!e.ModalMode)
+        {
+            // Play right away if no modal required.
+            _homeScreen.GetComponent<ScreenMusicProperties>().RestartMusic();
+        }
     }
 
     private void GameManagerOnNewScreen(CallNewScreenGameEvent e)
     {
-        screenController.GoToScreen(e.ScreenName);
+        _screenController.GoToScreen(e.ScreenName);
     }
 
     private void GameManagerOnPlayMusic(RequestMusicPlayerEvent e)
     {
-        musicPlayer.PlayTrack(e.Track);
+        _musicPlayer.PlayTrack(e.Track);
+    }
+
+    private void GameManagerOnPlayMusicOff(RequestMusicPlayerOffEvent e)
+    {
+        _musicPlayer.StopTrack();
     }
 }

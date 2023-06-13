@@ -11,10 +11,14 @@ namespace AudioSystem
     {
         [SerializeField]
         private AudioClip musicTrack;
-
         public void PlayMusicTrack()
         {
             EventManager.Instance.QueueEvent(new RequestMusicPlayerEvent(musicTrack));
         }
+
+        public void StopMusicTrack(float fade)
+        {
+            EventManager.Instance.QueueEvent(new RequestMusicPlayerOffEvent(fade));
+        } 
     } 
 }

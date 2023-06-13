@@ -13,22 +13,43 @@ namespace AudioSystem
         [SerializeField]
         private AudioClip backgroundMusic;
 
-        private void Start()
+        [SerializeField]
+        private bool isFadeIn;
+
+        [SerializeField]
+        private bool isFadeOut;
+
+        private AudioClip BackgroundMusic
         {
-            if (!backgroundMusic)
+            get
             {
-                Debug.LogWarning($"[{GetType().Name}] {gameObject.name} missing audio track.");
-                return;
+                if (backgroundMusic == null)
+                {
+                    Debug.LogWarning($"[{GetType().Name}] {gameObject.name} missing audio track.");
+                    return null;
+                }
+
+                return backgroundMusic;
             }
-            else
+        }
+        public void RestartMusic()
+        {
+            if (BackgroundMusic)
             {
                 EventManager.Instance.QueueEvent(new RequestMusicPlayerEvent(backgroundMusic));
             }
         }
-
-        private void OnDisable()
+        private void OnEnable()
         {
-            // TODO: Fade the music.
+            if (BackgroundMusic)
+            {
+                Invoke(nameof(DelayPlayMusic), 1f);
+            }
+        }
+
+        private void DelayPlayMusic()
+        {
+            EventManager.Instance.QueueEvent(new RequestMusicPlayerEvent(backgroundMusic));
         }
     }
 

@@ -16,7 +16,6 @@ namespace AudioSystem
 
         public void PlayAudioClip()
         {
-            Debug.LogWarning($"[{this.GetType()}] playing audio clip on {gameObject.name}.");
             audioSource.PlayOneShot(audioClip, volume);
         }
 
