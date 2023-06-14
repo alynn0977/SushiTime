@@ -41,7 +41,13 @@ public class GameManager : MonoBehaviour
         _musicPlayer = _audioController.GetComponent<MusicPlayer>();
         EventManager.Instance.AddListener<RequestMusicPlayerEvent>(GameManagerOnPlayMusic);
         EventManager.Instance.AddListener<RequestMusicPlayerOffEvent>(GameManagerOnPlayMusicOff);
-    } 
+        EventManager.Instance.AddListener<RequestAudioClipEvent>(GameManagerOnPlayClip);
+    }
+
+    private void GameManagerOnPlayClip(RequestAudioClipEvent e)
+    {
+        _audioController.Play(e.Clip.name, volume: e.Volume);
+    }
     #endregion
 
     private void GameManagerOnCallHome(CallHomeScreenEvent e)
@@ -60,6 +66,8 @@ public class GameManager : MonoBehaviour
     {
         _screenController.GoToScreen(e.ScreenName);
     }
+
+
 
     private void GameManagerOnPlayMusic(RequestMusicPlayerEvent e)
     {

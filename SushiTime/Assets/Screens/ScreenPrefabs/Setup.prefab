@@ -998,6 +998,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3165978245299958116, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 39d30c926dcb9a34e936ae928fc11402, type: 3}
     - target: {fileID: 3764437008010309618, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
@@ -1009,19 +1013,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1533787649374356965, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
   m_PrefabInstance: {fileID: 1480653452375599741}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5255012468153241971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127593677141487512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScreenName: Dialogue01
 --- !u!114 &4226750950899210995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1026,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicTrack: {fileID: 0}
+--- !u!114 &5255012468153241971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127593677141487512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenName: Dialogue01
 --- !u!224 &635292666286808820 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2043883437225555081, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}

@@ -12,7 +12,7 @@ namespace AudioSystem
         [SerializeField]
         private AudioClip audioClip;
 
-        public float volume = 0.5f;
+        public float volume = 1f;
 
         public void PlayAudioClip()
         {

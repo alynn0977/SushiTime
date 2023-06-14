@@ -37,5 +37,4 @@ namespace AudioSystem
             this.Track = newTrack;
         }
     }
-
 }
