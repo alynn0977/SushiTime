@@ -1,0 +1,16 @@
+{
+    "name": "AudioSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:18ce373ed5ae72a4691ef3fe0ac49d6d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
