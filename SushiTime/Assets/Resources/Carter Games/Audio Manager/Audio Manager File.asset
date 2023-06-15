@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ae0c8eafd7263429865ae0f6fe29e6, type: 3}
   m_Name: Audio Manager File
   m_EditorClassIdentifier: 
-  tabPos: 0
+  tabPos: 1
   audioMixer:
   - {fileID: 0}
   soundPrefab: {fileID: 322064603624763291, guid: f97cb5ab9dca8bd488116e0ffc057e10, type: 3}
@@ -21,11 +21,11 @@ MonoBehaviour:
   - Assets/Audio
   - Assets/Audio/Sfx
   library:
+  - key: 01Start_Button
+    value: {fileID: 8300000, guid: b4cefdcadca15794bbf5a12559d36941, type: 3}
   - key: 02Select_Button
     value: {fileID: 8300000, guid: 310086a032ae9924a86ca7ce99bf7cc3, type: 3}
-  - key: 04Back-Exit_Button2
-    value: {fileID: 8300000, guid: ae157893711adf84085fa541ad789f60, type: 3}
-  - key: 04Select_Button2
-    value: {fileID: 8300000, guid: ea20d90e5e7ea5442abb4fc4f2aee84e, type: 3}
-  - key: 06Start_MainMenu_Button2
-    value: {fileID: 8300000, guid: 39d30c926dcb9a34e936ae928fc11402, type: 3}
+  - key: 03Back-Exit_Button
+    value: {fileID: 8300000, guid: 994ac267d185e3642aa02cb8c8679411, type: 3}
+  - key: 04On_Press_Button
+    value: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}

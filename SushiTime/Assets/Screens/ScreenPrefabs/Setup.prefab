@@ -578,6 +578,10 @@ PrefabInstance:
       propertyPath: m_text
       value: SETTINGS
       objectReference: {fileID: 0}
+    - target: {fileID: 3165978245299958116, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}
     - target: {fileID: 7199940803191016886, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
@@ -724,6 +728,10 @@ PrefabInstance:
       propertyPath: m_text
       value: CREDIT
       objectReference: {fileID: 0}
+    - target: {fileID: 3165978245299958116, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
 --- !u!1 &1198486053978321730 stripped
@@ -844,6 +852,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExitButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8299547419152749756, guid: c96f4f92528cf9e44aa37353ffbc51c1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 310086a032ae9924a86ca7ce99bf7cc3, type: 3}
+    - target: {fileID: 8299547419152749756, guid: c96f4f92528cf9e44aa37353ffbc51c1, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 994ac267d185e3642aa02cb8c8679411, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96f4f92528cf9e44aa37353ffbc51c1, type: 3}
 --- !u!224 &425866187553717419 stripped
@@ -1001,7 +1017,7 @@ PrefabInstance:
     - target: {fileID: 3165978245299958116, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: 39d30c926dcb9a34e936ae928fc11402, type: 3}
+      objectReference: {fileID: 8300000, guid: b4cefdcadca15794bbf5a12559d36941, type: 3}
     - target: {fileID: 3764437008010309618, guid: b8343ad4692a2fc439c300eddf3c0dec, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
