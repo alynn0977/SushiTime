@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81aa9f71015690c4eacde397ef77eff5, type: 3}
+  m_Name: PandaNook
+  m_EditorClassIdentifier: 
+  characterName: Panda Nook
+  CharacterPortrait: {fileID: 21300000, guid: c1593b4ab3d5e2e46bedc7cc6ddee5ca, type: 3}
