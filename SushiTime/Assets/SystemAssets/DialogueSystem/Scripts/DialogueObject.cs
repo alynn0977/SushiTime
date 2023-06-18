@@ -8,6 +8,7 @@ namespace DialogueSystem
     [CreateAssetMenu(menuName = "My Assets/Dialogue")]
     public class DialogueObject : ScriptableObject
     {
+
         [Header("Characters")]
         // First, need left character.
         [SerializeField]
@@ -17,11 +18,44 @@ namespace DialogueSystem
         [SerializeField]
         private CharacterObject rightCharacter;
 
+        /// <summary>
+        /// Read-only access to the left character.
+        /// </summary>
+        public CharacterObject GetLeftCharacter
+        {
+            get
+            {
+                if (!leftCharacter)
+                {
+                    Debug.LogError($"[{GetType().Name}]: Please assign left character to {this.name}");
+                    return null;
+                }
+
+                return leftCharacter;
+            }
+        }
+
+        /// <summary>
+        /// Read-only access to the left character.
+        /// </summary>
+        public CharacterObject GetRightCharacter
+        {
+            get
+            {
+                if (!rightCharacter)
+                {
+                    Debug.LogError($"[{GetType().Name}]: Please assign right character to {this.name}");
+                    return null;
+                }
+
+                return rightCharacter; ;
+            }
+        }
+
         [Space(20)]
         [Header("Dialogue")]
         // Then an arrive of lots o' dialogue a plenty.
         public SpeechBubble[] TheScript;
-
     }
 
     [Serializable]

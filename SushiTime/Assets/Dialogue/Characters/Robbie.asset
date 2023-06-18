@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Robbie
   m_EditorClassIdentifier: 
   characterName: Robbie Wasabi
+  characterSize: {x: 161, y: 134}
+  characterOffset: {x: 0, y: 0, z: 0}
   CharacterPortrait: {fileID: 21300000, guid: 2185927d8685b184097e6eea746b4e02, type: 3}

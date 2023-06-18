@@ -22,3 +22,13 @@ MonoBehaviour:
       something.
   - Character: 0
     textBubble: One more test guvna'. Thank you very much,
+  - Character: 1
+    textBubble: Oye, mate. We can't end the test that early, right? We have to do
+      some more text tests.
+  - Character: 0
+    textBubble: Well then, I imagine your right, guvna. So let's get on with it.
+      Let's do something with a long test-
+  - Character: 0
+    textBubble: '- And now some short text.'
+  - Character: 1
+    textBubble: Now you have it!
