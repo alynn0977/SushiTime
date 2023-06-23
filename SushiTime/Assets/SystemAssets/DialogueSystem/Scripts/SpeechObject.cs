@@ -28,7 +28,10 @@ namespace DialogueSystem
 
         [SerializeField]
         [Tooltip("What is max characters bubble should have on one line?")]
-        private int maxWidth = 30;
+        private int maxWidth = 33;
+
+        // There's only so much a user will read. C'mon.
+        private int maxStringLength = 100;
 
         public void InitializeSpeechBubble(string initializeName, string initializeText)
         {
@@ -40,9 +43,10 @@ namespace DialogueSystem
             }
 
             characterName.text = initializeName;
-            characterText.text = ProcessedText(initializeText);
+            characterText.text = initializeText;
 
             EnableAll();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(characterText.rectTransform);
         }
 
         public void DisableSpeechBubble()
@@ -52,37 +56,9 @@ namespace DialogueSystem
 
         private void EnableAll()
         {
+            speechContainer.gameObject.SetActive(true);
             ResizeCharacterBox();
             ResizeTextBox();
-
-            speechContainer.gameObject.SetActive(true);
-        }
-
-        private string ProcessedText(string oldString)
-        {
-            // Create a StringBuilder to hold the new string.
-            StringBuilder newString = new StringBuilder();
-
-            // Iterate over the characters in the old string.
-            int i = 0;
-            while (i < oldString.Length)
-            {
-                // If the current character is a space, and the next character is less than 30 characters away,
-                // insert a linebreak.
-                if (oldString[i] == ' ' && i + 30 <= oldString.Length && oldString[i + 30] != ' ')
-                {
-                    newString.Append("\n");
-                }
-
-                // Append the current character to the new string.
-                newString.Append(oldString[i]);
-
-                // Increment the counter.
-                i++;
-            }
-
-            // Return the new string.
-            return newString.ToString();
         }
 
         private void ResizeCharacterBox()
@@ -94,8 +70,8 @@ namespace DialogueSystem
         private void ResizeTextBox()
         {
             var resizedTextHeight = characterText.preferredHeight + 6;
-            var resizedTextWidth = characterText.preferredWidth + 5;
-            characterText.rectTransform.sizeDelta = new Vector2(resizedTextWidth, resizedTextHeight);
+            // var resizedTextWidth = characterText.preferredWidth + 5;
+            characterText.rectTransform.sizeDelta = new Vector2(characterText.rectTransform.sizeDelta.x, resizedTextHeight);
         }
 
     } 
