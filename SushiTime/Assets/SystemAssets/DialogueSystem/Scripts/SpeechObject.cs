@@ -30,8 +30,7 @@ namespace DialogueSystem
         [Tooltip("What is max characters bubble should have on one line?")]
         private int maxWidth = 33;
 
-        // There's only so much a user will read. C'mon.
-        private int maxStringLength = 100;
+        private RectTransform thisRect;
 
         public void InitializeSpeechBubble(string initializeName, string initializeText)
         {
@@ -41,10 +40,10 @@ namespace DialogueSystem
                 Debug.LogError($"[{GetType().Name}]: {gameObject.name} has missing references. Check inspector.");
                 return;
             }
-
+            thisRect = GetComponent<RectTransform>();
             characterName.text = initializeName;
             characterText.text = initializeText;
-
+            
             EnableAll();
             LayoutRebuilder.ForceRebuildLayoutImmediate(characterText.rectTransform);
         }
@@ -70,8 +69,8 @@ namespace DialogueSystem
         private void ResizeTextBox()
         {
             var resizedTextHeight = characterText.preferredHeight + 6;
-            // var resizedTextWidth = characterText.preferredWidth + 5;
             characterText.rectTransform.sizeDelta = new Vector2(characterText.rectTransform.sizeDelta.x, resizedTextHeight);
+            thisRect.sizeDelta = new Vector2(thisRect.sizeDelta.x, resizedTextHeight+12);
         }
 
     } 

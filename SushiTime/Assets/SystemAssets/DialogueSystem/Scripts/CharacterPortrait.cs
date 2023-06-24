@@ -73,13 +73,14 @@ namespace DialogueSystem
             }
 
             CharacterSprite.preserveAspect = true;
+            
             CharacterSprite.rectTransform.anchorMin = Vector2Half;
             CharacterSprite.rectTransform.anchorMax = Vector2Half;
 
             if (size.Equals(Vector2.zero))
             {
                 Debug.LogWarning($"[{GetType().Name}]: {gameObject.name} was given zero size vector. Defaulting to one instead.");
-                CharacterSprite.rectTransform.sizeDelta = new Vector2(size.x, size.y);
+                CharacterSprite.rectTransform.sizeDelta = new Vector2(size.x * .5f, size.y * .5f);
             }
             else
             {

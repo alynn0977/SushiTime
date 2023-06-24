@@ -13,6 +13,7 @@ namespace DialogueSystem
     {
         private const float DivideScreen = .3f;
         private const float DivideByHalf = .5f;
+        private const float DivideByThirds = .33f;
 
         [Header("Setup")]
         // It needs to know if it should play on awake/enable
@@ -102,17 +103,25 @@ namespace DialogueSystem
 
         }
 
-        public void PlayCurrentTrack()
+        public IEnumerator PlayCurrentTrack()
         {
             Debug.Log($"Now playing track: {currentTrackIndex}");
-
+            yield return new WaitForSeconds(1.2f);
             if (trackList.ContainsKey(currentTrackIndex))
             {
+                int i = 0;
                 foreach(var track in trackList[currentTrackIndex])
                 {
-                    Debug.Log($"Track {trackList[currentTrackIndex]}: {ConvertSpeechToString(track)}");
+                    FireTrack(track, i);
+                    i++;
+                    yield return new WaitForSeconds(.4f);
                 }
             }
+        }
+
+        private void FireTrack(SpeechBubble track, int poolIndex)
+        {
+            bubblePool[poolIndex].InitializeSpeechBubble(GetCharacterName(track), ConvertSpeechToString(track));
         }
 
         public void StepForwardDialogue()
@@ -203,12 +212,22 @@ namespace DialogueSystem
             {
                 var bubble = Instantiate(bubblePrefab, dialogueHolder.transform);
                 bubblePool.Add(bubble);
-                bubble.gameObject.SetActive(false);
+                bubble.DisableSpeechBubble();
             }
 
-            Invoke(nameof(PlayCurrentTrack), 2f);
+            StartCoroutine(nameof(PlayCurrentTrack));
         }
 
+        private string GetCharacterName(SpeechBubble speechBubble)
+        {
+            if (string.IsNullOrEmpty(speechBubble.textBubble))
+            {
+                Debug.LogWarning($"[{GetType().Name}]: Given incorrect speech object.");
+                return string.Empty;
+            }
+
+            return ReturnCharacterName(speechBubble.Character);
+        }
         private string ConvertSpeechToString(SpeechBubble speechBubble) 
         {
             if (string.IsNullOrEmpty(speechBubble.textBubble))
@@ -216,15 +235,8 @@ namespace DialogueSystem
                 Debug.LogWarning($"[{GetType().Name}]: Given incorrect speech object.");
                 return string.Empty;
             }
-            string characterName = ReturnCharacterName(speechBubble.Character);
-            if (string.IsNullOrEmpty(characterName))
-            {
-                Debug.LogWarning("Character name is missing.");
-            }
 
-            string speechLine = characterName+": "+speechBubble.textBubble;
-
-            return speechLine;
+            return speechBubble.textBubble;
         }
 
         private string ReturnCharacterName(CharacterSide side)
@@ -242,7 +254,7 @@ namespace DialogueSystem
         private void InstantiateLeftCharacter()
         {
             // Calculate a new offset that takes half of thirds x, and .3 of thirds y.
-            var offsetLeft = new Vector3(thirds.x * DivideByHalf, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
+            var offsetLeft = new Vector3(thirds.x * DivideByThirds, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
 
             // Instantiate LEFT portrait with the offset. Anchor it to bottom left.
             character1 = Instantiate(portraitPrefab, dialogueFrame.position + offsetLeft, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
@@ -269,7 +281,7 @@ namespace DialogueSystem
         private void InstantiateRightCharacter()
         {
             // Calculate a new offset that takes half of thirds x, and .3 of thirds y.
-            var offsetRight = new Vector3(thirds.x * DivideByHalf * -1, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
+            var offsetRight = new Vector3(thirds.x * DivideByThirds * -1, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
 
             // Instantiate RIGHT portrait with the offset. Anchor it to bottom left.
             character2 = Instantiate(portraitPrefab, dialogueFrame.position + offsetRight, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
