@@ -25,16 +25,30 @@ namespace DialogueSystem
         [SerializeField]
         private GameObject speechContainer;
 
+        [SerializeField]
+        private Color defaultColor;
+
         private RectTransform thisRect;
         // It must be able to nudge left or right.
         private HorizontalLayoutGroup layoutGroup;
         [SerializeField]
         private int offsetAmount = 14;
+        
+        /// <summary>
+        /// Returns true if Speech Bubble is in active use.
+        /// </summary>
         public bool IsActive
         {
             get;
             private set;
         }
+
+        public void InitializeSpeechBubble(string initializeName, string initializeText, Color newTextColor)
+        {
+            characterText.color = newTextColor;
+            InitializeSpeechBubble(initializeName, initializeText);
+        }
+
         public void InitializeSpeechBubble(string initializeName, string initializeText)
         {
             Debug.Log($"[{GetType().Name}]: Initializing Speech Bubble.");
@@ -54,6 +68,7 @@ namespace DialogueSystem
 
         public void DisableSpeechBubble()
         {
+            characterText.color = defaultColor;
             speechContainer.gameObject.SetActive(false);
             IsActive = false;
         }

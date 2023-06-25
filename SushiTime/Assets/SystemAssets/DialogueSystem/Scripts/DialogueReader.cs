@@ -128,7 +128,7 @@ namespace DialogueSystem
 
         private void FireTrack(SpeechBubble track, int poolIndex)
         {
-            bubblePool[poolIndex].InitializeSpeechBubble(GetCharacterName(track), ConvertSpeechToString(track));
+            bubblePool[poolIndex].InitializeSpeechBubble(GetCharacterName(track), ConvertSpeechToString(track),GetCharacterColor(track) );
             if (track.Character == CharacterSide.Left)
             {
                 bubblePool[poolIndex].NudgeLeft();
@@ -272,6 +272,18 @@ namespace DialogueSystem
             else
             {
                 return rightCharacterName;
+            }
+        }
+
+        private Color GetCharacterColor(SpeechBubble speechBubble)
+        {
+            if (speechBubble.Character == CharacterSide.Left)
+            {
+                return dialogueObject.GetLeftCharacter.GetCharacterColor;
+            }
+            else
+            {
+                return dialogueObject.GetRightCharacter.GetCharacterColor;
             }
         }
 

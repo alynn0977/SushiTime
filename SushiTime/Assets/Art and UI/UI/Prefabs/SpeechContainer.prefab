@@ -190,6 +190,7 @@ MonoBehaviour:
   characterName: {fileID: 5156319216432571772}
   characterText: {fileID: 7081131404779167910}
   speechContainer: {fileID: 3881717616388959193}
+  defaultColor: {r: 0.17718159, g: 0.06256675, b: 0.3584906, a: 1}
   offsetAmount: 20
 --- !u!114 &5771560046329473538
 MonoBehaviour:

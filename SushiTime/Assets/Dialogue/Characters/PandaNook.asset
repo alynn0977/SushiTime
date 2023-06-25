@@ -15,4 +15,5 @@ MonoBehaviour:
   characterName: Panda Nook
   characterSize: {x: 123, y: 141}
   characterOffset: {x: -1, y: -16, z: 0}
+  characterColor: {r: 0.41799998, g: 0.38814285, b: 0.41202855, a: 1}
   CharacterPortrait: {fileID: 21300000, guid: c1593b4ab3d5e2e46bedc7cc6ddee5ca, type: 3}

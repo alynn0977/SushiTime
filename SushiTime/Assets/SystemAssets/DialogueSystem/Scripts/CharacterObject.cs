@@ -19,6 +19,10 @@ namespace DialogueSystem
         [Tooltip("Where should the character appear, when in frame?")]
         private Vector3 characterOffset = new Vector3(0, 0, 0);
 
+        [SerializeField]
+        [Tooltip("What color is associated with this character?")]
+        private Color characterColor = Color.black;
+
         /// <summary>
         /// Read-only access to character name.
         /// </summary>
@@ -38,5 +42,10 @@ namespace DialogueSystem
         /// Read-only access to how character should be offset in a frame.
         /// </summary>
         public Vector3 GetCharacterOffset => characterOffset;
+
+        /// <summary>
+        /// Read-only access to the color associated with this character.
+        /// </summary>
+        public Color GetCharacterColor => characterColor;
     } 
 }
