@@ -2,6 +2,7 @@ namespace DialogueSystem
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using UnityEngine.UI;
     /// <summary>
@@ -103,18 +104,24 @@ namespace DialogueSystem
 
         }
 
+        public IEnumerator PlayFirstTrack()
+        {
+            yield return new WaitForSeconds(4f);
+            PlayCurrentTrack();
+        }
+
         public IEnumerator PlayCurrentTrack()
         {
             Debug.Log($"Now playing track: {currentTrackIndex}");
-            yield return new WaitForSeconds(1.2f);
             if (trackList.ContainsKey(currentTrackIndex))
             {
                 int i = 0;
                 foreach(var track in trackList[currentTrackIndex])
                 {
+                    // TODO: Make the wait for seconds a customizeable preference.
                     FireTrack(track, i);
                     i++;
-                    yield return new WaitForSeconds(.4f);
+                    yield return new WaitForSeconds(1f);
                 }
             }
         }
@@ -122,49 +129,65 @@ namespace DialogueSystem
         private void FireTrack(SpeechBubble track, int poolIndex)
         {
             bubblePool[poolIndex].InitializeSpeechBubble(GetCharacterName(track), ConvertSpeechToString(track));
+            if (track.Character == CharacterSide.Left)
+            {
+                bubblePool[poolIndex].NudgeLeft();
+            }
+            else
+            {
+                bubblePool[poolIndex].NudgeRight();
+            }
+        }
+
+        private void ClearCurrentDialogue()
+        {
+            Debug.Log("Clearing Dialogue.");
+            foreach(var bubble in bubblePool)
+            {
+                if (bubble.IsActive)
+                {
+                    bubble.Center();
+                    bubble.DisableSpeechBubble();
+                }
+            }
         }
 
         public void StepForwardDialogue()
         {
+            Debug.Log("Stepping forward.");
+            ClearCurrentDialogue();
+
             if ( (currentTrackIndex + 1) > trackList.Count-1)
             {
                 Debug.Log("We're at the end. Next.");
+                StartCoroutine(PlayCurrentTrack());
                 return;
             }
 
+            // Update track.
             currentTrackIndex++;
 
-            if (trackList.ContainsKey(currentTrackIndex))
-            {
-                Debug.Log($"Now playing track: {currentTrackIndex}");
-                foreach (var track in trackList[currentTrackIndex])
-                {
-                    Debug.Log($"Track {trackList[currentTrackIndex]}: {ConvertSpeechToString(track)}");
-                }
-            }
+            // Now play current.
+            StartCoroutine(PlayCurrentTrack());
         }
 
         public void StepBackwardDialogue()
         {
+            Debug.Log("Stepping back.");
+            ClearCurrentDialogue();
             if (currentTrackIndex == 0 )
             {
-                Debug.Log("We're at the beginning already. Replay.");
                 // We're already at the beginning, so just replay current.
-                PlayCurrentTrack();
+                StartCoroutine(PlayCurrentTrack());
                 return;
             }
 
-            currentTrackIndex--;
-           
-            Debug.Log($"Now playing track: {currentTrackIndex}");
-            if (trackList.ContainsKey(currentTrackIndex))
-            {
-                foreach (var track in trackList[currentTrackIndex])
-                {
-                    Debug.Log($"Track {trackList[currentTrackIndex]}: {ConvertSpeechToString(track)}");
-                }
-            }
+            
 
+            // Update track.
+            currentTrackIndex--;
+
+            StartCoroutine(PlayCurrentTrack());
         }
 
         /// <summary>
@@ -215,6 +238,7 @@ namespace DialogueSystem
                 bubble.DisableSpeechBubble();
             }
 
+            dialogueHolder.transform.SetAsLastSibling();
             StartCoroutine(nameof(PlayCurrentTrack));
         }
 
@@ -258,6 +282,7 @@ namespace DialogueSystem
 
             // Instantiate LEFT portrait with the offset. Anchor it to bottom left.
             character1 = Instantiate(portraitPrefab, dialogueFrame.position + offsetLeft, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
+            character1.CharacterRect.SetAsFirstSibling();
             character1.PortraitRect.anchorMin = Vector2.zero;
             character1.PortraitRect.anchorMax = Vector2.zero;
 
@@ -285,6 +310,7 @@ namespace DialogueSystem
 
             // Instantiate RIGHT portrait with the offset. Anchor it to bottom left.
             character2 = Instantiate(portraitPrefab, dialogueFrame.position + offsetRight, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
+            character2.CharacterRect.SetAsFirstSibling();
             character2.PortraitRect.anchorMin = new Vector2(1, 0);
             character2.PortraitRect.anchorMax = new Vector2(1, 0);
 

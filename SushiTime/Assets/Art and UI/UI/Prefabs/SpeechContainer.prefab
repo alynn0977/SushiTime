@@ -190,7 +190,7 @@ MonoBehaviour:
   characterName: {fileID: 5156319216432571772}
   characterText: {fileID: 7081131404779167910}
   speechContainer: {fileID: 3881717616388959193}
-  maxWidth: 30
+  offsetAmount: 20
 --- !u!114 &5771560046329473538
 MonoBehaviour:
   m_ObjectHideFlags: 0

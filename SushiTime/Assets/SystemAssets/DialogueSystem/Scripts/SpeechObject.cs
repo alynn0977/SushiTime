@@ -24,14 +24,17 @@ namespace DialogueSystem
         // Must be able to turn itself on and off.
         [SerializeField]
         private GameObject speechContainer;
-        // It must resize the rectTransform to fit the character name.
-
-        [SerializeField]
-        [Tooltip("What is max characters bubble should have on one line?")]
-        private int maxWidth = 33;
 
         private RectTransform thisRect;
-
+        // It must be able to nudge left or right.
+        private HorizontalLayoutGroup layoutGroup;
+        [SerializeField]
+        private int offsetAmount = 14;
+        public bool IsActive
+        {
+            get;
+            private set;
+        }
         public void InitializeSpeechBubble(string initializeName, string initializeText)
         {
             Debug.Log($"[{GetType().Name}]: Initializing Speech Bubble.");
@@ -41,6 +44,7 @@ namespace DialogueSystem
                 return;
             }
             thisRect = GetComponent<RectTransform>();
+            layoutGroup = GetComponent<HorizontalLayoutGroup>();
             characterName.text = initializeName;
             characterText.text = initializeText;
             
@@ -51,6 +55,28 @@ namespace DialogueSystem
         public void DisableSpeechBubble()
         {
             speechContainer.gameObject.SetActive(false);
+            IsActive = false;
+        }
+
+        [ContextMenu("Nudge Left")]
+        public void NudgeLeft()
+        {
+            layoutGroup.padding.left = -offsetAmount;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(thisRect);
+        }
+
+        [ContextMenu("Nudge Right")]
+        public void NudgeRight()
+        {
+            layoutGroup.padding.left = offsetAmount;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(thisRect);
+        }
+
+        [ContextMenu("Center")]
+        public void Center()
+        {
+            layoutGroup.padding.left = 0;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(thisRect);
         }
 
         private void EnableAll()
@@ -58,6 +84,7 @@ namespace DialogueSystem
             speechContainer.gameObject.SetActive(true);
             ResizeCharacterBox();
             ResizeTextBox();
+            IsActive = true;
         }
 
         private void ResizeCharacterBox()
@@ -72,6 +99,5 @@ namespace DialogueSystem
             characterText.rectTransform.sizeDelta = new Vector2(characterText.rectTransform.sizeDelta.x, resizedTextHeight);
             thisRect.sizeDelta = new Vector2(thisRect.sizeDelta.x, resizedTextHeight+12);
         }
-
     } 
 }
