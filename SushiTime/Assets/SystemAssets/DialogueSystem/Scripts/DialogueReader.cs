@@ -35,7 +35,7 @@ namespace DialogueSystem
         [SerializeField]
         private SpeechObject bubblePrefab;
         [SerializeField]
-        private int maxBubblePool = 6;
+        private int maxBubblePool = 3;
         [SerializeField]
         [Tooltip("How many bubbles should appear on screen at one time?")]
         private int segmentsPerScreen = 3;

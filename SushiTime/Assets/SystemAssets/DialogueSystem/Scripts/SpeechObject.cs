@@ -1,5 +1,6 @@
 namespace DialogueSystem
 {
+    using Core;
     using System.Collections;
     using System.Collections.Generic;
     using System.Text;
@@ -10,7 +11,7 @@ namespace DialogueSystem
     /// <summary>
     /// Defines the behaviours for the speech bubbles.
     /// </summary>
-    public class SpeechObject : MonoBehaviour
+    public class SpeechObject : MonoBehaviour, iFlippable
     {
         // A speech object needs to know the following:
         // What character name.
@@ -37,11 +38,16 @@ namespace DialogueSystem
 
         [Header("Optional")]
         [SerializeField]
-        private RectTransform tailLeft;
+        private Image flippable;
+
         [SerializeField]
-        private RectTransform tailRight;
+        private Sprite[] switchableSpriteAssets;
+
         private RectTransform thisRect;
 
+        private characterSide thisSide = characterSide.center;
+        private Animator anim;
+        private string OnInitialize;
         private RectTransform ThisRect
         {
             get 
@@ -81,7 +87,13 @@ namespace DialogueSystem
             layoutGroup = GetComponent<HorizontalLayoutGroup>();
             characterName.text = initializeName;
             characterText.text = initializeText;
-            
+
+            anim = GetComponent<Animator>();
+            if (anim)
+            {
+                Animator.StringToHash("OnOpenSpeechBubble");
+            }
+
             EnableAll();
             LayoutRebuilder.ForceRebuildLayoutImmediate(characterText.rectTransform);
         }
@@ -90,8 +102,6 @@ namespace DialogueSystem
         {
             characterText.color = defaultColor;
             speechContainer.gameObject.SetActive(false);
-
-            DisableTails();
             IsActive = false;
         }
 
@@ -99,12 +109,8 @@ namespace DialogueSystem
         public void NudgeLeft()
         {
             layoutGroup.padding.left = -offsetAmount;
-            
-            if (tailLeft)
-            {
-                tailLeft.gameObject.SetActive(true);
-            }
-            
+            thisSide = characterSide.left;
+            FlipAsset();
             LayoutRebuilder.ForceRebuildLayoutImmediate(ThisRect);
         }
 
@@ -112,12 +118,8 @@ namespace DialogueSystem
         public void NudgeRight()
         {
             layoutGroup.padding.left = offsetAmount;
-            
-            if (tailRight)
-            {
-                tailRight.gameObject.SetActive(true);
-            }
-
+            thisSide = characterSide.right;
+            FlipAsset();
             LayoutRebuilder.ForceRebuildLayoutImmediate(ThisRect);
         }
 
@@ -125,56 +127,84 @@ namespace DialogueSystem
         public void Center()
         {
             layoutGroup.padding.left = 0;
+            thisSide = characterSide.center;
+            FlipAsset();
             LayoutRebuilder.ForceRebuildLayoutImmediate(ThisRect);
         }
 
-        [ContextMenu("Refit Tails")]
-        protected void RefitTails()
+        public void FlipAsset()
         {
-            if (!tailLeft || !tailRight)
+
+            if (!flippable || switchableSpriteAssets.Length == 0)
             {
                 return;
             }
 
-            int padding = 22;
-            // Get the size of the rect transform.
-            tailLeft.anchoredPosition = new Vector2(0, -(characterText.rectTransform.sizeDelta.y + padding));
-            tailRight.anchoredPosition = new Vector2(characterText.rectTransform.sizeDelta.x, -(characterText.rectTransform.sizeDelta.y + padding));
+            switch (thisSide)
+            {
+                case characterSide.left:
+                    flippable.sprite = switchableSpriteAssets[1];
+                    break;
+                case characterSide.right:
+                    flippable.sprite = switchableSpriteAssets[2];
+                    break;
+                default:
+                    flippable.sprite = switchableSpriteAssets[0];
+                    break;
+            }
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(ThisRect);
         }
 
+        [ContextMenu("Resize Character Box")]
+        protected void ResizeCharacterBox()
+        {
+            float resizedNameBox = characterName.preferredWidth + 10;
+            characterName.rectTransform.sizeDelta = new Vector2(resizedNameBox, characterName.rectTransform.sizeDelta.y);
+        }
+
+        [ContextMenu("Resize Text Box")]
+        protected void ResizeTextBox()
+        {
+            var resizedTextHeight = characterText.preferredHeight+6;
+            characterText.rectTransform.sizeDelta = new Vector2(characterText.rectTransform.sizeDelta.x, resizedTextHeight);
+            ThisRect.sizeDelta = new Vector2(ThisRect.sizeDelta.x, resizedTextHeight + 12);
+
+            if (anim)
+            {
+                anim.enabled = true;
+                anim.Play(OnInitialize);
+            }
+        }
+
+        /*
+        protected void RefitTails()
+        {
+            //if (!tailLeft || !tailRight)
+            //{
+            //    return;
+            //}
+
+            // Get the size of the character rectTransform size delta, to inform where to place tails.
+            //var rect tailLeft.anchoredPosition = new Vector2(0, -(characterText.rectTransform.sizeDelta.y + padding));
+            //tailRight.anchoredPosition = new Vector2(characterText.rectTransform.sizeDelta.x, -(characterText.rectTransform.sizeDelta.y + padding));
+
+            //LayoutRebuilder.ForceRebuildLayoutImmediate(ThisRect);
+        }*/
 
         private void EnableAll()
         {
             speechContainer.gameObject.SetActive(true);
             ResizeCharacterBox();
             ResizeTextBox();
-            RefitTails();
+            FlipAsset();
             IsActive = true;
         }
 
-        private void ResizeCharacterBox()
+        private enum characterSide
         {
-            float resizedNameBox = characterName.preferredWidth + 10;
-            characterName.rectTransform.sizeDelta = new Vector2(resizedNameBox, characterName.rectTransform.sizeDelta.y);
-        }
-        
-        private void ResizeTextBox()
-        {
-            var resizedTextHeight = characterText.preferredHeight + 6;
-            characterText.rectTransform.sizeDelta = new Vector2(characterText.rectTransform.sizeDelta.x, resizedTextHeight);
-            ThisRect.sizeDelta = new Vector2(ThisRect.sizeDelta.x, resizedTextHeight+12);
-            
-        }
-
-        private void DisableTails()
-        {
-            if (tailLeft || tailRight)
-            {
-                tailLeft.gameObject.SetActive(false);
-                tailRight.gameObject.SetActive(false);
-            }
+            center,
+            left,
+            right,
         }
     } 
 }

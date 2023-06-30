@@ -16,12 +16,12 @@ MonoBehaviour:
   rightCharacter: {fileID: 11400000, guid: 05677d160ff978e429dca323eb05a182, type: 2}
   TheScript:
   - Character: 0
-    textBubble: This is a test and only a test of your Panda Character
+    textBubble: This is a test of your Panda Character.
   - Character: 1
     textBubble: This is a test of the Wasabi character. Lorem ipsum... Something
       something.
   - Character: 0
-    textBubble: One more test guvna'. Thank you very much,
+    textBubble: One more test guvna. Thank you very much.
   - Character: 1
     textBubble: Oye, mate. We can't end the test that early, right? We have to do
       some more text tests.
