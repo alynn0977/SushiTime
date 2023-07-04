@@ -14,6 +14,9 @@ namespace ScreenSystem
 
         [SerializeField]
         private ScreenType[] _screens;
+//        [SerializeField]
+        //private 
+
         private Dictionary<int, ScreenType> _screensCache;
         private RectTransform _currentScreen;
         private RectTransform _homeScreen;
@@ -111,7 +114,6 @@ namespace ScreenSystem
         {
             if (modalMode)
             {
-                // TODO: Insert a modal mode sequence.
                 GoToScreen(ModalScreen);
             }
             else
