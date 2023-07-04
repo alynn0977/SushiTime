@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81aa9f71015690c4eacde397ef77eff5, type: 3}
-  m_Name: PandaNook
+  m_Name: MrSerious
   m_EditorClassIdentifier: 
-  characterName: Panda Nook
+  characterName: Mr. Serious
   characterSize: {x: 123, y: 141}
-  characterOffset: {x: -1, y: -16, z: 0}
-  characterColor: {r: 0.24705884, g: 0.3529412, b: 0.19607845, a: 1}
-  CharacterPortrait: {fileID: 21300000, guid: c1593b4ab3d5e2e46bedc7cc6ddee5ca, type: 3}
+  characterOffset: {x: 0, y: -16, z: 0}
+  characterColor: {r: 0.2784314, g: 0.14901961, b: 0.14901961, a: 1}
+  CharacterPortrait: {fileID: 21300000, guid: 8c08a69bc8e25474f8066197a69bf21b, type: 3}

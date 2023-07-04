@@ -91,7 +91,6 @@ namespace DialogueSystem
 
             DivideScreenByThirds();
 
-            //****** Need to instantiate the two portraits in bottom left and right areas.
             // TODO: Make ONE function that can instantiate either.
             InstantiateLeftCharacter();
             InstantiateRightCharacter();

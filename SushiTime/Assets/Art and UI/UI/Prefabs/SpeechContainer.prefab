@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4277822247113284284}
   - component: {fileID: 5771560046329473538}
   - component: {fileID: 1760241718199461277}
-  - component: {fileID: 482430362397364392}
+  - component: {fileID: 6591636301789105372}
   m_Layer: 5
   m_Name: SpeechContainer
   m_TagString: Untagged
@@ -105,7 +105,7 @@ RectTransform:
   m_GameObject: {fileID: 2277683956320049939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1718140546042591694}
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 251.8412, y: 98.2959}
+  m_SizeDelta: {x: 420, y: 144}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4277822247113284284
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
   defaultColor: {r: 0.17718159, g: 0.06256675, b: 0.3584906, a: 1}
   characterText: {fileID: 5781948341541229757}
   speechContainer: {fileID: 3881717616388959193}
-  offsetAmount: 20
+  offsetAmount: 30
   flippable: {fileID: 6136298638754488025}
   switchableSpriteAssets:
   - {fileID: 21300000, guid: 995f20e08bf13c54aafa7a338001b715, type: 3}
@@ -179,7 +179,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
---- !u!95 &482430362397364392
+--- !u!95 &6591636301789105372
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2277683956320049939}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 52a23b09158b0af499692c2c3338ae50, type: 2}
   m_CullingMode: 0
@@ -237,8 +237,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -13.99}
-  m_SizeDelta: {x: 248, y: 0}
+  m_AnchoredPosition: {x: 0, y: -36}
+  m_SizeDelta: {x: 420, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2933695802663296295
 CanvasRenderer:
@@ -491,7 +491,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 251.84, y: 98.296}
+  m_SizeDelta: {x: 420, y: 144}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &5432868196244881995
 GameObject:
@@ -529,7 +529,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 246.3, y: 66.059}
+  m_SizeDelta: {x: 410, y: 66.059}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &966475769637430443
 CanvasRenderer:
@@ -586,8 +586,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -657,7 +657,7 @@ RectTransform:
   m_GameObject: {fileID: 6637485068943456220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7602, y: 1.7602, z: 1.7602}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7261923149984778519}
