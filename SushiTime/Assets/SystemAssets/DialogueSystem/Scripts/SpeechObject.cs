@@ -47,7 +47,9 @@ namespace DialogueSystem
 
         private characterSide thisSide = characterSide.center;
         private Animator anim;
+#pragma warning disable CS0649 // Add readonly modifier
         private string OnInitialize;
+#pragma warning restore CS0649 // Add readonly modifier
         private RectTransform ThisRect
         {
             get 

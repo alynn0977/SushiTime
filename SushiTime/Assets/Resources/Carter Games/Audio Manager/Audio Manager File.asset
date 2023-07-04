@@ -29,3 +29,5 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 994ac267d185e3642aa02cb8c8679411, type: 3}
   - key: 04On_Press_Button
     value: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}
+  - key: bubbleSFX8
+    value: {fileID: 8300000, guid: 0b99dc28b1669a1478cd8750420f09bb, type: 3}
