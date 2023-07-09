@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 425866188777539381}
   - component: {fileID: 3063847159353028155}
   - component: {fileID: 2604147189844258883}
+  - component: {fileID: 7436908920502874074}
   - component: {fileID: 175125608672895780}
   m_Layer: 5
   m_Name: Dialogue
@@ -310,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &175125608672895780
+--- !u!114 &7436908920502874074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,6 +319,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425866188777539383}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15c11692407fb84982b0cc13159bc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Basic screen types fade in and out before activating a system.
+  _fadeController: {fileID: 0}
+  initializeComponents:
+  - {fileID: 175125608672895780}
+--- !u!114 &175125608672895780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7563bd8fdbdb948869e77c8b3348e9, type: 3}
   m_Name: 

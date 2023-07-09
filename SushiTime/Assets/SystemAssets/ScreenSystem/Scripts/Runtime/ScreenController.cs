@@ -11,17 +11,16 @@ namespace ScreenSystem
     public class ScreenController : MonoBehaviour
     {
         private const string ModalScreen = "ModalHomeScreen";
+        private static Canvas _canvas;
 
         [SerializeField]
         private ScreenType[] _screens;
-//        [SerializeField]
-        //private 
 
         private Dictionary<int, ScreenType> _screensCache;
         private RectTransform _currentScreen;
         private RectTransform _homeScreen;
         private RectTransform _lastScreen;
-        private Canvas _canvas;
+        
         private List<RectTransform> _activeScreens = new();
 
         /// <summary>
@@ -58,7 +57,7 @@ namespace ScreenSystem
             {
                 if (_canvas == null)
                 {
-                    _canvas = FindObjectOfType<Canvas>();
+                    _canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
                 }
 
                 return _canvas;
@@ -153,6 +152,13 @@ namespace ScreenSystem
 
                 // Instantiate the object into a gameobject.
                 _currentScreen = Instantiate(GetScreens[indexInCache].ScreenPrefab).GetComponent<RectTransform>();
+
+                // Does the object have ScreenTypeBeahvour?
+                if (_currentScreen.TryGetComponent(out ScreenTypeBehaviour screenTypeBehaviour) )
+                {
+                    screenTypeBehaviour.InitializeScreen();
+                }
+
                 _activeScreens.Add(_currentScreen);
                 CenterAndParentScreen(_currentScreen);
             }

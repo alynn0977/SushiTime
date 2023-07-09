@@ -12,6 +12,10 @@ namespace ScreenSystem
         [SerializeField]
         [Tooltip("Provide name of the screen to close. Should be availble via Screen Object.")]
         private string ScreenName;
+
+        [SerializeField]
+        [Tooltip("Optional: Delay the new screen event by X seconds.")]
+        private float delayTime = 0;
         /// <summary>
         /// Closes the screen that matches the name specified in ScreenName field.
         /// </summary>
@@ -22,7 +26,18 @@ namespace ScreenSystem
                 Debug.LogWarning($"OpenScreen on {gameObject.name} has null fields.");
                 return;
             }
+            if (delayTime <= 0)
+            {
+                EventManager.Instance.QueueEvent(new CallNewScreenGameEvent(ScreenName));
+            }
+            else
+            {
+                Invoke(nameof(DelayOnCallScreen), delayTime);
+            }
+        }
 
+        private void DelayOnCallScreen()
+        {
             EventManager.Instance.QueueEvent(new CallNewScreenGameEvent(ScreenName));
         }
     } 
