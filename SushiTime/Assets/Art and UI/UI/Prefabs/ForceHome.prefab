@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8790375652650058211}
   - component: {fileID: 8790375652650058208}
   - component: {fileID: 5890717168169318521}
+  - component: {fileID: 4365159454849928347}
   m_Layer: 5
   m_Name: ForceHome
   m_TagString: Untagged
@@ -135,6 +136,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4365159454849928347}
+        m_TargetAssemblyTypeName: ScreenSystem.CallFadeScreen, ScreenSystem
+        m_MethodName: OnFadeScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &5890717168169318521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +158,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b85333adf07ca74c94adf028cb7112a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4365159454849928347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790375652650058222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003608b85f90c604baf39101634b10ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8790375652771693532

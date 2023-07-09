@@ -1,14 +1,17 @@
 {
     "name": "ScreenSystem",
-    "rootNamespace": "",
+    "rootNamespace": "ScreenSystem",
     "references": [
-        "GUID:18ce373ed5ae72a4691ef3fe0ac49d6d"
+        "GUID:18ce373ed5ae72a4691ef3fe0ac49d6d",
+        "GUID:1abe08df3d54da648b72e6973d7b9fd3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],

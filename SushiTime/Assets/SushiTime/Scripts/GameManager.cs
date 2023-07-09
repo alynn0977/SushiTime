@@ -53,20 +53,20 @@ public class GameManager : MonoBehaviour
     private void GameManagerOnCallHome(CallHomeScreenEvent e)
     {
         _screenController.GoToHomeScreen(e.ModalMode);
-
         // Handle Homescreen Restarting music.
         if (!e.ModalMode)
         {
             // Play right away if no modal required.
             _homeScreen.GetComponent<ScreenMusicProperties>().RestartMusic();
+            EventManager.Instance.QueueEvent(new FadeScreenEvent(false));
         }
+
     }
 
     private void GameManagerOnNewScreen(CallNewScreenGameEvent e)
     {
         _screenController.GoToScreen(e.ScreenName);
     }
-
 
 
     private void GameManagerOnPlayMusic(RequestMusicPlayerEvent e)
