@@ -358,7 +358,6 @@ namespace DialogueSystem
         {
             if (isPlayOnStart)
             {
-                // GO!
                 InitializeDialogue();
             }
         }
