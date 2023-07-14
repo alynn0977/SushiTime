@@ -30,12 +30,10 @@ namespace BreakoutSystem
 
             if (Vector3.Distance(transform.position, mousePosition) > deadzone)
             {
-                Debug.Log($"{Vector3.Distance(transform.position, mousePosition)}");
                 rigidBody.AddForceAtPosition(direction * moveSpeed, transform.position);
             }
             else
             {
-                Debug.Log("DEADZONE!");
                 rigidBody.velocity = Vector3.zero;
             }
 
