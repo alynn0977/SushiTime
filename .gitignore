@@ -95,3 +95,14 @@ SushiTime/Logs/AssetImportWorker1.log
 SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe0.log
 *.log
 *.settings
+SushiTime/.vscode/settings.json
+SushiTime/.vscode/extensions.json
+SushiTime/.vscode/launch.json
+SushiTime/ProjectSettings/ProjectVersion.txt
+SushiTime/Packages/packages-lock.json
+*.index
+SushiTime/UserSettings/EditorUserSettings.asset
+SushiTime/ProjectSettings/boot.config
+*.cache
+*.cache
+SushiTime/ProjectSettings/boot.config
