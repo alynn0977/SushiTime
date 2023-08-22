@@ -1,7 +1,5 @@
 namespace BreakoutSystem
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     // Tracks globals for this particular level instance.
@@ -13,6 +11,8 @@ namespace BreakoutSystem
         [SerializeField]
         private BallBehaviour mainBall;
 
+        [SerializeField]
+        private GoalKeeping goal;
         /// <summary>
         /// Read-only access of current player power stat.
         /// </summary>
