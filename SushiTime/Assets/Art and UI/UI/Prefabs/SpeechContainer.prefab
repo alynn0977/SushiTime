@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 5771560046329473538}
   - component: {fileID: 1760241718199461277}
   - component: {fileID: 6591636301789105372}
+  - component: {fileID: 9126597252206403930}
   m_Layer: 5
   m_Name: SpeechContainer
   m_TagString: Untagged
@@ -199,6 +200,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9126597252206403930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277683956320049939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6d10e59f8bb049b200644eb96b5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 0b99dc28b1669a1478cd8750420f09bb, type: 3}
+  volume: 0.5
 --- !u!1 &3260661182598664768
 GameObject:
   m_ObjectHideFlags: 0

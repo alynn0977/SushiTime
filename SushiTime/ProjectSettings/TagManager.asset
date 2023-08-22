@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Screen
   - MainCanvas
+  - Ball
+  - Boundary
   layers:
   - Default
   - TransparentFX
@@ -40,6 +42,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2625099237
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Game
+    uniqueID: 1094100441
     locked: 0

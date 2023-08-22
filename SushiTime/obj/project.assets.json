@@ -1,0 +1,239 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.0": {
+      "Assembly-CSharp/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "AudioSystem": "1.0.0",
+          "CarterGames.AudioManager.Demo": "1.0.0",
+          "CarterGames.AudioManager.Editor": "1.0.0",
+          "CarterGames.AudioManager.Runtime": "1.0.0",
+          "Core": "1.0.0",
+          "DOTween.Modules": "1.0.0",
+          "ScreenSystem": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Assembly-CSharp.dll": {}
+        }
+      },
+      "AudioSystem/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AudioSystem.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AudioSystem.dll": {}
+        }
+      },
+      "CarterGames.AudioManager.Demo/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "CarterGames.AudioManager.Runtime": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CarterGames.AudioManager.Demo.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarterGames.AudioManager.Demo.dll": {}
+        }
+      },
+      "CarterGames.AudioManager.Editor/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "CarterGames.AudioManager.Runtime": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CarterGames.AudioManager.Editor.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarterGames.AudioManager.Editor.dll": {}
+        }
+      },
+      "CarterGames.AudioManager.Runtime/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CarterGames.AudioManager.Runtime.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarterGames.AudioManager.Runtime.dll": {}
+        }
+      },
+      "Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "DOTween.Modules": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Core.dll": {}
+        }
+      },
+      "DOTween.Modules/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DOTween.Modules.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DOTween.Modules.dll": {}
+        }
+      },
+      "ScreenSystem/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Core": "1.0.0",
+          "DOTween.Modules": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ScreenSystem.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ScreenSystem.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Assembly-CSharp/1.0.0": {
+      "type": "project",
+      "path": "Assembly-CSharp.csproj",
+      "msbuildProject": "Assembly-CSharp.csproj"
+    },
+    "AudioSystem/1.0.0": {
+      "type": "project",
+      "path": "AudioSystem.csproj",
+      "msbuildProject": "AudioSystem.csproj"
+    },
+    "CarterGames.AudioManager.Demo/1.0.0": {
+      "type": "project",
+      "path": "CarterGames.AudioManager.Demo.csproj",
+      "msbuildProject": "CarterGames.AudioManager.Demo.csproj"
+    },
+    "CarterGames.AudioManager.Editor/1.0.0": {
+      "type": "project",
+      "path": "CarterGames.AudioManager.Editor.csproj",
+      "msbuildProject": "CarterGames.AudioManager.Editor.csproj"
+    },
+    "CarterGames.AudioManager.Runtime/1.0.0": {
+      "type": "project",
+      "path": "CarterGames.AudioManager.Runtime.csproj",
+      "msbuildProject": "CarterGames.AudioManager.Runtime.csproj"
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "path": "Core.csproj",
+      "msbuildProject": "Core.csproj"
+    },
+    "DOTween.Modules/1.0.0": {
+      "type": "project",
+      "path": "DOTween.Modules.csproj",
+      "msbuildProject": "DOTween.Modules.csproj"
+    },
+    "ScreenSystem/1.0.0": {
+      "type": "project",
+      "path": "ScreenSystem.csproj",
+      "msbuildProject": "ScreenSystem.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.0": [
+      "Assembly-CSharp >= 1.0.0",
+      "AudioSystem >= 1.0.0",
+      "CarterGames.AudioManager.Demo >= 1.0.0",
+      "CarterGames.AudioManager.Editor >= 1.0.0",
+      "CarterGames.AudioManager.Runtime >= 1.0.0",
+      "Core >= 1.0.0",
+      "DOTween.Modules >= 1.0.0",
+      "ScreenSystem >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\alynn\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Assembly-CSharp-Editor.csproj",
+      "projectName": "Assembly-CSharp-Editor",
+      "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Assembly-CSharp-Editor.csproj",
+      "packagesPath": "C:\\Users\\alynn\\.nuget\\packages\\",
+      "outputPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\alynn\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "projectReferences": {
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Assembly-CSharp.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Assembly-CSharp.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\AudioSystem.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\AudioSystem.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Demo.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Demo.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Editor.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Editor.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Runtime.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\CarterGames.AudioManager.Runtime.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Core.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\Core.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\DOTween.Modules.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\DOTween.Modules.csproj"
+            },
+            "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\ScreenSystem.csproj": {
+              "projectPath": "d:\\Amandas SurfacePro\\My Documents\\Projects\\SushiChef\\SushiTimeProject\\SushiTime\\ScreenSystem.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netstandard2.0": {
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
