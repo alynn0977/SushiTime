@@ -1,6 +1,7 @@
 namespace BreakoutSystem
 {
     using UnityEngine;
+    using Sirenix.OdinInspector;
 
     [CreateAssetMenu(fileName = "Goal Keeper", menuName = "My Assets/Goal", order = 0)]
     public class GoalKeeping : ScriptableObject 
