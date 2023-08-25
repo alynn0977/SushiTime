@@ -106,3 +106,4 @@ SushiTime/ProjectSettings/boot.config
 *.cache
 *.cache
 SushiTime/ProjectSettings/boot.config
+*.log
