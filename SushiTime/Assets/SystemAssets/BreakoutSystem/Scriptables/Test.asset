@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b64d668ae50f3664e88c0281fb0ad3ad, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp:BreakoutSystem:GoalKeeping
-  level: 0
+  level: 01
   levelGoal: 0
-  timeLimit: 180
+  goalTiles:
+  - GameTile: {fileID: 0}
+    Quantity: 2
+  - GameTile: {fileID: 0}
+    Quantity: 2
+  timeLimit: 0

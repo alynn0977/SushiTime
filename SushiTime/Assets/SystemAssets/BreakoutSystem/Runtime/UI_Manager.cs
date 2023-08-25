@@ -1,5 +1,6 @@
 namespace BreakoutSystem.UI
 {
+    using Sirenix.OdinInspector;
     using TMPro;
     using UnityEngine;
 
@@ -12,10 +13,30 @@ namespace BreakoutSystem.UI
         // What's the score?
         // How many lives?
         // What power ups are there?
+        [TabGroup("General Setup")]
+        public GameZone GameZone;
 
-        public GameZone gameZone;
-
+        [TabGroup("Level and Goal")]
         [SerializeField]
         private TMP_Text levelText;
+
+        
+        [ContextMenu("Validate Goal Object")]
+        protected void ValidateGoal()
+        {
+            if (!GameZone)
+            {
+                Debug.LogError("[UI Manager] is missing game zone object and will not activate.");
+            }
+
+            Debug.Log($"[UI Manager] Found Goal Object {GameZone.GameGoal.CurrentLevel} object");
+            SetGoal();
+        }
+
+        private void SetGoal()
+        {
+            levelText.text = $"Level {GameZone.GameGoal.CurrentLevel}";
+        }
     }
+  
 }
