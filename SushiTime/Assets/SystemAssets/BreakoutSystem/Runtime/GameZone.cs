@@ -18,9 +18,17 @@ namespace BreakoutSystem
         /// </summary>
         public int PlayerPower => playerPowr;
 
+        /// <summary>
+        /// Read-only access to current game goal data.
+        /// </summary>
+        public GoalKeeping GameGoal => goal;
+
         private void Start()
         {
-
+            if (!goal)
+            {
+                Debug.LogWarning($"[Game Zone]:{gameObject.name} does not have goal data. Is this intentional?");
+            }
             
         }
 
@@ -30,7 +38,6 @@ namespace BreakoutSystem
             playerPowr = e.SetPower;
         }
 
-        // TO DO: Update time.
         // TO DO: What are the goals?
     }
 

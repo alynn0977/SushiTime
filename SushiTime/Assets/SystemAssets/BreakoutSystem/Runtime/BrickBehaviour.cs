@@ -8,6 +8,7 @@ namespace BreakoutSystem
     /// <summary>
     /// Brick behaviour.
     /// </summary>
+    [RequireComponent(typeof(SpriteRenderer))]
     public class BrickBehaviour : MonoBehaviour, iInteractable
     {
 
@@ -17,6 +18,15 @@ namespace BreakoutSystem
 
         private GameZone gameZone;
 
+        /// <summary>
+        /// Read-only access to brick behaviour sprite.
+        /// </summary>
+        public SpriteRenderer TileSprite => GetComponent<SpriteRenderer>();
+
+        /// <summary>
+        /// Read-only access of tile name.
+        /// </summary>
+        public string TileName => gameObject.name;
         private void Awake()
         {
             if (GetComponentInParent<GameZone>())

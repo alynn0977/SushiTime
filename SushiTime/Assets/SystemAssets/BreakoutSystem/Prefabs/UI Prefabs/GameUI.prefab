@@ -443,7 +443,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3637632786963049665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
 --- !u!114 &1461002309259681568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +473,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deab8eded487d904c89a9746b4b319e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameZone: {fileID: 0}
+  levelText: {fileID: 5927374370869013240}
+  goalGroup: {fileID: 2423673135275940571}
+  textPrefab: {fileID: 2651276698478575197, guid: 1ba01ffc4b4bf9b41a4de16d01bf9580, type: 3}
+  tilePrefab: {fileID: 1177239594273691758, guid: dd9267dd96c799c4eaeeece404f40b48, type: 3}
 --- !u!1 &6680779683542482386
 GameObject:
   m_ObjectHideFlags: 0
