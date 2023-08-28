@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4121187140655696598}
   - component: {fileID: 3525371319275776722}
+  - component: {fileID: 5999336738792439796}
   m_Layer: 0
   m_Name: GoalTile
   m_TagString: Untagged
@@ -46,6 +47,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1177239594273691758}
   m_CullTransparentMesh: 1
+--- !u!114 &5999336738792439796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177239594273691758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06b4b7285a8d234a8fccd00f6f12524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalName: 
+  goalImage: {fileID: 0}
+  goalQty: 
 --- !u!1 &5793296808374856288
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.000000029802322, y: -0.641}
+  m_AnchoredPosition: {x: 0.000000029802322, y: -0.566}
   m_SizeDelta: {x: 1.2055, y: 0.3588}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7555392841824588001
@@ -213,7 +229,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.05
+  m_fontSize: 4.05
   m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -249,7 +265,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.006587495, y: 1.653208, z: -11.347923, w: -5.5418124}
+  m_margin: {x: -0.006587495, y: 1.653208, z: -11.347923, w: -6.8869987}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

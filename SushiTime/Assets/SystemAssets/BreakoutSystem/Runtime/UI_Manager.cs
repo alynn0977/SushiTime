@@ -54,14 +54,15 @@ namespace BreakoutSystem.UI
         {
             levelText.text = $"Level ##";
             var children = goalGroup.GetComponentsInChildren<Transform>();
-
-            for (int i = children.Length; i > 1; i--)
+            if (children.Length == 0)
             {
-#if UNITY_EDITOR
-                DestroyImmediate(children[i].gameObject);
-#else
-                Destroy(child.gameObject); 
-#endif
+                // Nothing here.
+                return;
+            }
+
+            for (int i = children.Length -1 ; i > 0; i--)
+            {
+                RemoveChildObject(children[i].gameObject);
             }
         }
 
@@ -75,7 +76,24 @@ namespace BreakoutSystem.UI
                 {
                     case GoalKeeping.GoalType.TileGoal:
                         
-                        for (int i = 0; i < MaxGoalTiles; i++)
+                        if (gameGoal.GoalTiles.Length == 0)
+                        {
+                            Debug.LogWarning("[UI Manager] tried to creat tiles, but list is null.");
+                            return;
+                        }
+
+                        int maxTiles;
+
+                        if (gameGoal.GoalTiles.Length -1 > 3)
+                        {
+                            maxTiles = MaxGoalTiles;
+                        }
+                        else
+                        {
+                            maxTiles = gameGoal.GoalTiles.Length - 1;
+                        }
+                        
+                        for (int i = 0; i <= maxTiles; i++)
                         {
                             var gameTile = gameGoal.GoalTiles[i];
                             SetNewGoalTile(
@@ -114,15 +132,36 @@ namespace BreakoutSystem.UI
 
         private void SetNewGoalTile(string name, int qty, SpriteRenderer spriteImage)
         {
+            if (string.IsNullOrEmpty(name) || qty == null || spriteImage == null)
+            {
+                Debug.LogWarning("[UI Manager] SetNewGoalTile given empty paramter.");
+                return;
+            }
+
             // Instantiate the tile prefab.
             var newTile = Instantiate(tilePrefab);
             
             // Set the parent.
             newTile.transform.SetParent(goalGroup.transform);
 
-            var construct = newTile.GetComponent<iConstructable<SpriteRenderer, string, string>>();
+            if (newTile.TryGetComponent(out iConstructable<SpriteRenderer, string, string> construct))
+            {
+                construct.ConstructWithThree(spriteImage, qty.ToString(), name);
+            }
+            else
+            {
+                Debug.LogError("[UI Manager] Encountered an error trying to construct new tile object. Deleting and skipping.");
+                RemoveChildObject(newTile);
+            }
+        }
 
-            construct.ConstructWithThree(spriteImage, qty.ToString(), name);
+        private void RemoveChildObject(GameObject obj)
+        {
+#if UNITY_EDITOR
+            DestroyImmediate(obj);
+#else
+                Destroy(obj);
+#endif
         }
     }
   
