@@ -31,9 +31,12 @@ namespace BreakoutSystem
         [SerializeField]
         [ShowIf("levelGoal", GoalType.ClearAll)]
         [InfoBox("Still under construction.")]
+        public string construction;
         #endregion
         public string CurrentLevel => level;
         public GoalType CurrentGoal => levelGoal;
+
+        public Goal[] GoalTiles => goalTiles;
 
         public float TimeLimit => timeLimit;
 

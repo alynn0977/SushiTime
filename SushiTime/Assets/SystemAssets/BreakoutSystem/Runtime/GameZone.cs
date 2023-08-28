@@ -38,7 +38,6 @@ namespace BreakoutSystem
             playerPowr = e.SetPower;
         }
 
-        // TO DO: Update time.
         // TO DO: What are the goals?
     }
 
