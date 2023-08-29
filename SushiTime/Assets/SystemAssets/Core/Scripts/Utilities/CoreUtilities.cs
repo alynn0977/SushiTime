@@ -24,4 +24,13 @@ public static class CoreUtilities
         // Return the Component
         return component;
     }
+
+    public static float ConvertSecondsToMinutes(float minutes)
+    {
+        return minutes / 60;
+    }
+    public static float ConvertMinutesToSeconds(float seconds)
+    {
+        return seconds * 60;
+    }
 }

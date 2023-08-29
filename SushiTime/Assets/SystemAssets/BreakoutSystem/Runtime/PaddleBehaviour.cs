@@ -63,9 +63,6 @@ namespace BreakoutSystem
                     // rigidBody.AddForceAtPosition(direction * moveSpeed, transform.position);
                 }
             }
-            else{
-                Debug.Log($"Mouse Position {mousePosition}");
-            }
         }
 
         private void MoveByMouse()
