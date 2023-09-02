@@ -1,3 +1,5 @@
+using Codice.Client.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,12 +27,61 @@ public static class CoreUtilities
         return component;
     }
 
-    public static float ConvertSecondsToMinutes(float minutes)
+    /// <summary>
+    /// Convert float to total minutes.
+    /// </summary>
+    /// <param name="seconds">Total seconds.</param>
+    /// <returns>A float representing total minutes.</returns>
+
+    public static float SecToMin(float seconds)
     {
-        return minutes / 60;
+        return Mathf.FloorToInt(seconds / 60);
     }
-    public static float ConvertMinutesToSeconds(float seconds)
+
+    /// <summary>
+    /// Convert a float to total seconds.
+    /// </summary>
+    /// <param name="minutes">Total minutes.</param>
+    /// <returns>A float representign seconds.</returns>
+    public static float MinsToSec(float minutes)
     {
-        return seconds * 60;
+        return minutes * 60;
     }
+
+    /// <summary>
+    /// Convert a float (seconds) to a min:sec countdown
+    /// </summary>
+    /// <param name="time">Total minutes.</param>
+    /// <returns>A string in mm:ss format.</returns>
+    public static string MinSecCountdown(float time)
+    {
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
+
+        if (seconds < 10)
+        {
+            return $"{minutes}:0{seconds}";
+        }
+        else if (minutes < 10)
+        {
+            return $"0{minutes}:{seconds}";
+        }
+        else
+        {
+            return $"{minutes}:{seconds}";
+        }
+        
+    }
+
+    public static string ReturnCounterString()
+    {
+        var seconds = 60 * 15;
+        var minutes = seconds / 60;
+        seconds %= 3600;
+        var hours = seconds / 3600;
+        seconds %= 60;
+
+        return $"{hours}:{minutes}:{seconds}";
+    }
+
 }

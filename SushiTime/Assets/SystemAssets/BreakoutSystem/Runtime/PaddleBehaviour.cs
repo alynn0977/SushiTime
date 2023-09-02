@@ -23,7 +23,7 @@ namespace BreakoutSystem
 
         private Vector3 mousePosition;
         private Collider2D thisCollider;
-
+     
         public Vector2 direction { get; private set; }
         public Rigidbody2D rigidBody { get; private set; }
         private void Start()
@@ -38,7 +38,6 @@ namespace BreakoutSystem
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (playZone && playZone.OverlapPoint(mousePosition))
             {
-                Debug.LogWarning("Mouse in play!");
                 if (mouseEnabled)
                 {
                     MoveByMouse();

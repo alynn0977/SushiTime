@@ -55,6 +55,7 @@ namespace BreakoutSystem.UI
             }
         }
 
+        #region Base Methods
         private void Start()
         {
             if (isGoalValid())
@@ -62,6 +63,15 @@ namespace BreakoutSystem.UI
                 ValidateGoal();
             }
         }
+
+        private void Update()
+        {
+            if (counterText)
+            {
+                BindTimer();
+            }
+        } 
+        #endregion
 
         #region Level Panel
         [ContextMenu("Validate Goal Object")]
@@ -116,33 +126,8 @@ namespace BreakoutSystem.UI
                 switch (gameGoal.CurrentGoal)
                 {
                     case GoalKeeping.GoalType.TileGoal:
-
-                        if (gameGoal.GoalTiles.Length == 0)
-                        {
-                            Debug.LogWarning("[UI Manager] tried to creat tiles, but list is null.");
-                            return;
-                        }
-
-                        int maxTiles;
-
-                        if (gameGoal.GoalTiles.Length - 1 > 3)
-                        {
-                            maxTiles = MaxGoalTiles;
-                        }
-                        else
-                        {
-                            maxTiles = gameGoal.GoalTiles.Length - 1;
-                        }
-
-                        for (int i = 0; i <= maxTiles; i++)
-                        {
-                            var gameTile = gameGoal.GoalTiles[i];
-                            SetNewGoalTile(
-                                gameTile.GameTile.TileName,
-                                gameTile.Quantity,
-                                gameTile.GameTile.TileSprite);
-                        }
-
+                        SetTileGoals();
+                        SetCountUpTimer();
                         break;
                     case GoalKeeping.GoalType.TimeGoal:
                         SetTextGoal($"{gameGoal.TimeLimit} min " + "\r\n" + "time limit.");
@@ -150,6 +135,7 @@ namespace BreakoutSystem.UI
                         break;
                     case GoalKeeping.GoalType.ClearAll:
                         SetTextGoal("Clear All!");
+                        SetCountUpTimer();
                         break;
                 }
             }
@@ -165,6 +151,35 @@ namespace BreakoutSystem.UI
 
             // Set Text.
             newText.GetComponentInChildren<TMP_Text>().text = value;
+        }
+
+        private void SetTileGoals()
+        {
+            if (gameGoal.GoalTiles.Length == 0)
+            {
+                Debug.LogWarning("[UI Manager] tried to creat tiles, but list is null.");
+                return;
+            }
+
+            int maxTiles;
+
+            if (gameGoal.GoalTiles.Length - 1 > 3)
+            {
+                maxTiles = MaxGoalTiles;
+            }
+            else
+            {
+                maxTiles = gameGoal.GoalTiles.Length - 1;
+            }
+
+            for (int i = 0; i <= maxTiles; i++)
+            {
+                var gameTile = gameGoal.GoalTiles[i];
+                SetNewGoalTile(
+                    gameTile.GameTile.TileName,
+                    gameTile.Quantity,
+                    gameTile.GameTile.TileSprite);
+            }
         }
 
         private void SetNewGoalTile(string name, int qty, SpriteRenderer spriteImage)
@@ -194,14 +209,37 @@ namespace BreakoutSystem.UI
         #endregion
 
         #region Time Panel
+
+        public void BindTimer()
+        {
+            if (counterText)
+            {
+                counterText.text = CoreUtilities.MinSecCountdown(counter.RemainingTime) + " Min";
+                Debug.Log(counter.RemainingTime);
+            }
+        }
+
         private void SetTimeGoal(float timeGoalValue)
         {
             if (timeGoalValue == 0 || counter == null)
             {
+                Debug.LogError("[UI Manager] Timer cannot be set without counter or 0 time.");
                 return;
             }
 
-            counter.SetCountDown(timeGoalValue);
+            counter.SetCountDown(timeGoalValue, true);
+        }
+
+        private void SetCountUpTimer()
+        {
+            if (counter == null)
+            {
+                Debug.LogError("[UI Manager] Timer cannot be set without counter.");
+                return;
+            }
+
+            counter.SetCountDown(0, false);
+            BindTimer();
         }
         #endregion
 

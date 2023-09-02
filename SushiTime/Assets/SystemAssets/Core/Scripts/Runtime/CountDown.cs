@@ -17,7 +17,6 @@ namespace Core
         private float startingValue;
 
         private float remainingTime;
-
         private bool isReady = false;
 
         /// <summary>
@@ -25,26 +24,51 @@ namespace Core
         /// </summary>
         public float RemainingTime => remainingTime;
 
-        public void SetCountDown(float setValue)
+        [Tooltip("True = counts down. False = counts up from 0.")]
+        public bool IsCountDown
         {
-            startingValue = CoreUtilities.ConvertMinutesToSeconds(setValue);
+            get;
+            private set;
+        }
+
+        public void SetCountDown(float setValue, bool isCountDown)
+        {
+            IsCountDown = isCountDown;
+            Debug.Log($"[{GetType().Name}] isCountDown: {IsCountDown}.");
+            startingValue = CoreUtilities.MinsToSec(setValue);
             BeginCountdown();
+        }
+
+        private void Awake()
+        {
+            if (isStartAwake && startingValue <= 0)
+            {
+                Debug.LogWarning($"[{GetType().Name}] can't start with 0.");
+                return;
+            }
+            else if (isStartAwake && startingValue >= 0)
+            {
+                BeginCountdown();
+            }
         }
         private void BeginCountdown()
         {
-            if (startingValue != default)
-            {
-                remainingTime = startingValue;
-                isReady = true;
-            }
+            remainingTime = IsCountDown ? startingValue : 0f;
+            isReady = true;
         }
 
         private void Update()
         {
             if (isReady)
             {
-                remainingTime -= Time.deltaTime;
-                Debug.Log($"Time Remaining: {remainingTime} total seconds.");
+                if (IsCountDown)
+                {
+                    remainingTime -= Time.deltaTime;
+                }
+                else
+                {
+                    remainingTime += Time.deltaTime;
+                }
             }
         }
     }

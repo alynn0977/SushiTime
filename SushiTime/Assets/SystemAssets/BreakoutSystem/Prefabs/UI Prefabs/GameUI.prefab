@@ -478,8 +478,8 @@ MonoBehaviour:
   goalGroup: {fileID: 2423673135275940571}
   textPrefab: {fileID: 2651276698478575197, guid: 1ba01ffc4b4bf9b41a4de16d01bf9580, type: 3}
   tilePrefab: {fileID: 1177239594273691758, guid: dd9267dd96c799c4eaeeece404f40b48, type: 3}
-  counterText: {fileID: 0}
-  counter: {fileID: 0}
+  counterText: {fileID: 5272806682566176227}
+  counter: {fileID: 6428281938975417186}
 --- !u!1 &6680779683542482386
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,3 +659,25 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4519454095823402230, guid: 654ef02a91048d742ae38c34da161f7e, type: 3}
   m_PrefabInstance: {fileID: 3168058429067745293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5272806682566176227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7123553209786463726, guid: 654ef02a91048d742ae38c34da161f7e, type: 3}
+  m_PrefabInstance: {fileID: 3168058429067745293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6428281938975417186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8269431377879087983, guid: 654ef02a91048d742ae38c34da161f7e, type: 3}
+  m_PrefabInstance: {fileID: 3168058429067745293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4664b3e3ada5b1841aca5fda117e3cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
