@@ -33,20 +33,66 @@ namespace BreakoutSystem.UI
         [TabGroup("Level and Goal")]
         [SerializeField]
         private GameObject tilePrefab;
+        [TabGroup("Timer Section")]
+        [SerializeField]
+        private TMP_Text counterText;
+        [TabGroup("Timer Section")]
+        [SerializeField]
+        private CountDown counter;
+        private GoalKeeping gameGoal
+        {
+            get
+            {
+                if (GameZone != null)
+                {
+                    return GameZone.GameGoal;
+                }
+                else
+                {
+                    Debug.LogError("[UI Manager] is missing a Goal Keeping referemce.");
+                    return null;
+                }
+            }
+        }
 
-        private GoalKeeping gameGoal => GameZone.GameGoal;
+        #region Base Methods
+        private void Start()
+        {
+            if (isGoalValid())
+            {
+                ValidateGoal();
+            }
+        }
 
-        
+        private void Update()
+        {
+            if (counterText)
+            {
+                BindTimer();
+            }
+        } 
+        #endregion
+
+        #region Level Panel
         [ContextMenu("Validate Goal Object")]
         protected void ValidateGoal()
+        {
+            if(gameGoal != null)
+            {
+                SetGoal();
+            }
+        }
+
+        private bool isGoalValid()
         {
             if (!GameZone)
             {
                 Debug.LogError("[UI Manager] is missing game zone object and will not activate.");
+                return false;
             }
 
             Debug.Log($"[UI Manager] Found Goal Object {gameGoal.CurrentLevel} object");
-            SetGoal();
+            return true;
         }
 
         [ContextMenu("Reset Levels")]
@@ -60,7 +106,7 @@ namespace BreakoutSystem.UI
                 return;
             }
 
-            for (int i = children.Length -1 ; i > 0; i--)
+            for (int i = children.Length - 1; i > 0; i--)
             {
                 RemoveChildObject(children[i].gameObject);
             }
@@ -68,6 +114,11 @@ namespace BreakoutSystem.UI
 
         private void SetGoal()
         {
+            if (levelText == null)
+            {
+                Debug.LogWarning("[UI_Manager] is missing level text reference.");
+                return;
+            }
             levelText.text = $"Level {gameGoal.CurrentLevel}";
 
             if (goalGroup)
@@ -75,47 +126,19 @@ namespace BreakoutSystem.UI
                 switch (gameGoal.CurrentGoal)
                 {
                     case GoalKeeping.GoalType.TileGoal:
-                        
-                        if (gameGoal.GoalTiles.Length == 0)
-                        {
-                            Debug.LogWarning("[UI Manager] tried to creat tiles, but list is null.");
-                            return;
-                        }
-
-                        int maxTiles;
-
-                        if (gameGoal.GoalTiles.Length -1 > 3)
-                        {
-                            maxTiles = MaxGoalTiles;
-                        }
-                        else
-                        {
-                            maxTiles = gameGoal.GoalTiles.Length - 1;
-                        }
-                        
-                        for (int i = 0; i <= maxTiles; i++)
-                        {
-                            var gameTile = gameGoal.GoalTiles[i];
-                            SetNewGoalTile(
-                                gameTile.GameTile.TileName,
-                                gameTile.Quantity,
-                                gameTile.GameTile.TileSprite);
-                        }
-
+                        SetTileGoals();
+                        SetCountUpTimer();
                         break;
                     case GoalKeeping.GoalType.TimeGoal:
-
-                        SetTextGoal($"{gameGoal.TimeLimit} min "+ "\r\n" + "time limit.");
+                        SetTextGoal($"{gameGoal.TimeLimit} min " + "\r\n" + "time limit.");
+                        SetTimeGoal(gameGoal.TimeLimit);
                         break;
                     case GoalKeeping.GoalType.ClearAll:
                         SetTextGoal("Clear All!");
+                        SetCountUpTimer();
                         break;
                 }
             }
-            // Depending on what goal type it is, it shoudl generate different things in the goal area.
-            // If Tile Goal, display the tiles.
-            // If time goal display the time. 
-            // If break them all, them display break all.
         }
 
         private void SetTextGoal(string value)
@@ -130,9 +153,38 @@ namespace BreakoutSystem.UI
             newText.GetComponentInChildren<TMP_Text>().text = value;
         }
 
+        private void SetTileGoals()
+        {
+            if (gameGoal.GoalTiles.Length == 0)
+            {
+                Debug.LogWarning("[UI Manager] tried to creat tiles, but list is null.");
+                return;
+            }
+
+            int maxTiles;
+
+            if (gameGoal.GoalTiles.Length - 1 > 3)
+            {
+                maxTiles = MaxGoalTiles;
+            }
+            else
+            {
+                maxTiles = gameGoal.GoalTiles.Length - 1;
+            }
+
+            for (int i = 0; i <= maxTiles; i++)
+            {
+                var gameTile = gameGoal.GoalTiles[i];
+                SetNewGoalTile(
+                    gameTile.GameTile.TileName,
+                    gameTile.Quantity,
+                    gameTile.GameTile.TileSprite);
+            }
+        }
+
         private void SetNewGoalTile(string name, int qty, SpriteRenderer spriteImage)
         {
-            if (string.IsNullOrEmpty(name) || qty == null || spriteImage == null)
+            if (string.IsNullOrEmpty(name) || qty == default || spriteImage == null)
             {
                 Debug.LogWarning("[UI Manager] SetNewGoalTile given empty paramter.");
                 return;
@@ -140,7 +192,7 @@ namespace BreakoutSystem.UI
 
             // Instantiate the tile prefab.
             var newTile = Instantiate(tilePrefab);
-            
+
             // Set the parent.
             newTile.transform.SetParent(goalGroup.transform);
 
@@ -154,7 +206,43 @@ namespace BreakoutSystem.UI
                 RemoveChildObject(newTile);
             }
         }
+        #endregion
 
+        #region Time Panel
+
+        public void BindTimer()
+        {
+            if (counterText)
+            {
+                counterText.text = CoreUtilities.MinSecCountdown(counter.RemainingTime) + " Min";
+            }
+        }
+
+        private void SetTimeGoal(float timeGoalValue)
+        {
+            if (timeGoalValue == 0 || counter == null)
+            {
+                Debug.LogError("[UI Manager] Timer cannot be set without counter or 0 time.");
+                return;
+            }
+
+            counter.SetCountDown(timeGoalValue, true);
+        }
+
+        private void SetCountUpTimer()
+        {
+            if (counter == null)
+            {
+                Debug.LogError("[UI Manager] Timer cannot be set without counter.");
+                return;
+            }
+
+            counter.SetCountDown(0, false);
+            BindTimer();
+        }
+        #endregion
+
+        #region Utilities
         private void RemoveChildObject(GameObject obj)
         {
 #if UNITY_EDITOR
@@ -162,7 +250,8 @@ namespace BreakoutSystem.UI
 #else
                 Destroy(obj);
 #endif
-        }
+        } 
+        #endregion
     }
   
 }

@@ -1,5 +1,8 @@
+using Codice.Client.Common;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 public static class CoreUtilities
@@ -24,4 +27,88 @@ public static class CoreUtilities
         // Return the Component
         return component;
     }
+
+    /// <summary>
+    /// Convert float to total minutes.
+    /// </summary>
+    /// <param name="seconds">Total seconds.</param>
+    /// <returns>A float representing total minutes.</returns>
+
+    public static float SecToMin(float seconds)
+    {
+        return Mathf.FloorToInt(seconds / 60);
+    }
+
+    /// <summary>
+    /// Convert a float to total seconds.
+    /// </summary>
+    /// <param name="minutes">Total minutes.</param>
+    /// <returns>A float representign seconds.</returns>
+    public static float MinsToSec(float minutes)
+    {
+        return minutes * 60;
+    }
+
+    /// <summary>
+    /// Convert a float (seconds) to a min:sec countdown
+    /// </summary>
+    /// <param name="time">Total minutes.</param>
+    /// <returns>A string in mm:ss format.</returns>
+    public static string MinSecCountdown(float time)
+    {
+        // float minutes = Mathf.FloorToInt(time / 60);
+        float minutes = MinCountDOwn(time);
+
+        // float seconds = Mathf.FloorToInt(time % 60);
+        float seconds = SecCountdown(time);
+
+        if (seconds < 10)
+        {
+            return $"{minutes}:0{seconds}";
+        }
+        else if (minutes < 10)
+        {
+            return $"0{minutes}:{seconds}";
+        }
+        else
+        {
+            return $"{minutes}:{seconds}";
+        }
+    }
+
+    /// <summary>
+    /// Converts total time to seconds only.
+    /// </summary>
+    /// <param name="time">Total time.</param>
+    /// <returns>Seconds as float.</returns>
+    public static float SecCountdown(float time)
+    {
+        return (int)Math.Round(time % 60);
+    }
+
+    /// <summary>
+    /// Converts total time to minutes only.
+    /// </summary>
+    /// <param name="time">Total time.</param>
+    /// <returns>Minutes as float.</returns>
+    public static float MinCountDOwn(float time)
+    {
+        return Mathf.FloorToInt(time / 60);
+    }
+
+    /// <summary>
+    /// Creates a total countdown in HH:MM:SS.
+    /// </summary>
+    /// <returns>Total countdown in HH:MM:SS.</returns>
+    public static string ReturnCounterString()
+    {
+        var seconds = 60 * 15;
+        var minutes = seconds / 60;
+        seconds %= 3600;
+        var hours = seconds / 3600;
+        seconds %= 60;
+
+        return $"{hours}:{minutes}:{seconds}";
+    }
+
 }

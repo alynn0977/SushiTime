@@ -9,11 +9,12 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/[Ll]og/
 /[Uu]ser[Ss]ettings/
 /SushiTime/Assets/Settings
 /SushiTime/Library
 /SushiTime/Temp
-/SushiTime/Logs
+/SushiTime/Logs/
 /SushiTime/SushiTime/Logs
 
 # MemoryCaptures can get excessive in size.
@@ -78,33 +79,3 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 SushiTime/.vsconfig
 *.dwlt
-SushiTime/Assets/Settings.meta
-*.log
-SushiTime/Logs/AssetImportWorker0.log
-SushiTime/Logs/AssetImportWorker1.log
-SushiTime/Logs/AssetImportWorker2.log
-SushiTime/Logs/AssetImportWorker3.log
-SushiTime/Logs/AssetImportWorker4.log
-SushiTime/Logs/AssetImportWorker5.log
-SushiTime/Logs/AssetImportWorker6.log
-SushiTime/Logs/AssetImportWorker7.log
-SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe7.log
-*.log
-SushiTime/Logs/AssetImportWorker0.log
-SushiTime/Logs/AssetImportWorker1.log
-SushiTime/Logs/shadercompiler-UnityShaderCompiler.exe0.log
-*.log
-*.settings
-SushiTime/.vscode/settings.json
-SushiTime/.vscode/extensions.json
-SushiTime/.vscode/launch.json
-SushiTime/ProjectSettings/ProjectVersion.txt
-SushiTime/Packages/packages-lock.json
-*.index
-SushiTime/UserSettings/EditorUserSettings.asset
-SushiTime/ProjectSettings/boot.config
-*.cache
-*.cache
-SushiTime/ProjectSettings/boot.config
-*.log
-*.log
