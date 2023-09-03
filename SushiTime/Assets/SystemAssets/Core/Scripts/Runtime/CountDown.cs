@@ -1,6 +1,7 @@
 namespace Core
 {
     using UnityEngine;
+    using UnityEngine.Events;
 
     /// <summary>
     /// Generic countdown class.
@@ -15,6 +16,9 @@ namespace Core
         [SerializeField]
         [Tooltip("Value in total minutes.")]
         private float startingValue;
+
+        [Header("Optional")]
+        public UnityEvent OnTick = new UnityEvent();
 
         private float remainingTime;
         private bool isReady = false;
@@ -68,6 +72,11 @@ namespace Core
                 else
                 {
                     remainingTime += Time.deltaTime;
+                }
+
+                if (CoreUtilities.SecCountdown(remainingTime) % 10 <= 0)
+                {
+                    OnTick?.Invoke();
                 }
             }
         }

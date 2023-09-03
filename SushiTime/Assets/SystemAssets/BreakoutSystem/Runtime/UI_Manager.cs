@@ -215,7 +215,6 @@ namespace BreakoutSystem.UI
             if (counterText)
             {
                 counterText.text = CoreUtilities.MinSecCountdown(counter.RemainingTime) + " Min";
-                Debug.Log(counter.RemainingTime);
             }
         }
 

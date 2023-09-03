@@ -2,6 +2,7 @@ using Codice.Client.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 public static class CoreUtilities
@@ -55,8 +56,11 @@ public static class CoreUtilities
     /// <returns>A string in mm:ss format.</returns>
     public static string MinSecCountdown(float time)
     {
-        float minutes = Mathf.FloorToInt(time / 60);
-        float seconds = Mathf.FloorToInt(time % 60);
+        // float minutes = Mathf.FloorToInt(time / 60);
+        float minutes = MinCountDOwn(time);
+
+        // float seconds = Mathf.FloorToInt(time % 60);
+        float seconds = SecCountdown(time);
 
         if (seconds < 10)
         {
@@ -70,9 +74,32 @@ public static class CoreUtilities
         {
             return $"{minutes}:{seconds}";
         }
-        
     }
 
+    /// <summary>
+    /// Converts total time to seconds only.
+    /// </summary>
+    /// <param name="time">Total time.</param>
+    /// <returns>Seconds as float.</returns>
+    public static float SecCountdown(float time)
+    {
+        return (int)Math.Round(time % 60);
+    }
+
+    /// <summary>
+    /// Converts total time to minutes only.
+    /// </summary>
+    /// <param name="time">Total time.</param>
+    /// <returns>Minutes as float.</returns>
+    public static float MinCountDOwn(float time)
+    {
+        return Mathf.FloorToInt(time / 60);
+    }
+
+    /// <summary>
+    /// Creates a total countdown in HH:MM:SS.
+    /// </summary>
+    /// <returns>Total countdown in HH:MM:SS.</returns>
     public static string ReturnCounterString()
     {
         var seconds = 60 * 15;
