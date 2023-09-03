@@ -15,6 +15,9 @@ namespace BreakoutSystem
         [SerializeField]
         [Tooltip("How many hits can this break take?")]
         private int health = 1;
+        [SerializeField]
+        [Tooltip("How many points is this brick worth?")]
+        private int score = 10;
 
         private GameZone gameZone;
 
@@ -32,7 +35,6 @@ namespace BreakoutSystem
             if (GetComponentInParent<GameZone>())
             {
                 gameZone = GetComponentInParent<GameZone>();
-
             }
         }
 
@@ -63,6 +65,7 @@ namespace BreakoutSystem
 
             if (health <= 0)
             {
+                EventManager.Instance.QueueEvent(new ChangeScoreEvent(score));
                 Destroy(gameObject);
             }
         }

@@ -128,24 +128,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1390489626390247244, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
   m_PrefabInstance: {fileID: 8346133310767629735}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &236228647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3634940254667906460, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-  m_PrefabInstance: {fileID: 8346133310767629735}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &236228651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236228647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5adc8ef30d5f3d844a09c7b44ef73703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sizePercent: 1.1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,41 +946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameZone
       objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 236228651}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Pulse
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CustomUI.PulseAnimation, UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: OnTick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3634940254667906460, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 236228651}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

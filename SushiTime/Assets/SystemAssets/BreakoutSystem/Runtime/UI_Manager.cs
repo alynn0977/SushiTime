@@ -2,6 +2,7 @@ namespace BreakoutSystem.UI
 {
     using Core;
     using Sirenix.OdinInspector;
+    using System;
     using TMPro;
     using Unity.VisualScripting;
     using UnityEngine;
@@ -39,6 +40,12 @@ namespace BreakoutSystem.UI
         [TabGroup("Timer Section")]
         [SerializeField]
         private CountDown counter;
+        [TabGroup("Stat Section")]
+        [SerializeField]
+        private TMP_Text scoreText;
+        [TabGroup("Stat Section")]
+        [SerializeField]
+        private TMP_Text livesText;
         private GoalKeeping gameGoal
         {
             get
@@ -60,8 +67,14 @@ namespace BreakoutSystem.UI
         {
             if (isGoalValid())
             {
-                ValidateGoal();
+                if (gameGoal != null)
+                {
+                    SetGoal();
+                }
             }
+
+            InitializeScore();
+            InitializeLives();
         }
 
         private void Update()
@@ -74,14 +87,6 @@ namespace BreakoutSystem.UI
         #endregion
 
         #region Level Panel
-        [ContextMenu("Validate Goal Object")]
-        protected void ValidateGoal()
-        {
-            if(gameGoal != null)
-            {
-                SetGoal();
-            }
-        }
 
         private bool isGoalValid()
         {
@@ -240,6 +245,62 @@ namespace BreakoutSystem.UI
             counter.SetCountDown(0, false);
             BindTimer();
         }
+        #endregion
+
+        #region Stats Panel
+
+        private int CurrentScore
+        {
+            get;
+            set;
+        }
+        private int CurrentLives
+        {
+            get;
+            set;
+        }
+        private void InitializeScore()
+        {
+            CurrentScore = 0;
+            if (scoreText)
+            {
+                scoreText.text = "0";
+            }
+            EventManager.Instance.AddListener<ChangeScoreEvent>(ScoreChange);
+        }
+
+        private void InitializeLives()
+        {
+            CurrentLives = 3;
+            if (livesText)
+            {
+                livesText.text = "x" + CurrentLives.ToString();
+            }
+            EventManager.Instance.AddListener<ChangeLivesEvent>(LifeChange);
+        }
+        private void ScoreChange(ChangeScoreEvent e)
+        {
+            CurrentScore = CurrentScore + e.ScoreAmount;
+            if (scoreText)
+            {
+                scoreText.text = CurrentScore.ToString();
+            }
+        }
+
+        private void LifeChange(ChangeLivesEvent e)
+        {
+            if (CurrentLives == 0)
+            {
+                return;
+            }
+
+            CurrentLives = CurrentLives + e.LivesAmount;
+            if (livesText)
+            {
+                livesText.text = "x"+CurrentLives.ToString();
+            }
+        }
+
         #endregion
 
         #region Utilities
