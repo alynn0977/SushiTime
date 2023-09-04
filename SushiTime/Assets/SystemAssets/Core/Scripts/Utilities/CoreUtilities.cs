@@ -1,12 +1,28 @@
-using Codice.Client.Common;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Graphs;
 using UnityEngine;
 
 public static class CoreUtilities
 {
+    public static void RemoveAllChildObjects(GameObject parentObject)
+    {
+        var children = parentObject.GetComponentsInChildren<Transform>();
+        if (children.Length == 0)
+        {
+            // Nothing here.
+            return;
+        }
+
+        for (int i = children.Length - 1; i > 0; i--)
+        {
+            var child = children[i];
+#if UNITY_EDITOR
+            UnityEngine.GameObject.DestroyImmediate(child.gameObject);
+#else
+            UnityEngine.GameObject.Destroy(child.gameObject);
+#endif
+        }
+    }
+    
     /// <summary>
     /// Add or get a component from an object.
     /// </summary>

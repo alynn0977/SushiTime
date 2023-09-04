@@ -1,6 +1,7 @@
 namespace BreakoutSystem.UI
 {
     using Core;
+    using CustomUI;
     using Sirenix.OdinInspector;
     using System;
     using TMPro;
@@ -46,6 +47,9 @@ namespace BreakoutSystem.UI
         [TabGroup("Stat Section")]
         [SerializeField]
         private TMP_Text livesText;
+        [TabGroup("Power Ups Section")]
+        [SerializeField]
+        private IconArray powerUpPanel;
         private GoalKeeping gameGoal
         {
             get
@@ -75,6 +79,7 @@ namespace BreakoutSystem.UI
 
             InitializeScore();
             InitializeLives();
+            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
         }
 
         private void Update()
@@ -248,7 +253,6 @@ namespace BreakoutSystem.UI
         #endregion
 
         #region Stats Panel
-
         private int CurrentScore
         {
             get;
@@ -303,6 +307,20 @@ namespace BreakoutSystem.UI
 
         #endregion
 
+        #region PowerUp Panel
+        private void PowerUp(PowerUpEvent e)
+        {
+            if (e.PowerUp.PowerPrefab == null)
+            {
+                Debug.LogError("[UI Manager] null power up reference. Check prefab.");
+            }
+            if (powerUpPanel)
+            {
+                powerUpPanel.SetIcon(e.PowerUp.PowerPrefab, e.PowerUp.Time);
+            }
+        }
+        #endregion
+        
         #region Utilities
         private void RemoveChildObject(GameObject obj)
         {
