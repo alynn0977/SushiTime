@@ -316,7 +316,7 @@ namespace BreakoutSystem.UI
             }
             if (powerUpPanel)
             {
-                powerUpPanel.SetIcon(e.PowerUp.PowerPrefab);
+                powerUpPanel.SetIcon(e.PowerUp.PowerPrefab, e.PowerUp.Time);
             }
         }
         #endregion

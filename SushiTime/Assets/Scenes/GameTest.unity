@@ -947,6 +947,10 @@ PrefabInstance:
       value: GameZone
       objectReference: {fileID: 0}
     - target: {fileID: 3452052603616476831, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: time
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452052603616476831, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: prefab
       value: 
       objectReference: {fileID: 1018519125123817674, guid: 0832af32bf536c5488a2b13550f0c495, type: 3}

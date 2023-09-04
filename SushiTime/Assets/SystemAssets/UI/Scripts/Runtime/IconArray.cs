@@ -19,7 +19,7 @@ namespace CustomUI
         /// </summary>
         public Icon[] Icons;
 
-        public void SetIcon(GameObject iconToAdd)
+        public void SetIcon(GameObject iconToAdd, float timeToRemain = 1.5f)
         {
             // Early return.
             if (iconToAdd == null)
@@ -40,6 +40,10 @@ namespace CustomUI
                 go.transform.position = openSlot.Slot.transform.position;
                 go.transform.SetParent(openSlot.Slot.transform);
                 openSlot.isAvailable = false;
+
+                var convertTime = CoreUtilities.MinsToSec(timeToRemain);
+                Debug.Log($"Reseting this slot after: {convertTime}");
+                StartCoroutine(DeleteChildAfterDelay(openSlot, convertTime));
             }
         }
 
@@ -56,18 +60,6 @@ namespace CustomUI
             SetIcon(testObject);
         }
 
-        private void Awake()
-        {
-            if (Icons.Length == 0)
-            {
-                Debug.LogError($"[{gameObject.name}] Icon Array is empty.");
-                gameObject.SetActive(true);
-                return;
-            }
-
-            ResetIcons();
-        }
-
         [ContextMenu("Reset Icons")]
         private void ResetIcons()
         {
@@ -76,6 +68,13 @@ namespace CustomUI
                 CoreUtilities.RemoveAllChildObjects(Icons[i].Slot);
                 Icons[i].isAvailable = true;
             }
+        }
+
+        private IEnumerator DeleteChildAfterDelay(Icon slotToReset, float delayTime)
+        {
+            yield return new WaitForSeconds(delayTime);
+            CoreUtilities.RemoveAllChildObjects(slotToReset.Slot);
+            slotToReset.isAvailable = true;
         }
 
         private bool CheckAvailability()
@@ -104,6 +103,18 @@ namespace CustomUI
             }
 
             return default;
+        }
+
+        private void Awake()
+        {
+            if (Icons.Length == 0)
+            {
+                Debug.LogError($"[{gameObject.name}] Icon Array is empty.");
+                gameObject.SetActive(true);
+                return;
+            }
+
+            ResetIcons();
         }
     }
 
