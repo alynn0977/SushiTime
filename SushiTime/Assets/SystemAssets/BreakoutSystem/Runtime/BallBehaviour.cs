@@ -10,7 +10,11 @@ namespace BreakoutSystem
     public class BallBehaviour : MonoBehaviour
     {
         private const string boundaryTag = "Boundary";
-        [SerializeField] Rigidbody2D _rb;
+        
+        [SerializeField]
+        private Rigidbody2D _rb;
+        [SerializeField]
+        private bool isPlayOnAwake = false;
         private Vector2 newVelocity;
 
         public void OnCollisionEnter2D(Collision2D collider)
@@ -33,14 +37,18 @@ namespace BreakoutSystem
 
             Push(newVelocity);
         }
+        
+        /// <summary>
+        /// Launch the ball in an initialize direction.
+        /// </summary>
+        public void LaunchBall()
+        {
+            newVelocity = Vector2.up * 4f;
+        }
 
         private void Push(Vector2 velocity)
         {
             newVelocity = velocity;
-        }
-        private void LaunchBall()
-        {
-            newVelocity = Vector2.up * 4f;
         }
         private void Start()
         {
@@ -49,8 +57,11 @@ namespace BreakoutSystem
                _rb = GetComponent<Rigidbody2D>();
             }
 
-            // Set the initial direction
-            LaunchBall();
+            if (isPlayOnAwake)
+            {
+                // Set the initial direction
+                LaunchBall(); 
+            }
         }
 
         private void FixedUpdate()

@@ -23,6 +23,8 @@ namespace BreakoutSystem
         /// </summary>
         public GoalKeeping GameGoal => goal;
 
+        public BallBehaviour MainBall => mainBall;
+
         private void Start()
         {
             if (!goal)
@@ -36,6 +38,12 @@ namespace BreakoutSystem
         {
             Debug.Log($"Player power increased to {e.SetPower}");
             playerPowr = e.SetPower;
+        }
+
+        [ContextMenu("Begin Game")]
+        private void BeginGame()
+        {
+            MainBall.LaunchBall();
         }
 
         // TO DO: What are the goals?
