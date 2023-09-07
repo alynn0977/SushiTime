@@ -946,6 +946,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameZone
       objectReference: {fileID: 0}
+    - target: {fileID: 2636696032440137447, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 32aed33cce62aa049b5db72d67990075, type: 2}
+    - target: {fileID: 6000391565852155694, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
