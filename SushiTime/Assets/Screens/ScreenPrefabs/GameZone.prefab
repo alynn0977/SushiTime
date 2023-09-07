@@ -1280,7 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowr: 1
-  mainBall: {fileID: 0}
+  mainBall: {fileID: 2162546883973909938}
   goal: {fileID: 11400000, guid: a3bffdcd82468ac438956d7cd6c56592, type: 2}
 --- !u!1 &1390489626503538971
 GameObject:
@@ -4267,7 +4267,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 6000391565852155689}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 32aed33cce62aa049b5db72d67990075, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6969,3 +6969,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7503551354333152232, guid: 19ecbc48f0230d747b3f5ec5ce81a04f, type: 3}
   m_PrefabInstance: {fileID: 8346133309686702216}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2162546883973909938 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7913252154088549690, guid: 19ecbc48f0230d747b3f5ec5ce81a04f, type: 3}
+  m_PrefabInstance: {fileID: 8346133309686702216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d2215262dcc644fbf70e6469e1b401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
