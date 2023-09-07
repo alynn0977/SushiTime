@@ -4,89 +4,59 @@ namespace BreakoutSystem
     using UnityEngine;
 
     /// <summary>
-    /// Behaviour for the break-out ball.
+    /// Core behaviour of the ball.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BallBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        private float speed = 20f;
-        [SerializeField]
-        private float initialSpeed = 2f;
+        private const string boundaryTag = "Boundary";
+        [SerializeField] Rigidbody2D _rb;
+        private Vector2 newVelocity;
 
-        private GameZone gameZone;
-        
-        [field: SerializeField]
-        public Vector2 Velocity { get; set; }
-
-        [field: SerializeField]
-        public int CurrentPlayerPwr { get; private set; }
-
-        public Rigidbody2D ThisRigidBody { get; private set; }
-
-        private void Awake()
+        public void OnCollisionEnter2D(Collision2D collider)
         {
-            ThisRigidBody = GetComponent<Rigidbody2D>();
-            ThisRigidBody.velocity = ReturnRandomTraj().normalized * initialSpeed;
-            if (GetComponentInParent<GameZone>())
+            // Activate the interaction of capable objects.
+            if (collider.gameObject.TryGetComponent(out iInteractable interactor))
             {
-                gameZone = GetComponentInParent<GameZone>();
-                CurrentPlayerPwr = gameZone.PlayerPower;
-                
-                if (EventManager.Instance)
-                {
-                    EventManager.Instance.AddListener<IncreasePowerEvent>(PlayerPowerIncrease);
-                }
+                interactor.Interact();
             }
-            else
+
+            // Provide new velocity, based on what was hit.
+            newVelocity = Vector2.Reflect(newVelocity, collider.contacts[0].normal);
+
+            // If the ball hits the paddle or wall, add a slight upward bias to the velocity
+            if (collider.gameObject.TryGetComponent<PaddleBehaviour>(out _) ||
+                collider.gameObject.CompareTag(boundaryTag))
             {
-                Debug.LogWarning("[BallBehaviour]: No gamezone found. Initializing with default.");
-                CurrentPlayerPwr = 1;
+                newVelocity += Vector2.up * 0.1f;
             }
+
+            Push(newVelocity);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void Push(Vector2 velocity)
         {
-            // Ball activates certain game objects.
-            if (collision.gameObject.TryGetComponent(out iInteractable interactable))
-            {
-                Interact(collision);
-            }
+            newVelocity = velocity;
         }
-
-        private static void Interact(Collision2D collision)
+        private void LaunchBall()
         {
-            if (collision.gameObject.TryGetComponent(out iInteractable interactable))
-            {
-                interactable.Interact();
-            }
+            newVelocity = Vector2.up * 4f;
         }
-
-        private Vector3 ReturnRandomTraj()
+        private void Start()
         {
-            Vector3 force = Vector2.zero;
-            force.x = Random.Range(-1f, 1f);
-            force.y = -1f;
+            if (_rb!= null)
+            {
+               _rb = GetComponent<Rigidbody2D>();
+            }
 
-            return force;
+            // Set the initial direction
+            LaunchBall();
         }
 
         private void FixedUpdate()
         {
-            if (Mathf.Abs(ThisRigidBody.velocity.y) < 0.5f)
-            {
-                Vector3 newVelocity = ThisRigidBody.velocity;
-                newVelocity.y = newVelocity.y < 0 ? -1f : 1f;
-                ThisRigidBody.velocity = newVelocity;
-            }
-
-            // Normalize the velocity to maintain a constant speed
-            ThisRigidBody.velocity = ThisRigidBody.velocity.normalized * speed;
+            _rb.MovePosition(_rb.position + newVelocity * Time.deltaTime);
         }
 
-        private void PlayerPowerIncrease(IncreasePowerEvent e)
-        {
-            Debug.Log($"Player power increased to {e.SetPower}");
-            CurrentPlayerPwr = e.SetPower;
-        }
     }
 }
