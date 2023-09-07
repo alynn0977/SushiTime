@@ -1,8 +1,6 @@
 namespace BreakoutSystem
 {
     using Core;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
@@ -14,8 +12,6 @@ namespace BreakoutSystem
         private float speed = 20f;
         [SerializeField]
         private float initialSpeed = 2f;
-        
-        private Vector3 initialDirection;
 
         private GameZone gameZone;
         
@@ -93,5 +89,4 @@ namespace BreakoutSystem
             CurrentPlayerPwr = e.SetPower;
         }
     }
-
 }
