@@ -1,149 +1,62 @@
 namespace BreakoutSystem
 {
     using Core;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
-    /// Behaviour for the break-out ball.
+    /// Core behaviour of the ball.
     /// </summary>
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BallBehaviour : MonoBehaviour
     {
+        private const string boundaryTag = "Boundary";
+        [SerializeField] Rigidbody2D _rb;
+        private Vector2 newVelocity;
 
-        private const int boundaryLimit = 3;
-
-        [SerializeField]
-        private float speed = 20f;
-
-        [SerializeField]
-        private float maxBounceAngle = 75f;
-
-        private GameZone gameZone;
-      
-        [field: SerializeField]
-        public float Speed { get; set; }
-        
-        [field: SerializeField]
-        public Vector2 Vector { get; set; }
-
-        [field: SerializeField]
-        public int CurrentPlayerPwr { get; private set; }
-
-        [field: SerializeField]
-        public int CurrentBoundaryHits { get; private set; }
-
-        public Rigidbody2D ThisRigidBody { get; private set; }
-        
-
-
-        private void Awake()
+        public void OnCollisionEnter2D(Collision2D collider)
         {
-            ThisRigidBody = GetComponent<Rigidbody2D>();
-
-            if (GetComponentInParent<GameZone>())
+            // Activate the interaction of capable objects.
+            if (collider.gameObject.TryGetComponent(out iInteractable interactor))
             {
-                gameZone = GetComponentInParent<GameZone>();
-                CurrentPlayerPwr = gameZone.PlayerPower;
-                
-                if (EventManager.Instance)
-                {
-                    EventManager.Instance.AddListener<IncreasePowerEvent>(PlayerPowerIncrease);
-                }
-            }
-            else
-            {
-                Debug.LogWarning("[BallBehaviour]: No gamezone found. Initializing with default.");
-                CurrentPlayerPwr = 1;
+                interactor.Interact();
             }
 
+            // Provide new velocity, based on what was hit.
+            newVelocity = Vector2.Reflect(newVelocity, collider.contacts[0].normal);
+
+            // If the ball hits the paddle or wall, add a slight upward bias to the velocity
+            if (collider.gameObject.TryGetComponent<PaddleBehaviour>(out _) ||
+                collider.gameObject.CompareTag(boundaryTag))
+            {
+                newVelocity += Vector2.up * 0.1f;
+            }
+
+            Push(newVelocity);
         }
 
+        private void Push(Vector2 velocity)
+        {
+            newVelocity = velocity;
+        }
+        private void LaunchBall()
+        {
+            newVelocity = Vector2.up * 4f;
+        }
         private void Start()
         {
-            Invoke(nameof(ReturnRandomTraj), .4f);
-        }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.TryGetComponent(out BallBehaviour ballBehaviour))
+            if (_rb!= null)
             {
-                BallCollision(collision);
+               _rb = GetComponent<Rigidbody2D>();
             }
-            else if (collision.gameObject.TryGetComponent(out iInteractable interactable))
-            {
-                Interact(collision);
-            }
-            else if (collision.gameObject.tag == "Boundary")
-            {
-                if (CurrentBoundaryHits >= boundaryLimit)
-                {
-                    ReturnRandomTraj();
-                    CurrentBoundaryHits = 0;
-                    return;
-                }
 
-                CurrentBoundaryHits++;
-            }
-        }
-
-        private static void Interact(Collision2D collision)
-        {
-            if (collision.gameObject.TryGetComponent(out iInteractable interactable))
-            {
-                interactable.Interact();
-            }
-        }
-
-        private void BallCollision(Collision2D collision)
-        {
-            if (collision.gameObject.TryGetComponent(out BallBehaviour ball))
-            {
-                float calculateNewAngle = CalculateRotation(ball, collision);
-                Quaternion rotation = Quaternion.AngleAxis(calculateNewAngle, Vector3.forward);
-                ball.ThisRigidBody.velocity = rotation * Vector2.up * ball.ThisRigidBody.velocity.magnitude;
-            }
-        }
-
-        private float CalculateRotation(BallBehaviour ball, Collision2D collision)
-        {
-            Vector3 paddlePosition = transform.position;
-            Vector2 contactPoint = collision.GetContact(0).point;
-
-            float offset = paddlePosition.x - contactPoint.x;
-            float width = collision.otherCollider.bounds.size.x * 5f;
-
-            float currentAngle = Vector2.SignedAngle(Vector2.up, ball.ThisRigidBody.velocity);
-            float bounceAngle = (offset / width) * maxBounceAngle;
-
-            float newAngle = Mathf.Clamp(currentAngle + bounceAngle, -maxBounceAngle, maxBounceAngle);
-
-            return newAngle;
-        }
-        private void ReturnRandomTraj()
-        {
-            Vector2 force = Vector2.zero;
-            force.x = Random.Range(-1f, 1f);
-            force.y = -1f;
-
-            ThisRigidBody.AddForce(force.normalized * speed);
-        }
-
-        private void Update()
-        {
-            Speed = ThisRigidBody.velocity.magnitude;
+            // Set the initial direction
+            LaunchBall();
         }
 
         private void FixedUpdate()
         {
-            ThisRigidBody.velocity = ThisRigidBody.velocity.normalized* speed;
+            _rb.MovePosition(_rb.position + newVelocity * Time.deltaTime);
         }
 
-        private void PlayerPowerIncrease(IncreasePowerEvent e)
-        {
-            Debug.Log($"Player power increased to {e.SetPower}");
-            CurrentPlayerPwr = e.SetPower;
-        }
     }
-
 }
