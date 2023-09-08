@@ -13,6 +13,12 @@ namespace BreakoutSystem
 
         [SerializeField]
         private GoalKeeping goal;
+
+        [SerializeField]
+        private Canvas modalCanvas;
+
+        [SerializeField]
+        private GameObject gameOverScreen;
         /// <summary>
         /// Read-only access of current player power stat.
         /// </summary>
@@ -24,7 +30,19 @@ namespace BreakoutSystem
         public GoalKeeping GameGoal => goal;
 
         public BallBehaviour MainBall => mainBall;
+        public void CallGameOver()
+        {
+            gameOverScreen.SetActive(true);
+        }
 
+        public void RemoveGameOver()
+        {
+            // Turn off modal.
+            // Shut down game.
+            // Send info to GameManager if available.
+        }
+
+        // TODO: What are the goals?
         private void Start()
         {
             if (!goal)
@@ -32,6 +50,7 @@ namespace BreakoutSystem
                 Debug.LogWarning($"[Game Zone]:{gameObject.name} does not have goal data. Is this intentional?");
             }
 
+            InitializeModalCanvas();
             Invoke(nameof(BeginGame), 1.5f);
         }
 
@@ -47,7 +66,19 @@ namespace BreakoutSystem
             MainBall.LaunchBall();
         }
 
-        // TO DO: What are the goals?
+        private void InitializeModalCanvas()
+        {
+            if (modalCanvas != null)
+            {
+                modalCanvas = GetComponentInChildren<Canvas>();
+                if (modalCanvas != null)
+                {
+                    Debug.LogWarning($"[{GetType().Name}]: {gameObject.name} lacks a modal canvas.");
+                    return;
+                }
+            }
+            gameOverScreen.SetActive(false);
+        }
     }
 
 }

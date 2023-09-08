@@ -307,6 +307,7 @@ namespace BreakoutSystem.UI
                 if (CurrentLives == 0)
                 {
                     // Tell Game manager to game over!
+                    GameZone.CallGameOver();
                 }
             }
         }
