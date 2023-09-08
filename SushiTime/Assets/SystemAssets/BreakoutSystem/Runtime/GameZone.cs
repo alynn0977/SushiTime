@@ -31,7 +31,8 @@ namespace BreakoutSystem
             {
                 Debug.LogWarning($"[Game Zone]:{gameObject.name} does not have goal data. Is this intentional?");
             }
-            
+
+            Invoke(nameof(BeginGame), 1.5f);
         }
 
         private void PlayerPowerIncrease(IncreasePowerEvent e)

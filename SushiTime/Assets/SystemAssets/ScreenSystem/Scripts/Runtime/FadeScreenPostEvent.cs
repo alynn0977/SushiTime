@@ -11,7 +11,7 @@ namespace ScreenSystem
     {
         public FadeScreenPostEvent()
         {
-
+            Debug.Log("Fade Screen Post Event.");
         }
     }
 }

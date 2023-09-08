@@ -17,5 +17,14 @@ namespace ScreenSystem
         {
             EventManager.Instance.QueueEvent(new FadeScreenEvent(fadeIn));
         }
+
+        /// <summary>
+        /// First, fade the screen in. Then fade out automatically.
+        /// </summary>
+        /// <param name="fadeIn"></param>
+        public void OnFadeScreenAuto()
+        {
+            EventManager.Instance.QueueEvent(new FadeScreenEvent(true, true));
+        }
     }
 }

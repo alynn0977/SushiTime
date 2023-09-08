@@ -156,16 +156,35 @@ namespace ScreenSystem
                 }
 
                 // Instantiate the object into a gameobject.
-                _currentScreen = Instantiate(GetScreens[indexInCache].ScreenPrefab).GetComponent<RectTransform>();
 
-                // Does the object have ScreenTypeBeahvour?
-                if (_currentScreen.TryGetComponent(out ScreenTypeBehaviour screenTypeBehaviour) )
+                var _go = Instantiate(GetScreens[indexInCache].ScreenPrefab);
+
+                if (_go.TryGetComponent(out RectTransform rectTransform))
                 {
-                    screenTypeBehaviour.InitializeScreen();
-                }
+                    _currentScreen = rectTransform;
 
-                _activeScreens.Add(_currentScreen);
-                CenterAndParentScreen(_currentScreen);
+                    if (_currentScreen.TryGetComponent(out ScreenTypeBehaviour screenTypeBehaviour))
+                    {
+                        screenTypeBehaviour.InitializeScreen();
+                    }
+
+                    _activeScreens.Add(_currentScreen);
+                    CenterAndParentScreen(_currentScreen);
+                }
+                else
+                {
+                    // This must be a game screen. Turn off main.
+                    Debug.Log("Game Screen detected.");
+                    GameObject.Destroy(_lastScreen.gameObject);
+                    _currentScreen = _homeScreen;
+                    _currentScreen.gameObject.SetActive(false);
+
+                    if (_go.TryGetComponent(out ScreenTypeBehaviour screenTypeBehaviour))
+                    {
+                        screenTypeBehaviour.InitializeScreen();
+                    }
+                }
+               
             }
             else
             {
