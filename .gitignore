@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 *.slnf
 SushiTime/.vsconfig
+SushiTime/Assets/Resources/DOTweenSettings.asset
