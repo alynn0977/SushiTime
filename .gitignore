@@ -60,15 +60,16 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
-*.zip
 
 # Crashlytics generated file
 crashlytics-build.properties
 
 # Packed Addressables
-SushiTime/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 # Temporary auto-generated Android Assets
-SushiTime/[Aa]ssets/[Ss]treamingAssets/aa.meta
-SushiTime/[Aa]ssets/[Ss]treamingAssets/aa/*
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
 *.slnf
+SushiTime/.vsconfig
+SushiTime/Assets/Resources/DOTweenSettings.asset
