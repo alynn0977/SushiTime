@@ -18,6 +18,8 @@
 /SushiTime/SushiTime/Logs
 /SushiTime/UserSettings
 /SushiTime/SushiTime/obj
+/SushiTime/Build
+\SushiTime\Build
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
