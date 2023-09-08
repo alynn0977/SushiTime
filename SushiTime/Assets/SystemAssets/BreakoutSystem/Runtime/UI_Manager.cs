@@ -293,6 +293,7 @@ namespace BreakoutSystem.UI
 
         private void LifeChange(ChangeLivesEvent e)
         {
+            // Null check in case of debugging.
             if (CurrentLives == 0)
             {
                 return;
@@ -302,6 +303,11 @@ namespace BreakoutSystem.UI
             if (livesText)
             {
                 livesText.text = "x"+CurrentLives.ToString();
+
+                if (CurrentLives == 0)
+                {
+                    // Tell Game manager to game over!
+                }
             }
         }
 

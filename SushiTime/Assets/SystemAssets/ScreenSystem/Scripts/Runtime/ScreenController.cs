@@ -2,7 +2,10 @@ namespace ScreenSystem
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using Unity.Collections;
     using UnityEngine;
+    using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
     /// <summary>
     /// Screen Controller class provides access and navigation
@@ -13,7 +16,9 @@ namespace ScreenSystem
         private const string ModalScreen = "ModalHomeScreen";
         private static Canvas _canvas;
 
+        [Header("Please update scriptable object.")]
         [SerializeField]
+        [ReadOnly]
         private ScreenType[] _screens;
 
         private Dictionary<int, ScreenType> _screensCache;
