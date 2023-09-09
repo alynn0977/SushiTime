@@ -103,15 +103,8 @@ namespace DialogueSystem
 
         }
 
-        public IEnumerator PlayFirstTrack()
-        {
-            yield return new WaitForSeconds(4f);
-            PlayCurrentTrack();
-        }
-
         public IEnumerator PlayCurrentTrack()
         {
-            Debug.Log($"Now playing track: {currentTrackIndex}");
             if (trackList.ContainsKey(currentTrackIndex))
             {
                 int i = 0;
@@ -121,6 +114,7 @@ namespace DialogueSystem
                     FireTrack(track, i);
                     i++;
                     yield return new WaitForSeconds(1f);
+                    Debug.Log($"Played a track at {Time.timeScale}");
                 }
             }
         }

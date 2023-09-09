@@ -2,12 +2,12 @@ using AudioSystem;
 using CarterGames.Assets.AudioManager;
 using Core;
 using ScreenSystem;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
+/// <summary>
+/// Provides connection to <see cref="AppManager"/>
+/// and other global level commands.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Screen Commands
     private void GameManagerOnCallHome(CallHomeScreenEvent e)
     {
         _screenController.GoToHomeScreen(e.ModalMode);
@@ -67,8 +68,9 @@ public class GameManager : MonoBehaviour
     {
         _screenController.GoToScreen(e.ScreenName);
     }
+    #endregion
 
-
+    #region Music Commands
     private void GameManagerOnPlayMusic(RequestMusicPlayerEvent e)
     {
         _musicPlayer.PlayTrack(e.Track);
@@ -77,5 +79,6 @@ public class GameManager : MonoBehaviour
     private void GameManagerOnPlayMusicOff(RequestMusicPlayerOffEvent e)
     {
         _musicPlayer.StopTrack();
-    }
+    } 
+    #endregion
 }

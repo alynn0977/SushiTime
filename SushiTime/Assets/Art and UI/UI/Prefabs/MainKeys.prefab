@@ -34,7 +34,6 @@ RectTransform:
   - {fileID: 5358506525345200975}
   - {fileID: 1696063241734631539}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -79,7 +78,8 @@ GameObject:
   - component: {fileID: 7201000776410188242}
   - component: {fileID: 1090143281204029481}
   - component: {fileID: 457163828678928179}
-  - component: {fileID: 4582705199576792068}
+  - component: {fileID: 6787489159027776646}
+  - component: {fileID: 6613587595077245941}
   m_Layer: 5
   m_Name: PauseKey
   m_TagString: Untagged
@@ -101,7 +101,6 @@ RectTransform:
   m_Children:
   - {fileID: 3414194539363824459}
   m_Father: {fileID: 5910018864451863782}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -190,9 +189,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4582705199576792068}
-        m_TargetAssemblyTypeName: ExitButton, Assembly-CSharp
-        m_MethodName: ExitApplication
+      - m_Target: {fileID: 6613587595077245941}
+        m_TargetAssemblyTypeName: ScreenSystem.CallNewScreen, ScreenSystem
+        m_MethodName: OnCallScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -202,7 +201,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4582705199576792068
+--- !u!114 &6787489159027776646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,9 +210,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 2099642371932304752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba6cf0c1c0bc18418a634617904ce37, type: 3}
+  m_Script: {fileID: 11500000, guid: 14fe824b074821149b817d286e5f97fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6613587595077245941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099642371932304752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenName: PauseScreen
+  delayTime: 0.2
 --- !u!1 &3770472181202227362
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +258,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5358506525345200975}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -321,7 +333,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9119909812383731269}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -400,7 +411,6 @@ RectTransform:
   m_Children:
   - {fileID: 2509142754186145312}
   m_Father: {fileID: 5910018864451863782}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -547,7 +557,6 @@ RectTransform:
   m_Children:
   - {fileID: 2573122962337426}
   m_Father: {fileID: 5910018864451863782}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -660,6 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b85333adf07ca74c94adf028cb7112a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
 --- !u!1 &8703632199922205590
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +701,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6479976166367586536}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -741,6 +750,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5910018864451863782}
     m_Modifications:
     - target: {fileID: 722388988883513808, guid: c96f4f92528cf9e44aa37353ffbc51c1, type: 3}
@@ -848,6 +858,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96f4f92528cf9e44aa37353ffbc51c1, type: 3}
 --- !u!224 &1696063241734631539 stripped
 RectTransform:
