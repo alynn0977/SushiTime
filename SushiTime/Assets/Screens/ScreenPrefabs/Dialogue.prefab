@@ -1382,6 +1382,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 425866188777539382}
     m_Modifications:
+    - target: {fileID: 5120899447630987745, guid: 7f63eeb8a137b0c4b8fb652ffa049f3f, type: 3}
+      propertyPath: m_text
+      value: Prologue
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120899447630987745, guid: 7f63eeb8a137b0c4b8fb652ffa049f3f, type: 3}
+      propertyPath: m_fontSize
+      value: 43.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120899447630987745, guid: 7f63eeb8a137b0c4b8fb652ffa049f3f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 43.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5120899447630987745, guid: 7f63eeb8a137b0c4b8fb652ffa049f3f, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7246240004100013153, guid: 7f63eeb8a137b0c4b8fb652ffa049f3f, type: 3}
       propertyPath: m_Name
       value: Banner

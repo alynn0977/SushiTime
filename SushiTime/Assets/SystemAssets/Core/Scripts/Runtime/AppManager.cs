@@ -1,24 +1,44 @@
 namespace Core
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
     /// Application manager for the system. Tracks only the most universal
     /// elements of any application such as pausing and quitting.
     /// </summary>
-    public class AppManager : MonoBehaviour
+    public static class AppManager
     {
-        private void PauseGame()
+        private static bool isGlobalPaused = false;
+
+        /// <summary>
+        /// True if the entire game is paused,
+        /// which means time is set to zero.
+        /// </summary>
+        public static bool IsGlobalPaused => isGlobalPaused;
+
+        /// <summary>
+        /// Ceases Game Time Scale
+        /// at a global scale.
+        /// </summary>
+        public static void GlobalPause()
         {
-            // TODO: Write code that pauses the game.
-            // TODO: Create a pause menu that gets called from screen manager.
-            throw new NotImplementedException();
+            Debug.Log("Time Scale at 0");
+            Time.timeScale = 0;
+            isGlobalPaused = true;
         }
 
-        private void EndGame()
+        /// <summary>
+        /// Resumes Game Time Scale
+        /// at global level.
+        /// </summary>
+        public static void GlobalResume()
+        {
+            Time.timeScale = 1;
+            isGlobalPaused = false;
+        }
+
+        private static void EndGame()
         {
             throw new NotImplementedException();
         }
