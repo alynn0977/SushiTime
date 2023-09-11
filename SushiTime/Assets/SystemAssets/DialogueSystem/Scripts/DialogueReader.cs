@@ -355,10 +355,5 @@ namespace DialogueSystem
                 InitializeDialogue();
             }
         }
-
-
     }
-
-    
-
 }

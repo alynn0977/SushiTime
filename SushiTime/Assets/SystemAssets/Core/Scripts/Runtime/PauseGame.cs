@@ -10,6 +10,11 @@ namespace Core
     public class PauseGame : MonoBehaviour
     {
         /// <summary>
+        /// Dictates whether pause function kicks in on awake.
+        /// </summary>
+        public bool isPauseOnAwake = false;
+
+        /// <summary>
         /// Force Pause a game from a script.
         /// </summary>
         public void PauseGameGlobal()
@@ -27,6 +32,14 @@ namespace Core
             Debug.LogWarning("Game is resuming.");
             AppManager.GlobalResume();
             EventManager.Instance.QueueEvent(new PauseGameEvent(AppManager.IsGlobalPaused));
+        }
+
+        private void Awake()
+        {
+            if (isPauseOnAwake)
+            {
+                PauseGameGlobal();
+            }
         }
     }
 
