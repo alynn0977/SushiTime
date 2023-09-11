@@ -34,35 +34,7 @@ public class GameManager : MonoBehaviour
     private ScreenController _screenController;
     private AudioManager _audioController;
     private MusicPlayer _musicPlayer;
-    private AudioClip _currentClip;
     private RectTransform _homeScreen;
-
-    /// <summary>
-    /// Global volume of the game.
-    /// </summary>
-    public int GlobalVolume
-    {
-        get { return PlayerPrefs.GetInt(GlobalAudioKey); }
-        set { PlayerPrefs.SetInt(GlobalAudioKey, value); }
-    }
-
-    /// <summary>
-    /// Sound volume of the game.
-    /// </summary>
-    public int GlobalSound
-    {
-        get { return PlayerPrefs.GetInt(GlobalSoundKey); }
-        set { PlayerPrefs.SetInt(GlobalSoundKey, value); }
-    }
-
-    /// <summary>
-    /// Sound volume of the game.
-    /// </summary>
-    public int GlobalMusic
-    {
-        get { return PlayerPrefs.GetInt(GlobalMusicKey); }
-        set { PlayerPrefs.SetInt(GlobalMusicKey, value); }
-    }
 
     private void Start()
     {
@@ -73,20 +45,6 @@ public class GameManager : MonoBehaviour
         InitializeAudioController();
 
         EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGameEvent);
-    }
-
-    private void OnPauseGameEvent(PauseGameEvent e)
-    {
-        if (e.IsPause && _musicPlayer.IsTrackPlaying)
-        {
-            _musicPlayer.SetVolume(0);
-            _musicPlayer.StopTrack();
-        }
-
-        if (!e.IsPause)
-        {
-            _musicPlayer.SetVolume(PlayerPrefs.GetInt(GlobalMusicKey));
-        }
     }
 
     #region Initialize
@@ -106,7 +64,22 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.AddListener<RequestMusicPlayerEvent>(OnGameManagerOnPlayMusic);
         EventManager.Instance.AddListener<RequestMusicPlayerOffEvent>(OnGameManagerOnPlayMusicOff);
         EventManager.Instance.AddListener<RequestAudioClipEvent>(OnGameManagerOnPlayClip);
-        EventManager.Instance.AddListener<ChangeAudioEvent>(OnGameManagerVolumeChange);
+        EventManager.Instance.AddListener<ChangeVolumeEvent>(OnGameManagerVolumeChange);
+    }
+    #endregion
+
+    #region Application Commmands
+    private void OnPauseGameEvent(PauseGameEvent e)
+    {
+        //if (AppManager.IsGlobalPaused)
+        //{
+        //    _musicPlayer.SetVolume(0);
+        //}
+
+        //if (!AppManager.IsGlobalPaused)
+        //{
+        //    _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
+        //}
     }
     #endregion
 
@@ -134,35 +107,29 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Test Global Volume")]
     private void TestGlobal()
     {
-        Debug.Log("Test Global");
-        PlayerPrefs.SetInt(GlobalAudioKey, TestGlobalVolume);
+        PlayerPrefs.SetFloat(GlobalAudioKey, TestGlobalVolume);
         _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalAudioKey));
     }
     [ContextMenu("Test Audio Volume")]
     private void TestAudio()
     {
-        Debug.Log("Test Audio");
-        PlayerPrefs.SetInt(GlobalSoundKey, TestAudioVolume);
+        PlayerPrefs.SetFloat(GlobalSoundKey, TestAudioVolume);
     }
     [ContextMenu("Test Music Volume")]
     private void TestMusic()
     {
-        Debug.Log("Test Music");
-        PlayerPrefs.SetInt(GlobalMusicKey, TestMusicVolume);
+        PlayerPrefs.SetFloat(GlobalMusicKey, TestMusicVolume);
         _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
     }
     private static void InitializeSoundPref()
     {
-        if (!PlayerPrefs.HasKey(GlobalAudioKey))
-        {
-            PlayerPrefs.SetInt(GlobalAudioKey, 10);
-            PlayerPrefs.SetInt(GlobalSoundKey, 10);
-            PlayerPrefs.SetInt(GlobalMusicKey, 10);
-        }
+            PlayerPrefs.SetFloat(GlobalAudioKey, 10);
+            PlayerPrefs.SetFloat(GlobalSoundKey, 10);
+            PlayerPrefs.SetFloat(GlobalMusicKey, 10);
     }
     private void OnGameManagerOnPlayMusic(RequestMusicPlayerEvent e)
     {
-        _musicPlayer.SetVolume(GlobalMusic);
+        _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         _musicPlayer.PlayTrack(e.Track);
     }
 
@@ -173,30 +140,31 @@ public class GameManager : MonoBehaviour
 
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
-        _audioController.Play(e.Clip.name, GlobalSound);
+        _audioController.Play(e.Clip.name, volume:PlayerPrefs.GetFloat(GlobalAudioKey));
     }
 
-    private void OnGameManagerVolumeChange(ChangeAudioEvent e)
+    private void OnGameManagerVolumeChange(ChangeVolumeEvent e)
     {
         if (e.NewGlobalVolume != default)
         {
-            Debug.Log($"[GameManager] now changing global volume to {e.NewGlobalVolume}");
-            GlobalVolume = e.NewGlobalVolume;
-            GlobalSound = e.NewGlobalVolume;
-            GlobalMusic = e.NewGlobalVolume;
 
-            _musicPlayer.SetVolume(GlobalMusic);
+            PlayerPrefs.SetFloat(GlobalAudioKey,e.NewGlobalVolume * .1f);
+            PlayerPrefs.SetFloat(GlobalSoundKey, e.NewGlobalVolume * .1f);
+            PlayerPrefs.SetFloat(GlobalMusicKey, e.NewGlobalVolume *.1f);
+
+            Debug.Log($"[GameManager] Global Music set to {PlayerPrefs.GetFloat(GlobalMusicKey)}");
+            _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         }
 
         if (e.NewSoundVolume != default)
         {
-            GlobalSound = e.NewSoundVolume;
+            PlayerPrefs.SetFloat(GlobalSoundKey, e.NewSoundVolume * .1f);
         }
 
         if (e.NewMusicVolume != default)
         {
-            GlobalMusic = e.NewMusicVolume;
-            _musicPlayer.SetVolume(GlobalMusic);
+            PlayerPrefs.SetFloat(GlobalMusicKey,e.NewMusicVolume * .1f);
+            _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         }
     }
 
