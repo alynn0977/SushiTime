@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     #region Application Commmands
     private void OnPauseGameEvent(PauseGameEvent e)
     {
+        // TODO: When or when not to pause music? 
+
         //if (AppManager.IsGlobalPaused)
         //{
         //    _musicPlayer.SetVolume(0);
@@ -123,9 +125,14 @@ public class GameManager : MonoBehaviour
     }
     private static void InitializeSoundPref()
     {
+        // If no player prefs, set from scratch.
+        if (!PlayerPrefs.HasKey(GlobalSoundKey))
+        {
             PlayerPrefs.SetFloat(GlobalAudioKey, 10);
             PlayerPrefs.SetFloat(GlobalSoundKey, 10);
             PlayerPrefs.SetFloat(GlobalMusicKey, 10);
+        }
+        
     }
     private void OnGameManagerOnPlayMusic(RequestMusicPlayerEvent e)
     {
@@ -140,29 +147,22 @@ public class GameManager : MonoBehaviour
 
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
-        _audioController.Play(e.Clip.name, volume:PlayerPrefs.GetFloat(GlobalAudioKey));
+        var volume = PlayerPrefs.GetFloat(GlobalSoundKey);
+        Debug.Log($"Playing audio clip: {e.Clip.name} at {volume}");
+        _audioController.Play(e.Clip.name, volume);
     }
 
     private void OnGameManagerVolumeChange(ChangeVolumeEvent e)
     {
-        if (e.NewGlobalVolume != default)
-        {
-
-            PlayerPrefs.SetFloat(GlobalAudioKey,e.NewGlobalVolume * .1f);
-            PlayerPrefs.SetFloat(GlobalSoundKey, e.NewGlobalVolume * .1f);
-            PlayerPrefs.SetFloat(GlobalMusicKey, e.NewGlobalVolume *.1f);
-
-            Debug.Log($"[GameManager] Global Music set to {PlayerPrefs.GetFloat(GlobalMusicKey)}");
-            _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
-        }
-
         if (e.NewSoundVolume != default)
         {
+            Debug.Log($"Changing sound to {PlayerPrefs.GetFloat(GlobalSoundKey, e.NewSoundVolume * .1f)}");
             PlayerPrefs.SetFloat(GlobalSoundKey, e.NewSoundVolume * .1f);
         }
 
         if (e.NewMusicVolume != default)
         {
+            Debug.Log($"Changing sound to {PlayerPrefs.GetFloat(GlobalSoundKey, e.NewSoundVolume * .1f)}");
             PlayerPrefs.SetFloat(GlobalMusicKey,e.NewMusicVolume * .1f);
             _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         }

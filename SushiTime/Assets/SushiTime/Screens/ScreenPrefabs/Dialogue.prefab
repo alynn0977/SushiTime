@@ -202,6 +202,8 @@ GameObject:
   - component: {fileID: 2604147189844258883}
   - component: {fileID: 7436908920502874074}
   - component: {fileID: 175125608672895780}
+  - component: {fileID: 2966418058170669270}
+  - component: {fileID: 3426627614638494559}
   m_Layer: 5
   m_Name: Dialogue
   m_TagString: Screen
@@ -339,11 +341,78 @@ MonoBehaviour:
   bubblePrefab: {fileID: 4277822247113284284, guid: 92b8764b8f2ffce4db1f98cc90d69ec6, type: 3}
   maxBubblePool: 3
   segmentsPerScreen: 3
+  OnLastTrack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 278343857579558914}
+        m_TargetAssemblyTypeName: ScreenSystem.CallFadeScreen, ScreenSystem
+        m_MethodName: OnFadeScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5934579229963430609}
+        m_TargetAssemblyTypeName: ScreenSystem.CallNewScreen, ScreenSystem
+        m_MethodName: OnCallScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3426627614638494559}
+        m_TargetAssemblyTypeName: AudioSystem.RequestMusicPlayer, AudioSystem
+        m_MethodName: StopMusicTrack
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   flipLeftPortrait: 1
   flipLeftArt: 0
   flipRightPortrait: 0
   flipRightArt: 0
   portraitPrefab: {fileID: 9220790951093186850, guid: c7b2caedd7062394e9717a9cc266f2cb, type: 3}
+--- !u!114 &2966418058170669270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21f2ec346204204fbbf27bbac86aca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundMusic: {fileID: 8300000, guid: 31bcef039db3dba47b84ec656d30e7ae, type: 3}
+  isFadeIn: 1
+  isFadeOut: 1
+--- !u!114 &3426627614638494559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe45eabf7efa2043a6d11fcb3b4483d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTrack: {fileID: 0}
 --- !u!1 &1853068034669458623
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +589,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 16.57
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -801,6 +870,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: ScreenSystem.CallNewScreen, ScreenSystem
         m_MethodName: OnCallScreen
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3426627614638494559}
+        m_TargetAssemblyTypeName: AudioSystem.RequestMusicPlayer, AudioSystem
+        m_MethodName: StopMusicTrack
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1199,7 +1280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &573940604473648629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1215,9 +1296,9 @@ RectTransform:
   - {fileID: 4689709607026587275}
   m_Father: {fileID: 8046039448995226779}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 43.294, y: -13.1185}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &760120151681617932

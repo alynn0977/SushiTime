@@ -4,6 +4,7 @@ namespace DialogueSystem
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
+    using UnityEngine.Events;
     using UnityEngine.UI;
     /// <summary>
     /// Reads through a provided <see cref="DialogueObject"/> and
@@ -42,6 +43,10 @@ namespace DialogueSystem
         private List<SpeechObject> bubblePool = new List<SpeechObject>();
         private int currentTrackIndex = 0;
 
+        [Header("On Last Track")]
+        [SerializeField]
+        [Tooltip("What should happen after last track plays?")]
+        private UnityEvent OnLastTrack = new UnityEvent();
         [Header("Left Character Properties")]
         [SerializeField]
         private bool flipLeftPortrait = true;
@@ -152,8 +157,8 @@ namespace DialogueSystem
 
             if ( (currentTrackIndex + 1) > trackList.Count-1)
             {
-                Debug.Log("We're at the end. Next.");
-                StartCoroutine(PlayCurrentTrack());
+                Debug.Log("We're at the end. Next screen.");
+                OnLastTrack?.Invoke();
                 return;
             }
 
