@@ -21,15 +21,22 @@
 
         public void PlayAudioClipOther(AudioClip newClip)
         {
-            // If set to use Global Audio,
-            // Then intercept and change.
-
+            // Or default straight to global.
             if (useGlobalAudio)
             {
-                volume = PlayerPrefs.GetFloat(GlobalSoundKey);
-            }
+                var newVolume = PlayerPrefs.GetFloat(GlobalSoundKey); 
+                if (newVolume < 0)
+                {
+                    newVolume = 0;
+                }
 
-            EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, newClip));
+                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, newClip));
+            }
+            // Or override entirely.
+            else
+            {
+                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, newClip));
+            }
         }
     }
 

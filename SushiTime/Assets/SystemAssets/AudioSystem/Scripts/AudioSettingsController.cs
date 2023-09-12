@@ -9,25 +9,15 @@ namespace AudioSystem
     /// </summary>
     public class AudioSettingsController : MonoBehaviour
     {
-        private const string GlobalAudioKey = "globalaudiokey";
         private const string GlobalSoundKey = "globalsoundkey";
         private const string GlobalMusicKey = "globalmusickey";
 
-        [SerializeField]
-        private Slider globalSlider;
         [SerializeField]
         private Slider volumeSlider;
         [SerializeField]
         private Slider musicSlider;
 
-        /// <summary>
-        /// Update master volume via a UI slider.
-        /// </summary>
-        /// <param name="slider">UI slider.</param>
-        public void UpdateMasterVolume(Slider slider)
-        {
-            UpdateMasterVolume(slider.value);
-        }
+
         /// <summary>
         /// Update Sound Volume via a UI slider.
         /// </summary>
@@ -44,21 +34,6 @@ namespace AudioSystem
         {
             UpdateMusicVolume(slider.value);
         }
-        /// <summary>
-        /// Update master volume.
-        /// </summary>
-        /// <param name="volume">Amount for sound.</param>
-        public void UpdateMasterVolume(float volume)
-        {
-            if (EventManager.Instance)
-            {
-                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(newGlobalVolume: (int)volume));
-            }
-            else
-            {
-                NullEventManager();
-            }
-        }
 
         /// <summary>
         /// Update Sound volume.
@@ -68,7 +43,7 @@ namespace AudioSystem
         {
             if (EventManager.Instance)
             {
-                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(newGlobalVolume: default, newSoundVolume: (int)soundVolume, newMusicVolume: default));
+                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(soundVolume));
             }
             else
             {
@@ -83,7 +58,8 @@ namespace AudioSystem
         {
             if (EventManager.Instance)
             {
-                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(newGlobalVolume: default, newSoundVolume: default, newMusicVolume: musicVolume));
+                var currentVolume = PlayerPrefs.GetFloat(GlobalSoundKey);
+                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(currentVolume, musicVolume));
             }
             else
             {
@@ -98,10 +74,13 @@ namespace AudioSystem
 
         private void Awake()
         {
-            if (globalSlider)
+            if (volumeSlider)
             {
-                Debug.Log($"Global Slider found, and should get value of {PlayerPrefs.GetFloat(GlobalAudioKey)}");
-                globalSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalAudioKey));
+                volumeSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalSoundKey) * 10);
+            }
+            if (musicSlider)
+            {
+                musicSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalMusicKey) * 10);
             }
         }
     }
