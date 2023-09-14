@@ -323,6 +323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeComponents:
   - {fileID: 175125608672895780}
+  initializeButtons:
+  - {fileID: 2249493046696286340}
 --- !u!114 &175125608672895780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +851,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2249493046696286343}
   m_OnClick:
     m_PersistentCalls:
