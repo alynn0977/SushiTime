@@ -41,14 +41,15 @@ namespace ScreenSystem
 
         public void ScreenFade(FadeScreenEvent e)
         {
-            Debug.Log($"FadeController recevied call to screen fade with value {e.FadeIn}");
             if (e.FadeIn)
             {
                 FadeIn();
+                Debug.Log($"FadeController received call fade in.");
             }
             else
             {
                 FadeAway();
+                Debug.Log($"FadeController received call fade out.");
             }
         }
 

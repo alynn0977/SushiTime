@@ -88,9 +88,11 @@ public class GameManager : MonoBehaviour
     #region Screen Commands
     private void OnGameManagerOnCallHome(CallHomeScreenEvent e)
     {
-        _screenController.GoToHomeScreen(e.ModalMode);
+        // Go to the modal screen first, if Is Modal is true.
+        _screenController.GoToHomeScreen(e.IsModalScreen);
+
         // Handle Homescreen Restarting music.
-        if (!e.ModalMode)
+        if (!e.IsModalScreen)
         {
             // Play right away if no modal required.
             _homeScreen.GetComponent<ScreenMusicProperties>().RestartMusic();
@@ -148,7 +150,6 @@ public class GameManager : MonoBehaviour
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
         var volume = PlayerPrefs.GetFloat(GlobalSoundKey);
-        Debug.Log($"Playing audio clip: {e.Clip.name} at {volume}");
         _audioController.Play(e.Clip.name, volume);
     }
 

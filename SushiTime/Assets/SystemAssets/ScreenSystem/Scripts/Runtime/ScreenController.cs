@@ -124,6 +124,9 @@ namespace ScreenSystem
             {
                 CloseAllScreens();
             }
+            
+            // Ensure the home screen is active, in case it's off.
+            _homeScreen.gameObject.SetActive(true);
         }
 
         private void CloseAllScreens()

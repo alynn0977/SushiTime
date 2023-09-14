@@ -71,7 +71,7 @@ namespace BreakoutSystem
             if (modalCanvas != null)
             {
                 modalCanvas = GetComponentInChildren<Canvas>();
-                if (modalCanvas != null)
+                if (modalCanvas == null)
                 {
                     Debug.LogWarning($"[{GetType().Name}]: {gameObject.name} lacks a modal canvas.");
                     return;

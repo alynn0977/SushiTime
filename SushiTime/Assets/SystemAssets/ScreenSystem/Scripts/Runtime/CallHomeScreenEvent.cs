@@ -12,15 +12,15 @@ namespace ScreenSystem
         /// <summary>
         /// Call a modal screen to confirm first.
         /// </summary>
-        public bool ModalMode;
+        public bool IsModalScreen;
 
         /// <summary>
         /// Event to close all screens but hom.
         /// </summary>
-        /// <param name="modalMode">Ask to confirm first.</param>
-        public CallHomeScreenEvent(bool modalMode)
+        /// <param name="isModalMode">Ask to confirm first.</param>
+        public CallHomeScreenEvent(bool isModalMode)
         {
-            this.ModalMode = modalMode;
+            this.IsModalScreen = isModalMode;
         }
     } 
 }

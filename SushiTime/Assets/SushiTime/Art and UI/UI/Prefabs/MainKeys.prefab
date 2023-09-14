@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 1211527887462235871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.008901964, y: 0.008901964, z: 0.008901964}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6479976166367586536}
@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fe824b074821149b817d286e5f97fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPauseOnAwake: 0
 --- !u!114 &6613587595077245941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +538,7 @@ GameObject:
   - component: {fileID: 6479976166367586539}
   - component: {fileID: 6479976166367586538}
   - component: {fileID: 6479976166367586537}
-  - component: {fileID: 3112285911545296119}
+  - component: {fileID: 6477700135689361079}
   m_Layer: 5
   m_Name: HomeKey
   m_TagString: Untagged
@@ -647,19 +648,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3112285911545296119}
-        m_TargetAssemblyTypeName: ScreenSystem.CallHomeScreen, ScreenSystem
-        m_MethodName: OnCallHomeScreen
-        m_Mode: 6
+      - m_Target: {fileID: 6477700135689361079}
+        m_TargetAssemblyTypeName: ScreenSystem.CallNewScreen, ScreenSystem
+        m_MethodName: OnCallScreen
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3112285911545296119
+--- !u!114 &6477700135689361079
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -668,10 +669,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6479976166367586535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b85333adf07ca74c94adf028cb7112a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0
+  ScreenName: ModalScreenInGame
+  delayTime: 0
 --- !u!1 &8703632199922205590
 GameObject:
   m_ObjectHideFlags: 0
