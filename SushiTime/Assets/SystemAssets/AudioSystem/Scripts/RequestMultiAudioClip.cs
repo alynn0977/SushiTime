@@ -54,6 +54,5 @@ namespace AudioSystem
                 EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, audioClip));
             }
         }
-
     }
 }
