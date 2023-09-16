@@ -10,14 +10,32 @@ namespace ScreenSystem
     [Serializable]
     public class CloseCurrentScreen : MonoBehaviour
     {
+        [SerializeField]
+        private float delayClose = 0f;
+
+        private GameObject destroyThis;
         /// <summary>
         /// Close a current screen by destroying it.
         /// </summary>
         /// <param name="gameObjectToClose">Object to be closed (screen)</param>
         public void CloseScreen(GameObject gameObjectToClose)
         {
-            Debug.Log($"Closing {gameObjectToClose}");
-            Destroy(gameObjectToClose);
+            destroyThis = gameObjectToClose; 
+            if (delayClose > 0f)
+            {
+                Invoke(nameof(DelayClose), delayClose);
+            }
+            else
+            {
+                Destroy(gameObjectToClose);
+            }
+            
+        }
+
+        private void DelayClose()
+        {
+            Debug.Log("Delay closing.");
+            Destroy(destroyThis);
         }
     } 
 }

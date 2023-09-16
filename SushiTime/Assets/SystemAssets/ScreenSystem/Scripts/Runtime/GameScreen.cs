@@ -35,7 +35,7 @@ namespace ScreenSystem
                 }
                 catch (Exception)
                 {
-                    Debug.Log("WTF mate?");
+                    Debug.Log($"[{GetType().Name}] has experienced an error while calling home.");
                 }
             }
 

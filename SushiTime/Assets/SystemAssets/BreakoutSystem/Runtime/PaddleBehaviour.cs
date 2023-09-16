@@ -1,13 +1,17 @@
 namespace BreakoutSystem
 {
+    using Core;
     using DG.Tweening;
+    using System;
     using UnityEngine;
 
     /// <summary>
     /// Behaviour for paddle interaction.
     /// </summary>
     public class PaddleBehaviour : MonoBehaviour
-    { 
+    {
+        [SerializeField]
+        private bool isReady = true;
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Rect gameZone;
 
@@ -19,9 +23,30 @@ namespace BreakoutSystem
         private void Start()
         {
             mainCamera = Camera.main;
+            EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
+        }
+
+        private void OnPauseGame(PauseGameEvent e)
+        {
+            if (e.IsPause)
+            {
+                isReady = false;
+            }
+            else
+            {
+                isReady = true;
+            }
         }
 
         void Update()
+        {
+            if (isReady)
+            {
+                MoveByMouse();
+            }
+        }
+
+        private void MoveByMouse()
         {
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             if (gameZone.Contains(mousePosition))
