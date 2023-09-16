@@ -2,13 +2,13 @@ namespace BreakoutSystem
 {
     using Core;
     using DG.Tweening;
-    using System;
     using UnityEngine;
+    using UnityEngine.Events;
 
     /// <summary>
     /// Behaviour for paddle interaction.
     /// </summary>
-    public class PaddleBehaviour : MonoBehaviour
+    public class PaddleBehaviour : MonoBehaviour, iInteractable
     {
         [SerializeField]
         private bool isReady = true;
@@ -19,6 +19,19 @@ namespace BreakoutSystem
         [SerializeField]
         private Vector3 Swing = new Vector3(0,0, 22f);
 
+        [Header("Interaction Actions")]
+        [Tooltip("Specify actions for when paddle interaction is called.")]
+        public UnityEvent OnInteraction = new UnityEvent();
+
+        // TODO:
+        // Then play a random batch of sounds.
+        // Then see if you can play sounds depending on what end you're hitting.
+
+        /// <inheritdoc/>
+        public void Interact()
+        {
+            OnInteraction?.Invoke();
+        }
 
         private void Start()
         {
@@ -38,7 +51,7 @@ namespace BreakoutSystem
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (isReady)
             {

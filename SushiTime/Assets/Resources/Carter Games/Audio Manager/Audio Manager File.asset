@@ -18,8 +18,8 @@ MonoBehaviour:
   soundPrefab: {fileID: 322064603624763291, guid: f97cb5ab9dca8bd488116e0ffc057e10, type: 3}
   isPopulated: 1
   directory:
-  - Assets/Audio
-  - Assets/Audio/Sfx
+  - Assets/SushiTime/Audio/Sfx
+  - Assets/SushiTime/Audio/Music
   library:
   - key: 01Start_Button
     value: {fileID: 8300000, guid: b4cefdcadca15794bbf5a12559d36941, type: 3}
@@ -31,3 +31,19 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: e3694dbce04f84a4b9cdaa1dc3d42964, type: 3}
   - key: bubbleSFX8
     value: {fileID: 8300000, guid: 0b99dc28b1669a1478cd8750420f09bb, type: 3}
+  - key: chopstickSFX1
+    value: {fileID: 8300000, guid: e309416994f5f3c478b660a7b3636e86, type: 3}
+  - key: chopstickSFX2
+    value: {fileID: 8300000, guid: b2bd41443757c604e996077b80fd9c4b, type: 3}
+  - key: chopstickSFX3
+    value: {fileID: 8300000, guid: ef9eee57ec17ddb40be9338ec8d478cd, type: 3}
+  - key: chopstickSFX4
+    value: {fileID: 8300000, guid: 741240dba96191540b3c49099b6acc12, type: 3}
+  - key: chopstickSFX5
+    value: {fileID: 8300000, guid: 05248f14b30e9084388946f26086287f, type: 3}
+  - key: chopstickSFX6
+    value: {fileID: 8300000, guid: efac0acd2d57efa4881ae38f9bc6dd56, type: 3}
+  - key: bgmDialogueCutscenes
+    value: {fileID: 8300000, guid: 31bcef039db3dba47b84ec656d30e7ae, type: 3}
+  - key: bgmTitleScreen_Refined
+    value: {fileID: 8300000, guid: 2c96c5f512a902f499e6fc5d0786061f, type: 3}
