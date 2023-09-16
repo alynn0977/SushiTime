@@ -18,9 +18,10 @@
         /// <summary>
         /// Play assigned audio clip.
         /// </summary>
-
+        [ContextMenu("Play Audio Clip")]
         public void PlayAudioClipOther(AudioClip newClip)
         {
+            Debug.Log($"[{GetType().Name}] Requesting audio clip {newClip.name}");
             // Or default straight to global.
             if (useGlobalAudio)
             {
@@ -39,5 +40,4 @@
             }
         }
     }
-
 }
