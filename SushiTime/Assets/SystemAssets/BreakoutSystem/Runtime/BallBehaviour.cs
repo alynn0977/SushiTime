@@ -1,6 +1,8 @@
 namespace BreakoutSystem
 {
     using Core;
+    using ScreenSystem;
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -14,7 +16,9 @@ namespace BreakoutSystem
         [SerializeField]
         private Rigidbody2D _rb;
         [SerializeField]
-        private bool isPlayOnAwake = false;
+        private bool isPlayOnStart = false;
+        [SerializeField]
+        private bool isPlaymode = true;
         private Vector2 newVelocity;
 
         public void OnCollisionEnter2D(Collision2D collider)
@@ -57,16 +61,26 @@ namespace BreakoutSystem
                _rb = GetComponent<Rigidbody2D>();
             }
 
-            if (isPlayOnAwake)
+            EventManager.Instance.AddListenerOnce<KillPlayerEvent>(OnKillPlayer);
+
+            if (isPlayOnStart)
             {
                 // Set the initial direction
                 LaunchBall(); 
             }
         }
 
+        private void OnKillPlayer(KillPlayerEvent e)
+        {
+            gameObject.SetActive(false);
+        }
+
         private void FixedUpdate()
         {
-            _rb.MovePosition(_rb.position + newVelocity * Time.deltaTime);
+            if (isPlaymode)
+            {
+                _rb.MovePosition(_rb.position + newVelocity * Time.deltaTime); 
+            }
         }
 
     }

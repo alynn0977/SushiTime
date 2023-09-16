@@ -15,6 +15,11 @@ namespace Core
         public bool isPauseOnAwake = false;
 
         /// <summary>
+        /// Specify a delay time before Pausing.
+        /// </summary>
+        public float delayPause = 0f;
+
+        /// <summary>
         /// Force Pause a game from a script.
         /// </summary>
         public void PauseGameGlobal()
@@ -34,9 +39,14 @@ namespace Core
             EventManager.Instance.QueueEvent(new PauseGameEvent(AppManager.IsGlobalPaused));
         }
 
-        private void Awake()
+        private void Start()
         {
-            if (isPauseOnAwake)
+            if (delayPause > 0 && isPauseOnAwake)
+            {
+                Debug.Log("Delay pause");
+                Invoke(nameof(PauseGame), delayPause);
+            }
+            else if (isPauseOnAwake)
             {
                 PauseGameGlobal();
             }

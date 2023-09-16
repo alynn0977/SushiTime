@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 425866188777539381}
   - component: {fileID: 8961187658819017243}
   - component: {fileID: 2766236692649808435}
+  - component: {fileID: 7749693821366341613}
   m_Layer: 5
   m_Name: GameOverscreen
   m_TagString: Screen
@@ -267,6 +268,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &7749693821366341613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fe824b074821149b817d286e5f97fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPauseOnAwake: 1
 --- !u!1 &1123747805425180925
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7526689401062214688}
     m_Modifications:
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 7749693821366341613}
     - target: {fileID: 1832087749150091555, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

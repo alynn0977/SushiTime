@@ -14,6 +14,7 @@ namespace ScreenSystem
     /// </summary>
     public class FadeController : MonoBehaviour
     {
+        private const float AutoFadeDelay = 1.2f;
         [Header("Main Options")]
         [SerializeField]
         private float time = 1f;
@@ -45,6 +46,10 @@ namespace ScreenSystem
             {
                 FadeIn();
                 Debug.Log($"FadeController received call fade in.");
+                if (e.AutoTransition)
+                {
+                    Invoke(nameof(FadeAway), AutoFadeDelay);
+                }
             }
             else
             {
