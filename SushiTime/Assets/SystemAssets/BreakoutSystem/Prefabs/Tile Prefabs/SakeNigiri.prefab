@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 481360195078926458}
   - component: {fileID: 4471722095646555792}
   m_Layer: 0
-  m_Name: Frame
+  m_Name: Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 2779446522940580984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0024, y: -0.0031, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.0043, y: -0.0675, z: 0}
+  m_LocalScale: {x: 0.22672789, y: 0.2226332, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030860294892435292}
@@ -73,11 +73,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
-  m_Color: {r: 0.6981132, g: 0.53017086, b: 0.5361688, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 63fe06dffdbbe444a9b9d8a11c5cba3c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 1.86, y: 1.86}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8936330782533430062
 Transform:
   m_ObjectHideFlags: 0
@@ -369,13 +369,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7257017226984986275}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.03344708, w: -0.9994405}
-  m_LocalPosition: {x: 0.023999957, y: 0.30999994, z: 0}
-  m_LocalScale: {x: 0.36643398, y: 0.36643395, z: 0.36643398}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0068256264, w: 0.9999767}
+  m_LocalPosition: {x: 0.03, y: 0.03, z: 0}
+  m_LocalScale: {x: 0.34921157, y: 0.34921154, z: 0.34921157}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2030860294892435292}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.782}
 --- !u!212 &7823643772400519216
 SpriteRenderer:
   m_ObjectHideFlags: 0
