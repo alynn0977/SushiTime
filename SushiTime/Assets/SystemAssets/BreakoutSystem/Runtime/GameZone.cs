@@ -1,24 +1,32 @@
 namespace BreakoutSystem
 {
     using UnityEngine;
+    using Sirenix.OdinInspector;
 
     // Tracks globals for this particular level instance.
     public class GameZone : MonoBehaviour
     {
+        [Header("Setup")]
         [SerializeField]
+        [BoxGroup("Player")]
         private int playerPowr = 1;
 
         [SerializeField]
+        [BoxGroup("Player")]
         private BallBehaviour mainBall;
 
         [SerializeField]
+        [BoxGroup("Goal")]
         private GoalKeeping goal;
 
         [SerializeField]
+        [BoxGroup("UI")]
         private Canvas modalCanvas;
-
+        
         [SerializeField]
+        [BoxGroup("UI")]
         private GameObject gameOverScreen;
+
         /// <summary>
         /// Read-only access of current player power stat.
         /// </summary>
@@ -30,16 +38,13 @@ namespace BreakoutSystem
         public GoalKeeping GameGoal => goal;
 
         public BallBehaviour MainBall => mainBall;
+
+        /// <summary>
+        /// Call the gameover screen.
+        /// </summary>
         public void CallGameOver()
         {
             gameOverScreen.SetActive(true);
-        }
-
-        public void RemoveGameOver()
-        {
-            // Turn off modal.
-            // Shut down game.
-            // Send info to GameManager if available.
         }
 
         // TODO: What are the goals?
@@ -51,6 +56,7 @@ namespace BreakoutSystem
             }
 
             InitializeModalCanvas();
+
             Invoke(nameof(BeginGame), 1.5f);
         }
 
@@ -77,7 +83,6 @@ namespace BreakoutSystem
                     return;
                 }
             }
-            gameOverScreen.SetActive(false);
         }
     }
 

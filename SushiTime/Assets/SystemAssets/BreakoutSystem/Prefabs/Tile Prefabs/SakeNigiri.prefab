@@ -342,8 +342,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e20ad659707ec546819847d1f01d895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileName: SakeNigiri
   health: 1
   score: 10
+  icon: {fileID: 7823643772400519216}
+  OnBrickInteraction:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBrickDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7257017226984986275
 GameObject:
   m_ObjectHideFlags: 0
