@@ -3,9 +3,8 @@ namespace BreakoutSystem.UI
     using Core;
     using CustomUI;
     using Sirenix.OdinInspector;
-    using System;
+    using System.Collections.Generic;
     using TMPro;
-    using Unity.VisualScripting;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -13,13 +12,6 @@ namespace BreakoutSystem.UI
     {
         private const int MaxGoalTiles = 3;
 
-        // Should begin by reading the Goal Keeping scriptable.
-        // What level is this one?
-        // What are the goals for this level?
-        // What time limit is there?
-        // What's the score?
-        // How many lives?
-        // What power ups are there?
         [TabGroup("General Setup")]
         public GameZone GameZone;
 
@@ -35,6 +27,9 @@ namespace BreakoutSystem.UI
         [TabGroup("Level and Goal")]
         [SerializeField]
         private GameObject tilePrefab;
+        [TabGroup("Level and Goal")]
+        [SerializeField]
+        private GoalKeeper goalKeeper;
         [TabGroup("Timer Section")]
         [SerializeField]
         private TMP_Text counterText;
@@ -50,6 +45,9 @@ namespace BreakoutSystem.UI
         [TabGroup("Power Ups Section")]
         [SerializeField]
         private IconArray powerUpPanel;
+        private List<GoalTile> UI_goals = new List<GoalTile>();
+
+        public List<GoalTile> UI_Goals => UI_goals;
         private GoalKeeping gameGoal
         {
             get
@@ -149,8 +147,17 @@ namespace BreakoutSystem.UI
                         break;
                 }
             }
-        }
 
+            if (goalKeeper)
+            {
+                goalKeeper.InitializeGoalKeeper(this);
+            }
+            else
+            {
+                Debug.LogWarning($"[{GetType().Name}]: Is missing Goal Keeper reference. Is this intentional?");
+            }
+        }
+        
         private void SetTextGoal(string value)
         {
             // Instantiate next Prefab.
@@ -206,9 +213,11 @@ namespace BreakoutSystem.UI
             // Set the parent.
             newTile.transform.SetParent(goalGroup.transform);
 
-            if (newTile.TryGetComponent(out iConstructable<SpriteRenderer, string, string> construct))
+            if (newTile.TryGetComponent(out iConstructable<SpriteRenderer, int, string> construct))
             {
-                construct.ConstructWithThree(spriteImage, qty.ToString(), name);
+                construct.ConstructWithThree(spriteImage, qty, name);
+                
+                UI_goals.Add(newTile.GetComponent<GoalTile>());
             }
             else
             {

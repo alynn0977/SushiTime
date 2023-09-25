@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3525371319275776722}
   - component: {fileID: 5999336738792439796}
   m_Layer: 0
-  m_Name: GoalTile
+  m_Name: GoalTileUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalName: 
   goalImage: {fileID: 0}
-  goalQty: 
+  goalQty: 0
 --- !u!1 &5793296808374856288
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,9 +127,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a9bfb091652c4b24fa32fa68754ac201, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

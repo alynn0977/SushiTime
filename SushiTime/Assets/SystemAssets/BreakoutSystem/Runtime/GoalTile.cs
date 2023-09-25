@@ -1,6 +1,7 @@
 namespace BreakoutSystem.UI
 {
     using Core;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using TMPro;
@@ -11,7 +12,7 @@ namespace BreakoutSystem.UI
     /// <summary>
     /// Sets and reads a Goal Tile for UI and level purposes.
     /// </summary>
-    public class GoalTile : MonoBehaviour, iConstructable<SpriteRenderer, string, string>
+    public class GoalTile : MonoBehaviour, iConstructable<SpriteRenderer, int, string>
     {
         [SerializeField]
         private string goalName;
@@ -20,20 +21,37 @@ namespace BreakoutSystem.UI
         private Image goalImage;
 
         [SerializeField]
-        private string goalQty;
+        private int goalQty;
 
-        public void ConstructWithThree(SpriteRenderer imageValue, string qty, string nameValue)
+        private string goalText;
+        /// <summary>
+        /// Name of the goal tile.
+        /// </summary>
+        public string GoalName => goalName;
+
+        public int GoalQty => goalQty;
+        public void ConstructWithThree(SpriteRenderer imageValue, int qty, string nameValue)
         {
-            if (imageValue == null || string.IsNullOrEmpty(qty) || string.IsNullOrEmpty(nameValue)){
-                Debug.LogError("[GoalTile] detected incorrector null parameters.");
+            if (imageValue == null || qty <= 0 || string.IsNullOrEmpty(nameValue)){
+                Debug.LogError("[GoalTile] detected incorrect null parameters.");
                 return;
             }
 
             goalName = nameValue;
             goalImage = GetComponentInChildren<Image>();
             goalImage.sprite = imageValue.sprite;
+            goalQty = qty;
+            goalText = GetComponentInChildren<TMP_Text>().text = $"x{goalQty}";
+        }
 
-            goalQty = GetComponentInChildren<TMP_Text>().text = $"x{qty}";
+        /// <summary>
+        /// Update goal text and qty.
+        /// </summary>
+        /// <param name="newQty">Int qty.</param>
+        public void UpdateQTY(int newQty)
+        {
+            goalQty = newQty;
+            goalText = GetComponentInChildren<TMP_Text>().text = $"x{goalQty}";
         }
     }
 

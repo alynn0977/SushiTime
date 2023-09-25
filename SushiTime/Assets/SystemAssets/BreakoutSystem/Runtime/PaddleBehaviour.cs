@@ -23,10 +23,6 @@ namespace BreakoutSystem
         [Tooltip("Specify actions for when paddle interaction is called.")]
         public UnityEvent OnInteraction = new UnityEvent();
 
-        // TODO:
-        // Then play a random batch of sounds.
-        // Then see if you can play sounds depending on what end you're hitting.
-
         /// <inheritdoc/>
         public void Interact()
         {
