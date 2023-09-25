@@ -26,6 +26,9 @@ namespace BreakoutSystem
         [SerializeField]
         [BoxGroup("UI")]
         private GameObject gameOverScreen;
+        [SerializeField]
+        [BoxGroup("UI")]
+        private GameObject gameWinScreen;
 
         /// <summary>
         /// Read-only access of current player power stat.
@@ -47,10 +50,16 @@ namespace BreakoutSystem
             gameOverScreen.SetActive(true);
         }
 
+        public void CallGameWin()
+        {
+            gameWinScreen.SetActive(true);
+            Debug.Log($"[{GetType().Name}]: YOU WIN!!!!!!!!!!");
+        }
+
         // TODO: What are the goals?
         private void Start()
         {
-            if (!goal)
+            if (!goal )
             {
                 Debug.LogWarning($"[Game Zone]:{gameObject.name} does not have goal data. Is this intentional?");
             }

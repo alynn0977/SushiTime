@@ -77,7 +77,7 @@ namespace BreakoutSystem
 
             if (goalTiles.Count <= 0)
             {
-                Debug.LogWarning("YOU WIN!!!!");
+                gameZone.CallGameWin();
             }
         }
 
@@ -115,7 +115,7 @@ namespace BreakoutSystem
 
             if (specialGoalCount <= 0)
             {
-                Debug.LogWarning("YOU WIN!");
+                gameZone.CallGameWin();
             }
         }
 
