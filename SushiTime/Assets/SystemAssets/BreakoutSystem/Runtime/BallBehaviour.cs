@@ -9,18 +9,22 @@ namespace BreakoutSystem
     /// Core behaviour of the ball.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Sprite))]
     public class BallBehaviour : MonoBehaviour
     {
         private const string boundaryTag = "Boundary";
         
         [SerializeField]
-        private Rigidbody2D _rb;
+        private Rigidbody2D rb;
         [SerializeField]
         private bool isPlayOnStart = false;
         [SerializeField]
         private bool isPlaymode = true;
+        [SerializeField]
+        private float delayRelaunch = 3f;
         private Vector2 newVelocity;
-
+        private Vector3 startingPosition;
+        private SpriteRenderer ballSprite;
         public void OnCollisionEnter2D(Collision2D collider)
         {
             // Activate the interaction of capable objects.
@@ -47,21 +51,45 @@ namespace BreakoutSystem
         /// </summary>
         public void LaunchBall()
         {
+            isPlaymode = true;
+            ballSprite.enabled = true;
             newVelocity = Vector2.up * 4f;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetBall()
+        {
+            ballSprite.enabled = false;
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            transform.position = startingPosition;
+            isPlaymode = false;
+            Invoke(nameof(SpriteOn), delayRelaunch-1);
         }
 
         private void Push(Vector2 velocity)
         {
             newVelocity = velocity;
         }
+
+        private void SpriteOn()
+        {
+            ballSprite.enabled = true;
+            Invoke(nameof(LaunchBall), delayRelaunch);
+        }
+
         private void Start()
         {
-            if (_rb!= null)
+            if (rb!= null)
             {
-               _rb = GetComponent<Rigidbody2D>();
+               rb = GetComponent<Rigidbody2D>();
             }
 
             EventManager.Instance.AddListenerOnce<KillPlayerEvent>(OnKillPlayer);
+            startingPosition = gameObject.transform.position;
+            ballSprite = GetComponent<SpriteRenderer>();
 
             if (isPlayOnStart)
             {
@@ -79,7 +107,7 @@ namespace BreakoutSystem
         {
             if (isPlaymode)
             {
-                _rb.MovePosition(_rb.position + newVelocity * Time.deltaTime); 
+                rb.MovePosition(rb.position + newVelocity * Time.deltaTime); 
             }
         }
 

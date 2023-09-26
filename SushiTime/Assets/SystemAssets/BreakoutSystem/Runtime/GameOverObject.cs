@@ -1,16 +1,15 @@
 namespace BreakoutSystem
 {
 	using Core;
-	using System.Collections;
-	using System.Collections.Generic;
 	using UnityEngine;
+    using UnityEngine.Events;
 
     public class GameOverObject : MonoBehaviour, iInteractable
     {
+        public UnityEvent OnInteract = new UnityEvent();
         public void Interact()
         {
-            Debug.Log($"Ball interacting with game over object.");
-            EventManager.Instance.QueueEvent(new ChangeLivesEvent(-1));
+            OnInteract?.Invoke();
         }
     }
 
