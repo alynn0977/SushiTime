@@ -38,7 +38,6 @@ namespace BreakoutSystem.UI
             }
 
             goalName = nameValue;
-            goalImage = GetComponentInChildren<Image>();
             goalImage.sprite = imageValue.sprite;
             goalQty = qty;
             goalText = GetComponentInChildren<TMP_Text>().text = $"x{goalQty}";

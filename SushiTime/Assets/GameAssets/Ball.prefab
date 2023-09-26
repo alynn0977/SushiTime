@@ -161,4 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d2215262dcc644fbf70e6469e1b401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 3905406034867490252}
+  rb: {fileID: 0}
+  isPlayOnStart: 0
+  isPlaymode: 1
+  delayRelaunch: 1.2
