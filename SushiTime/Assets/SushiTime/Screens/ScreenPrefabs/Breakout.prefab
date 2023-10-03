@@ -385,6 +385,10 @@ PrefabInstance:
       value: GameZone
       objectReference: {fileID: 0}
     - target: {fileID: 2162546883973909938, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: ballSpeed
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162546883973909938, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: delayRelaunch
       value: 1.1
       objectReference: {fileID: 0}

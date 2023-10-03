@@ -22,6 +22,8 @@ namespace BreakoutSystem
         private bool isPlaymode = true;
         [SerializeField]
         private float delayRelaunch = 3f;
+        [SerializeField]
+        private float ballSpeed = 2f;
         private Vector2 newVelocity;
         private Vector3 startingPosition;
         private SpriteRenderer ballSprite;
@@ -107,7 +109,7 @@ namespace BreakoutSystem
         {
             if (isPlaymode)
             {
-                rb.MovePosition(rb.position + newVelocity * Time.deltaTime); 
+                rb.MovePosition(rb.position + newVelocity * Time.deltaTime * ballSpeed); 
             }
         }
 
