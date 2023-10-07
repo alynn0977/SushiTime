@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 1390489627276683770}
   - component: {fileID: 3919951195493411882}
   - component: {fileID: 2726120488262114120}
+  - component: {fileID: 5526940407603278532}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Boundary
@@ -626,6 +627,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5526940407603278532}
+        m_TargetAssemblyTypeName: AudioSystem.RequestAudioClip, AudioSystem
+        m_MethodName: PlayAudioClipOther
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: d47426dfa837c8944af404dba451a3eb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2726120488262114120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +651,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6c2854c4bf79741acb48d75b83b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5526940407603278532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390489627276683768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6d10e59f8bb049b200644eb96b5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 5baa6e8fd2fed4d44ae5779193a4473e, type: 3}
+  useGlobalAudio: 1
+  volume: 0.8
 --- !u!1 &2377673290054852632
 GameObject:
   m_ObjectHideFlags: 0
@@ -3708,6 +3736,14 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 5035488507500424516}
+    - target: {fileID: 7913252154088549690, guid: 19ecbc48f0230d747b3f5ec5ce81a04f, type: 3}
+      propertyPath: ballSpeed
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913252154088549690, guid: 19ecbc48f0230d747b3f5ec5ce81a04f, type: 3}
+      propertyPath: delayRelaunch
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
