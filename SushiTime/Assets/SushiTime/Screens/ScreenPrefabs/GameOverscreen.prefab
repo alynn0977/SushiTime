@@ -313,7 +313,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 467fcabbd37d578478d3c8fbe1ca3cd6, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3fef38e845ed64bbc6fa3a17cfad5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameter: IsPauseOn
+  parameter: IsMenuOn
   animator: {fileID: 0}
   isPlayOnAwake: 1
   OnAnimationFinished:
@@ -352,7 +352,7 @@ CanvasGroup:
   m_GameObject: {fileID: 425866188777539383}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
+  m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &1123747805425180925
@@ -925,9 +925,41 @@ PrefabInstance:
     m_TransformParent: {fileID: 7526689401062214688}
     m_Modifications:
     - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 7749693821366341613}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 2770744659768668939}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: ReverseAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: MenuController, UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1832087749150091554, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1832087749150091555, guid: 1bb9992258cc2a443a1e09c3a7f8bf96, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
