@@ -5,7 +5,7 @@ namespace DialogueSystem
     using System.Collections.Generic;
     using UnityEngine;
 
-    public interface iPortrait : iFlippable
+    public interface IPortrait : IFlippable
     {
         /// <summary>
         /// Get the Rect Transform of the character.

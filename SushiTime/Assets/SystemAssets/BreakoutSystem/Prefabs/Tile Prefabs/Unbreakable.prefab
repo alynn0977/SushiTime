@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 2881204361952027502}
   - component: {fileID: 1533711420657133939}
   - component: {fileID: 5356904604456648649}
+  - component: {fileID: 9090596839531179019}
   m_Layer: 0
   m_Name: Unbreakable
   m_TagString: Unbreakable
@@ -348,10 +349,37 @@ MonoBehaviour:
   icon: {fileID: 7823643772400519216}
   OnBrickInteraction:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9090596839531179019}
+        m_TargetAssemblyTypeName: AudioSystem.RequestAudioClip, AudioSystem
+        m_MethodName: PlayAudioClipOther
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: a01476050caa9984484b43132668106c, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBrickDestroy:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9090596839531179019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551227133225172067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6d10e59f8bb049b200644eb96b5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 3e9e8941ce5325747a9b6e748042d604, type: 3}
+  useGlobalAudio: 0
+  volume: 0.4
 --- !u!1 &7257017226984986275
 GameObject:
   m_ObjectHideFlags: 0

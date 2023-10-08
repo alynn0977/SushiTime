@@ -12,7 +12,7 @@ namespace BreakoutSystem.UI
     /// <summary>
     /// Sets and reads a Goal Tile for UI and level purposes.
     /// </summary>
-    public class GoalTile : MonoBehaviour, iConstructable<SpriteRenderer, int, string>
+    public class GoalTile : MonoBehaviour, IConstructable<SpriteRenderer, int, string>
     {
         [SerializeField]
         private string goalName;

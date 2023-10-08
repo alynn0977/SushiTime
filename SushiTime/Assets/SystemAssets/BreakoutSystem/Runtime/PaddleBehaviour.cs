@@ -8,7 +8,7 @@ namespace BreakoutSystem
     /// <summary>
     /// Behaviour for paddle interaction.
     /// </summary>
-    public class PaddleBehaviour : MonoBehaviour, iInteractable
+    public class PaddleBehaviour : MonoBehaviour, IInteractable
     {
         [SerializeField]
         private bool isReady = true;

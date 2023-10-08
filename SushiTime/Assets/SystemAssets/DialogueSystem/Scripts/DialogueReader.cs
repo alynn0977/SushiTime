@@ -70,8 +70,8 @@ namespace DialogueSystem
         private Vector2 screenSpace;
 
         // Needs to flip portraits and bubbles as needed.
-        private iPortrait character1;
-        private iPortrait character2;
+        private IPortrait character1;
+        private IPortrait character2;
 
         private string leftCharacterName;
         private string rightCharacterName;
@@ -291,7 +291,7 @@ namespace DialogueSystem
             var offsetLeft = new Vector3(thirds.x * DivideByThirds, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
 
             // Instantiate LEFT portrait with the offset. Anchor it to bottom left.
-            character1 = Instantiate(portraitPrefab, dialogueFrame.position + offsetLeft, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
+            character1 = Instantiate(portraitPrefab, dialogueFrame.position + offsetLeft, dialogueFrame.rotation, dialogueFrame).GetComponent<IPortrait>();
             character1.CharacterRect.SetAsFirstSibling();
             character1.PortraitRect.anchorMin = Vector2.zero;
             character1.PortraitRect.anchorMax = Vector2.zero;
@@ -319,7 +319,7 @@ namespace DialogueSystem
             var offsetRight = new Vector3(thirds.x * DivideByThirds * -1, ((thirds.y * .3f) * .5f), dialogueFrame.position.z);
 
             // Instantiate RIGHT portrait with the offset. Anchor it to bottom left.
-            character2 = Instantiate(portraitPrefab, dialogueFrame.position + offsetRight, dialogueFrame.rotation, dialogueFrame).GetComponent<iPortrait>();
+            character2 = Instantiate(portraitPrefab, dialogueFrame.position + offsetRight, dialogueFrame.rotation, dialogueFrame).GetComponent<IPortrait>();
             character2.CharacterRect.SetAsFirstSibling();
             character2.PortraitRect.anchorMin = new Vector2(1, 0);
             character2.PortraitRect.anchorMax = new Vector2(1, 0);

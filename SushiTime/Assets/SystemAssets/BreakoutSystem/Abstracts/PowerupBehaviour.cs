@@ -4,13 +4,17 @@ namespace BreakoutSystem
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using UnityEngine.Events;
 
-    public abstract class PowerupBehaviour : MonoBehaviour, iInteractable
+    public abstract class PowerupBehaviour : MonoBehaviour, IInteractable
     {
+        public UnityEvent OnInteract = new UnityEvent();
+
         // Interact wth the powerup.
         public void Interact()
         {
-            PowerUp();   
+            OnInteract?.Invoke();
+            PowerUp();
         }
 
         protected abstract void PowerUp();

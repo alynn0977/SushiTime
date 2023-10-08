@@ -11,7 +11,7 @@ namespace DialogueSystem
     /// <summary>
     /// Defines the behaviours for the speech bubbles.
     /// </summary>
-    public class SpeechObject : MonoBehaviour, iFlippable
+    public class SpeechObject : MonoBehaviour, IFlippable
     {
         // A speech object needs to know the following:
         // What character name.
