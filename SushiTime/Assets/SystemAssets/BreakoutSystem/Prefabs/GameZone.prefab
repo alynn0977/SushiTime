@@ -283,6 +283,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1390489626249943722}
   - component: {fileID: 1390489626249943893}
+  - component: {fileID: 693520872836588704}
+  - component: {fileID: 4116054263607449435}
   m_Layer: 0
   m_Name: Right
   m_TagString: Boundary
@@ -350,6 +352,48 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4615736, y: 6.3766255}
   m_EdgeRadius: 0
+--- !u!114 &693520872836588704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390489626249943723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6d10e59f8bb049b200644eb96b5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  useGlobalAudio: 1
+  volume: 0.5
+--- !u!114 &4116054263607449435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390489626249943723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4cefcaabbd839b4292d105c97e99216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 693520872836588704}
+        m_TargetAssemblyTypeName: AudioSystem.RequestAudioClip, AudioSystem
+        m_MethodName: PlayAudioClipOther
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3e9e8941ce5325747a9b6e748042d604, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1390489626390247245
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +497,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1390489627047499568}
   - component: {fileID: 1390489627047499571}
+  - component: {fileID: 1222292207337632479}
+  - component: {fileID: 8316999955038237549}
   m_Layer: 0
   m_Name: Left
   m_TagString: Boundary
@@ -520,6 +566,48 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4615736, y: 6.3766255}
   m_EdgeRadius: 0
+--- !u!114 &1222292207337632479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390489627047499569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4cefcaabbd839b4292d105c97e99216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8316999955038237549}
+        m_TargetAssemblyTypeName: AudioSystem.RequestAudioClip, AudioSystem
+        m_MethodName: PlayAudioClipOther
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3e9e8941ce5325747a9b6e748042d604, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8316999955038237549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390489627047499569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b6d10e59f8bb049b200644eb96b5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 0}
+  useGlobalAudio: 1
+  volume: 0.5
 --- !u!1 &1390489627276683768
 GameObject:
   m_ObjectHideFlags: 0

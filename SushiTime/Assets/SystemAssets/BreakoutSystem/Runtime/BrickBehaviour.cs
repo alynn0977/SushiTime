@@ -9,7 +9,7 @@ namespace BreakoutSystem
     /// Brick behaviour.
     /// </summary>
     [RequireComponent(typeof(SpriteRenderer))]
-    public class BrickBehaviour : MonoBehaviour, iInteractable
+    public class BrickBehaviour : MonoBehaviour, IInteractable
     {
         [SerializeField]
         private string tileName;

@@ -213,7 +213,7 @@ namespace BreakoutSystem.UI
             // Set the parent.
             newTile.transform.SetParent(goalGroup.transform);
 
-            if (newTile.TryGetComponent(out iConstructable<SpriteRenderer, int, string> construct))
+            if (newTile.TryGetComponent(out IConstructable<SpriteRenderer, int, string> construct))
             {
                 construct.ConstructWithThree(spriteImage, qty, name);
                 

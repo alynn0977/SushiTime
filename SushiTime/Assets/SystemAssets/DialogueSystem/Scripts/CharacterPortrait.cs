@@ -6,7 +6,7 @@ namespace DialogueSystem
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class CharacterPortrait : MonoBehaviour, iPortrait
+    public class CharacterPortrait : MonoBehaviour, IPortrait
     {
         private static Vector2 Vector2Half = new Vector2(.5f, .5f);
         [Header("Setup")]

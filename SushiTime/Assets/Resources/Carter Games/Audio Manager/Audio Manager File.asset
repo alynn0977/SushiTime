@@ -87,6 +87,8 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 9f19daf5095f8154c857f79f46b799f5, type: 3}
   - key: Lost sound 1
     value: {fileID: 8300000, guid: a4a458ce8c476fc46a2b02ef1dc66b66, type: 3}
+  - key: specialTileSFX2
+    value: {fileID: 8300000, guid: 05f1790389836d24d97d9fe14cfbc881, type: 3}
   - key: tileSFX1
     value: {fileID: 8300000, guid: 2930a92295f8a464a823192c459ce142, type: 3}
   - key: tileSFX12
@@ -95,7 +97,15 @@ MonoBehaviour:
     value: {fileID: 8300000, guid: 94d150f9b0daa214c9dbfedd7ad81662, type: 3}
   - key: tileSFX9
     value: {fileID: 8300000, guid: 5baa6e8fd2fed4d44ae5779193a4473e, type: 3}
+  - key: Wood hit Light 3
+    value: {fileID: 8300000, guid: a01476050caa9984484b43132668106c, type: 3}
   - key: bgmDialogueCutscenes
     value: {fileID: 8300000, guid: 31bcef039db3dba47b84ec656d30e7ae, type: 3}
+  - key: bgmLevel1
+    value: {fileID: 8300000, guid: adca5c50bbc1c834c8011dc0196c8d06, type: 3}
+  - key: bgmLevel2
+    value: {fileID: 8300000, guid: 2b1e9107a9385524e8dffa2ed6263b6e, type: 3}
+  - key: bgmLevel3
+    value: {fileID: 8300000, guid: c9627a2a8abe6974d86c59b4e87c2451, type: 3}
   - key: bgmTitleScreen_Refined
     value: {fileID: 8300000, guid: 2c96c5f512a902f499e6fc5d0786061f, type: 3}

@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 3e9e8941ce5325747a9b6e748042d604, type: 3}
-  useGlobalAudio: 1
-  volume: 0.8
+  useGlobalAudio: 0
+  volume: 0.4
 --- !u!1 &7257017226984986275
 GameObject:
   m_ObjectHideFlags: 0
