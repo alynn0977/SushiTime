@@ -347,6 +347,9 @@ MonoBehaviour:
   health: 2
   score: 10
   icon: {fileID: 7823643772400519216}
+  easeType: 0
+  animateSpeed: 0.1
+  reverseSpeed: 0.02
   OnBrickInteraction:
     m_PersistentCalls:
       m_Calls:
@@ -357,6 +360,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 5baa6e8fd2fed4d44ae5779193a4473e, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 283858995575174526}
+        m_TargetAssemblyTypeName: BreakoutSystem.BrickBehaviour, Assembly-CSharp
+        m_MethodName: Animate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
