@@ -1,8 +1,6 @@
 namespace BreakoutSystem
 {
     using Core;
-    using ScreenSystem;
-    using System;
     using UnityEngine;
 
     /// <summary>
@@ -29,16 +27,10 @@ namespace BreakoutSystem
         private SpriteRenderer ballSprite;
         public void OnCollisionEnter2D(Collision2D collider)
         {
-            Debug.Log($"Ball hit {collider.gameObject.name}");
             // Activate the interaction of capable objects.
             if (collider.gameObject.TryGetComponent(out IInteractable interactor))
             {
                 interactor.Interact();
-                Debug.Log($"Ball hit {collider.gameObject.name} Interaction!");
-            }
-            else
-            {
-                Debug.Log($"Ball hit {collider.gameObject.name} doesn't have an interactor.");
             }
 
             // Provide new velocity, based on what was hit.

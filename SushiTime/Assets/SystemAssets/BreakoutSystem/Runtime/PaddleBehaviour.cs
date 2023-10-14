@@ -1,7 +1,8 @@
 namespace BreakoutSystem
 {
     using Core;
-    using DG.Tweening;
+    // using DG.Tweening;
+    using PrimeTween;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -77,9 +78,11 @@ namespace BreakoutSystem
         private void SwingPaddle(Vector3 vector3)
         {
             var time = .05f;
-            var swing = transform.DORotate(vector3, time, RotateMode.Fast);
-            var swingDone = swing.OnComplete(() => transform.DORotate(Vector3.zero, .24f));
-            Invoke(nameof(swingDone), time+.4f);
+
+            Tween.LocalRotation(transform, endValue: vector3, duration: time).OnComplete(() => 
+            {
+                Tween.LocalRotation(transform, Vector3.zero, .24f);
+            });
         }
 
         /// <summary>

@@ -1,9 +1,6 @@
 namespace ScreenSystem
 {
-    using DG.Tweening;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
+    using PrimeTween;
     using UnityEngine;
 
     /// <summary>
@@ -64,7 +61,9 @@ namespace ScreenSystem
         [ContextMenu("Fade In")]
         public void FadeIn()
         {
-            canvasGroup.DOFade(1, time);
+            // Animate the Canvas Group from 1 to 0.
+            Tween.Custom(0, 1, duration: time, onValueChange: newVal => canvasGroup.alpha = newVal);
+
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = true;
         }
@@ -75,7 +74,9 @@ namespace ScreenSystem
         [ContextMenu("Fade Away")]
         public void FadeAway()
         {
-            canvasGroup.DOFade(0, time).OnComplete(FadeScreenPostEvent);
+            // Animate the Canvas Group from 1 to 0.
+            Tween.Custom(1, 0, duration: time, onValueChange: newVal => canvasGroup.alpha = newVal).OnComplete(() => FadeScreenPostEvent());
+
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = false;
         }

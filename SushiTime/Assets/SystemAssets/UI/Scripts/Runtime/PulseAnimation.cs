@@ -1,6 +1,7 @@
 namespace CustomUI
 {
-    using DG.Tweening;
+    // using DG.Tweening;
+    using PrimeTween;
     using UnityEngine;
 
     public class PulseAnimation : MonoBehaviour
@@ -25,13 +26,16 @@ namespace CustomUI
         [ContextMenu("Pulse")]
         public void Pulse()
         {
-            transform.DOScale(_cacheOriginal.x * sizePercent, 1.1f).SetEase(Ease.OutBounce);
+            Tween.Scale(transform, _cacheOriginal.x * sizePercent, 1.1f, Ease.OutBounce);
+            //transform.DOScale(_cacheOriginal.x * sizePercent, 1.1f).SetEase(Ease.OutBounce);
+
             Invoke(nameof(ResetPulse), 1.4f);
         }
 
         public void ResetPulse()
         {
-            transform.DOScale(_cacheOriginal, .5f).SetEase(Ease.Linear);
+            Tween.Scale(transform, _cacheOriginal, 5f, Ease.Linear);
+            //transform.DOScale(_cacheOriginal, .5f).SetEase(Ease.Linear);
         }
     }
 
