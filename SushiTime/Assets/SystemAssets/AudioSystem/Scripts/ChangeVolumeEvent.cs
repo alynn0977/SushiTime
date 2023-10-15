@@ -1,5 +1,6 @@
 namespace AudioSystem
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
@@ -11,24 +12,26 @@ namespace AudioSystem
         /// <summary>
         /// Change volume for sound FX.
         /// </summary>
-        public float NewSoundVolume;
+        public float NewVolume;
 
-        /// <summary>
-        /// Change volume for music.
-        /// </summary>
-        public float NewMusicVolume;
+        public VolumeType VolumeToSet;
 
-
-        public ChangeVolumeEvent(float newSoundVolume)
+        public ChangeVolumeEvent(float newSoundVolume, VolumeType volumeToSet)
         {
-            this.NewSoundVolume = newSoundVolume;
+            this.NewVolume = newSoundVolume;
+            this.VolumeToSet = volumeToSet;
+            Debug.Log($"Updated{VolumeToSet} to {newSoundVolume}");
         }
+    }
 
-        public ChangeVolumeEvent(float newSoundVolume, float newMusicVolume) 
-        {
-            this.NewSoundVolume = newSoundVolume;
-            this.NewMusicVolume = newMusicVolume;
-        }
+    /// <summary>
+    /// Define what volume this is changing.
+    /// </summary>
+    [Serializable]
+    public enum VolumeType
+    {
+        Sound = 0,
+        Music = 1,
     }
 
 }
