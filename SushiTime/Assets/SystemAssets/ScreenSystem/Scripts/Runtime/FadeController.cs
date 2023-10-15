@@ -74,6 +74,12 @@ namespace ScreenSystem
         [ContextMenu("Fade Away")]
         public void FadeAway()
         {
+            if (canvasGroup.alpha == 0)
+            {
+                // No need to "fade away" it's already over.
+                return;
+            }
+
             // Animate the Canvas Group from 1 to 0.
             Tween.Custom(1, 0, duration: time, onValueChange: newVal => canvasGroup.alpha = newVal).OnComplete(() => FadeScreenPostEvent());
 
