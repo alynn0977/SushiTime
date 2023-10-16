@@ -149,9 +149,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
-        
-        Debug.Log($"Playing sound at {e.Volume}")
-        _audioController.Play(e.Clip.name, volume);
+        _audioController.Play(e.Clip.name, e.Volume);
     }
 
     private void OnGameManagerVolumeChange(ChangeVolumeEvent e)
@@ -161,18 +159,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat(GlobalSoundKey, e.NewVolume);
 
             // Audio Volume reads directly from preferences.
-            Debug.Log($"[GameManager]: Changing sound to {PlayerPrefs.GetFloat(GlobalSoundKey)}");
         }
 
         if (e.VolumeToSet == VolumeType.Music)
         {
             PlayerPrefs.SetFloat(GlobalMusicKey, e.NewVolume * .1f);
-            Debug.Log($"[GameManager]: Changing music to {PlayerPrefs.GetFloat(GlobalMusicKey)}");
             
             // Music player is different and requires direct setting.
             _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         }
     }
-
     #endregion
 }
