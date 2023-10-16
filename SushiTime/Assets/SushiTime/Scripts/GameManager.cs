@@ -149,7 +149,8 @@ public class GameManager : MonoBehaviour
 
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
-        var volume = PlayerPrefs.GetFloat(GlobalSoundKey);
+        
+        Debug.Log($"Playing sound at {e.Volume}")
         _audioController.Play(e.Clip.name, volume);
     }
 

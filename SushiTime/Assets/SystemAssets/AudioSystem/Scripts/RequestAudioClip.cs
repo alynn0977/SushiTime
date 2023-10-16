@@ -21,7 +21,6 @@
         [ContextMenu("Play Audio Clip")]
         public void PlayAudioClipOther(AudioClip newClip)
         {
-            Debug.Log($"[{GetType().Name}] Requesting audio clip {newClip.name}");
             // Or default straight to global.
             if (useGlobalAudio)
             {
@@ -31,7 +30,7 @@
                     newVolume = 0;
                 }
 
-                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, newClip));
+                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(newVolume, newClip));
             }
             // Or override entirely.
             else
