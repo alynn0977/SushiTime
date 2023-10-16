@@ -17,70 +17,15 @@ namespace AudioSystem
         [SerializeField]
         private Slider musicSlider;
 
-
-        /// <summary>
-        /// Update Sound Volume via a UI slider.
-        /// </summary>
-        /// <param name="slider">UI Slider.</param>
-        public void UpdateSoundVolume(Slider slider)
-        {
-            UpdateSoundVolume(slider.value);
-        }
-        /// <summary>
-        /// Update music volume via a UI slider.
-        /// </summary>
-        /// <param name="slider">UI slider.</param>
-        public void UpdateMusicVolume(Slider slider)
-        {
-            UpdateMusicVolume(slider.value);
-        }
-
-        /// <summary>
-        /// Update Sound volume.
-        /// </summary>
-        /// <param name="soundVolume">Amount of sound.</param>
-        public void UpdateSoundVolume(float soundVolume)
-        {
-            if (EventManager.Instance)
-            {
-                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(soundVolume));
-            }
-            else
-            {
-                NullEventManager();
-            }
-        }
-        /// <summary>
-        /// Update music volume.
-        /// </summary>
-        /// <param name="musicVolume">Amount of sound.</param>
-        public void UpdateMusicVolume(float musicVolume)
-        {
-            if (EventManager.Instance)
-            {
-                var currentVolume = PlayerPrefs.GetFloat(GlobalSoundKey);
-                EventManager.Instance.QueueEvent(new ChangeVolumeEvent(currentVolume, musicVolume));
-            }
-            else
-            {
-                NullEventManager();
-            }
-        }
-
-        private void NullEventManager()
-        {
-            Debug.LogWarning($"[{GetType().Name}] cannot find EventManager");
-        }
-
         private void Awake()
         {
             if (volumeSlider)
             {
-                volumeSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalSoundKey) * 10);
+                volumeSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalSoundKey));
             }
             if (musicSlider)
             {
-                musicSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalMusicKey) * 10);
+                musicSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat(GlobalMusicKey));
             }
         }
     }

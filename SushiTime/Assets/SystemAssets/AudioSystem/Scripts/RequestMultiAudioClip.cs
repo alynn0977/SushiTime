@@ -46,7 +46,7 @@ namespace AudioSystem
             {
                 var newVolume = PlayerPrefs.GetFloat(GlobalSoundKey);
 
-                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(volume, audioClip));
+                EventManager.Instance.QueueEvent(new RequestAudioClipEvent(newVolume, audioClip));
             }
             // Or override entirely.
             else

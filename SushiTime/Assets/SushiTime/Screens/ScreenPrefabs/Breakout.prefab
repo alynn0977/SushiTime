@@ -364,14 +364,6 @@ PrefabInstance:
       propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 8300000, guid: 05f1790389836d24d97d9fe14cfbc881, type: 3}
-    - target: {fileID: 688085495754703933, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 688085495754703933, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: useGlobalAudio
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 891953446913190842, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: m_IsActive
       value: 1

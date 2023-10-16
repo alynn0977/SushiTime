@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 3e9e8941ce5325747a9b6e748042d604, type: 3}
-  useGlobalAudio: 0
+  useGlobalAudio: 1
   volume: 0.4
 --- !u!114 &9028911628253638358
 MonoBehaviour:

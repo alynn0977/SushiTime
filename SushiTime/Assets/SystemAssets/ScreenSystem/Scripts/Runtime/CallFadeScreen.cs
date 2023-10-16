@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace ScreenSystem
 {
-    using System;
     using UnityEngine;
     
     /// <summary>

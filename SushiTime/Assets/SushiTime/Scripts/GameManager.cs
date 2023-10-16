@@ -149,25 +149,25 @@ public class GameManager : MonoBehaviour
 
     private void OnGameManagerOnPlayClip(RequestAudioClipEvent e)
     {
-        var volume = PlayerPrefs.GetFloat(GlobalSoundKey);
-        _audioController.Play(e.Clip.name, volume);
+        _audioController.Play(e.Clip.name, e.Volume);
     }
 
     private void OnGameManagerVolumeChange(ChangeVolumeEvent e)
     {
-        if (e.NewSoundVolume != default)
+        if (e.VolumeToSet == VolumeType.Sound)
         {
-            Debug.Log($"Changing sound to {PlayerPrefs.GetFloat(GlobalSoundKey, e.NewSoundVolume * .1f)}");
-            PlayerPrefs.SetFloat(GlobalSoundKey, e.NewSoundVolume * .1f);
+            PlayerPrefs.SetFloat(GlobalSoundKey, e.NewVolume);
+
+            // Audio Volume reads directly from preferences.
         }
 
-        if (e.NewMusicVolume != default)
+        if (e.VolumeToSet == VolumeType.Music)
         {
-            Debug.Log($"Changing sound to {PlayerPrefs.GetFloat(GlobalSoundKey, e.NewSoundVolume * .1f)}");
-            PlayerPrefs.SetFloat(GlobalMusicKey,e.NewMusicVolume * .1f);
+            PlayerPrefs.SetFloat(GlobalMusicKey, e.NewVolume * .1f);
+            
+            // Music player is different and requires direct setting.
             _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
         }
     }
-
     #endregion
 }
