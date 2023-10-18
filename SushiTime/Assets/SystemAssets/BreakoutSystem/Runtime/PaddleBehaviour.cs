@@ -3,6 +3,7 @@ namespace BreakoutSystem
     using Core;
     // using DG.Tweening;
     using PrimeTween;
+    using System;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -20,6 +21,8 @@ namespace BreakoutSystem
         [SerializeField]
         private Vector3 Swing = new Vector3(0,0, 22f);
 
+        private Vector3 startPosition;
+
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
         public UnityEvent OnInteraction = new UnityEvent();
@@ -33,7 +36,15 @@ namespace BreakoutSystem
         private void Start()
         {
             mainCamera = Camera.main;
+            startPosition = transform.position;
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
+            EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
+        }
+
+        private void OnReset(ResetGameEvent e)
+        {
+            isReady = false;
+            transform.position = startPosition;
         }
 
         private void OnPauseGame(PauseGameEvent e)

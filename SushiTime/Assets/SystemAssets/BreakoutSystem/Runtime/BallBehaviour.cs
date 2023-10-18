@@ -61,6 +61,7 @@ namespace BreakoutSystem
         /// </summary>
         public void ResetBall()
         {
+            EventManager.Instance.QueueEvent(new ResetGameEvent());
             ballSprite.enabled = false;
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;

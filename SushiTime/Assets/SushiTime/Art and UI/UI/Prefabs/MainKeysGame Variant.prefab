@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fe824b074821149b817d286e5f97fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPauseOnAwake: 1
+  isPauseOnAwake: 0
   delayPause: 1.2
   isPauseByKey: 1
   keyToListenFor: 0
