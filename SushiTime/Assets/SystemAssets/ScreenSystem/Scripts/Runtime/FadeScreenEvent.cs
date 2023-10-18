@@ -22,7 +22,7 @@ namespace ScreenSystem
         /// <param name="fadeIn">If true, screen fades to solid. If false, fades away.</param>
         public FadeScreenEvent(bool fadeIn)
         {
-            UnityEngine.Debug.Log($"Screen fade called with {fadeIn}");
+            // UnityEngine.Debug.Log($"Screen fade called with {fadeIn}");
             this.FadeIn = fadeIn;
         }
 
