@@ -99,7 +99,7 @@ namespace BreakoutSystem.UI
                 return false;
             }
 
-            Debug.Log($"[UI Manager] Found Goal Object {gameGoal.CurrentLevel} object");
+            // Debug.Log($"[UI Manager] Found Goal Object {gameGoal.CurrentLevel} object");
             return true;
         }
 
