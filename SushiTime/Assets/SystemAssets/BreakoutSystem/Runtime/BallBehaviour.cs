@@ -1,6 +1,7 @@
 namespace BreakoutSystem
 {
     using Core;
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -57,7 +58,7 @@ namespace BreakoutSystem
         }
 
         /// <summary>
-        /// 
+        /// Reset the ball back to it's position
         /// </summary>
         public void ResetBall()
         {
@@ -67,7 +68,7 @@ namespace BreakoutSystem
             rb.angularVelocity = 0f;
             transform.position = startingPosition;
             isPlaymode = false;
-            Invoke(nameof(SpriteOn), delayRelaunch-1);
+            SpriteOn();
         }
 
         private void Push(Vector2 velocity)
@@ -78,17 +79,13 @@ namespace BreakoutSystem
         private void SpriteOn()
         {
             ballSprite.enabled = true;
-            Invoke(nameof(LaunchBall), delayRelaunch);
+            EventManager.Instance.AddListenerOnce<LaunchBallEvent>(e => LaunchBall());
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            if (rb!= null)
-            {
-               rb = GetComponent<Rigidbody2D>();
-            }
-
-            EventManager.Instance.AddListenerOnce<KillPlayerEvent>(OnKillPlayer);
+            rb = GetComponent<Rigidbody2D>();
+            EventManager.Instance.AddListener<KillPlayerEvent>(OnKillPlayer);
             startingPosition = gameObject.transform.position;
             ballSprite = GetComponent<SpriteRenderer>();
 
@@ -97,6 +94,11 @@ namespace BreakoutSystem
                 // Set the initial direction
                 LaunchBall(); 
             }
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
         }
 
         private void OnKillPlayer(KillPlayerEvent e)

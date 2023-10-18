@@ -22,6 +22,7 @@ namespace BreakoutSystem
         private Vector3 Swing = new Vector3(0,0, 22f);
 
         private Vector3 startPosition;
+        private bool isLaunchMode = false;
 
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
@@ -33,7 +34,7 @@ namespace BreakoutSystem
             OnInteraction?.Invoke();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             mainCamera = Camera.main;
             startPosition = transform.position;
@@ -41,10 +42,17 @@ namespace BreakoutSystem
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
         }
 
+        private void OnDisable()
+        {
+            EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
+            EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
+
+        }
         private void OnReset(ResetGameEvent e)
         {
             isReady = false;
             transform.position = startPosition;
+            isLaunchMode = true;
         }
 
         private void OnPauseGame(PauseGameEvent e)
@@ -64,6 +72,16 @@ namespace BreakoutSystem
             if (isReady)
             {
                 MoveByMouse();
+            }
+            
+            if (isLaunchMode)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    EventManager.Instance.QueueEvent(new LaunchBallEvent());
+                    isReady = true;
+                    isLaunchMode = false;
+                }
             }
         }
 
