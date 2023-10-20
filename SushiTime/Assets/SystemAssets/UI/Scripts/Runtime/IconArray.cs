@@ -5,7 +5,7 @@ namespace CustomUI
     using UnityEngine;
 
     /// <summary>
-    /// A clutch of icons that turn off or on, or provide other icons.
+    /// A collection of icons that turn off or on, or provide other icons.
     /// </summary>
     public class IconArray : MonoBehaviour
     {

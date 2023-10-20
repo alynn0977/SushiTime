@@ -45,9 +45,11 @@ namespace BreakoutSystem
 
         private void OnDisable()
         {
-            EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
-            EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
-
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
+                EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset); 
+            }
         }
         private void OnReset(ResetGameEvent e)
         {
