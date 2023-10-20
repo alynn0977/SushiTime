@@ -10,7 +10,12 @@ namespace Core
     /// </summary>
     public class KillPlayerEvent : GameEvent
     {
-        
-    }
+        /// <summary>
+        /// Generic constructor for kill player.
+        /// </summary>
+        public KillPlayerEvent()
+        {
 
+        }
+    }
 }

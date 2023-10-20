@@ -14,7 +14,7 @@ namespace Core
         public void Interact()
         {
             OnInteract?.Invoke();
-            Debug.Log($"Interaction called on {gameObject.name}");
+            // Debug.Log($"Interaction called on {gameObject.name}");
         }
     }
 }

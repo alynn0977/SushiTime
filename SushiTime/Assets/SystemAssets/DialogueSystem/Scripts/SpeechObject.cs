@@ -80,7 +80,7 @@ namespace DialogueSystem
 
         public void InitializeSpeechBubble(string initializeName, string initializeText)
         {
-            Debug.Log($"[{GetType().Name}]: Initializing Speech Bubble.");
+            // Debug.Log($"[{GetType().Name}]: Initializing Speech Bubble.");
             if (!characterName || !characterText || !speechContainer)
             {
                 Debug.LogError($"[{GetType().Name}]: {gameObject.name} has missing references. Check inspector.");

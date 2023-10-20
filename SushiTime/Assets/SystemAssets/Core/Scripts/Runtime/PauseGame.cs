@@ -79,7 +79,7 @@ namespace Core
         {
             if (delayPause > 0 && isPauseOnAwake)
             {
-                Debug.Log("Delay pause");
+                Debug.LogWarning($"Delay pause called from {gameObject.name}.");
                 Invoke(nameof(PauseGame), delayPause);
             }
             else if (isPauseOnAwake)

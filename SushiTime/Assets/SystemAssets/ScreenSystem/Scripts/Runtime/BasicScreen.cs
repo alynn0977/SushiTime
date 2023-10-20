@@ -29,7 +29,7 @@ namespace ScreenSystem
             foreach(var obj in initializeComponents)
             {
                 obj.enabled = true;
-                Debug.Log($"Activating {obj.name} on {gameObject.name}");
+                Debug.Log($"[{GetType().Name}]: Activating {gameObject.name}");
             }
 
             if (initializeButtons.Length > 0)

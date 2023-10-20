@@ -38,7 +38,6 @@ namespace Core
         public void SetCountDown(float setValue, bool isCountDown)
         {
             IsCountDown = isCountDown;
-            Debug.Log($"[{GetType().Name}] isCountDown: {IsCountDown}.");
             startingValue = CoreUtilities.MinsToSec(setValue);
             BeginCountdown();
         }

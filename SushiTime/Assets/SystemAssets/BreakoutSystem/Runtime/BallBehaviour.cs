@@ -1,6 +1,7 @@
 namespace BreakoutSystem
 {
     using Core;
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -18,8 +19,6 @@ namespace BreakoutSystem
         private bool isPlayOnStart = false;
         [SerializeField]
         private bool isPlaymode = true;
-        [SerializeField]
-        private float delayRelaunch = 3f;
         [SerializeField]
         private float ballSpeed = 2f;
         private Vector2 newVelocity;
@@ -57,16 +56,17 @@ namespace BreakoutSystem
         }
 
         /// <summary>
-        /// 
+        /// Reset the ball back to it's position
         /// </summary>
         public void ResetBall()
         {
+            EventManager.Instance.QueueEvent(new ResetGameEvent());
             ballSprite.enabled = false;
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
             transform.position = startingPosition;
             isPlaymode = false;
-            Invoke(nameof(SpriteOn), delayRelaunch-1);
+            SpriteOn();
         }
 
         private void Push(Vector2 velocity)
@@ -77,17 +77,13 @@ namespace BreakoutSystem
         private void SpriteOn()
         {
             ballSprite.enabled = true;
-            Invoke(nameof(LaunchBall), delayRelaunch);
+            EventManager.Instance.AddListenerOnce<LaunchBallEvent>(e => LaunchBall());
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            if (rb!= null)
-            {
-               rb = GetComponent<Rigidbody2D>();
-            }
-
-            EventManager.Instance.AddListenerOnce<KillPlayerEvent>(OnKillPlayer);
+            rb = GetComponent<Rigidbody2D>();
+            EventManager.Instance.AddListener<KillPlayerEvent>(OnKillPlayer);
             startingPosition = gameObject.transform.position;
             ballSprite = GetComponent<SpriteRenderer>();
 
@@ -95,6 +91,14 @@ namespace BreakoutSystem
             {
                 // Set the initial direction
                 LaunchBall(); 
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
             }
         }
 

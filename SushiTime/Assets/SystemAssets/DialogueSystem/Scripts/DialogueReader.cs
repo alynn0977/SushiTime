@@ -119,7 +119,6 @@ namespace DialogueSystem
                     FireTrack(track, i);
                     i++;
                     yield return new WaitForSeconds(1f);
-                    Debug.Log($"Played a track at {Time.timeScale}");
                 }
             }
         }

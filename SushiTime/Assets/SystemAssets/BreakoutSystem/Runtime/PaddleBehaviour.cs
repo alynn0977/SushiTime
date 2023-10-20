@@ -3,6 +3,7 @@ namespace BreakoutSystem
     using Core;
     // using DG.Tweening;
     using PrimeTween;
+    using System;
     using UnityEngine;
     using UnityEngine.Events;
 
@@ -20,6 +21,9 @@ namespace BreakoutSystem
         [SerializeField]
         private Vector3 Swing = new Vector3(0,0, 22f);
 
+        private Vector3 startPosition;
+        private bool isLaunchMode = false;
+
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
         public UnityEvent OnInteraction = new UnityEvent();
@@ -30,10 +34,26 @@ namespace BreakoutSystem
             OnInteraction?.Invoke();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             mainCamera = Camera.main;
+            startPosition = transform.position;
+
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
+            EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
+            EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
+
+        }
+        private void OnReset(ResetGameEvent e)
+        {
+            isReady = false;
+            transform.position = startPosition;
+            isLaunchMode = true;
         }
 
         private void OnPauseGame(PauseGameEvent e)
@@ -53,6 +73,16 @@ namespace BreakoutSystem
             if (isReady)
             {
                 MoveByMouse();
+            }
+
+            if (isLaunchMode)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    EventManager.Instance.QueueEvent(new LaunchBallEvent());
+                    isReady = true;
+                    isLaunchMode = false;
+                }
             }
         }
 

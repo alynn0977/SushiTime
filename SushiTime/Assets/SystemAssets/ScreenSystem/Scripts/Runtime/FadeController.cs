@@ -42,7 +42,7 @@ namespace ScreenSystem
             if (e.FadeIn)
             {
                 FadeIn();
-                Debug.Log($"FadeController received call fade in.");
+                // Debug.Log($"FadeController received call fade in.");
                 if (e.AutoTransition)
                 {
                     Invoke(nameof(FadeAway), AutoFadeDelay);
@@ -51,7 +51,7 @@ namespace ScreenSystem
             else
             {
                 FadeAway();
-                Debug.Log($"FadeController received call fade out.");
+                // Debug.Log($"FadeController received call fade out.");
             }
         }
 
