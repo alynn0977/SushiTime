@@ -38,6 +38,7 @@ namespace BreakoutSystem
         {
             mainCamera = Camera.main;
             startPosition = transform.position;
+
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
         }
@@ -73,7 +74,7 @@ namespace BreakoutSystem
             {
                 MoveByMouse();
             }
-            
+
             if (isLaunchMode)
             {
                 if (Input.GetMouseButtonDown(0))

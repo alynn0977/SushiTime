@@ -20,8 +20,6 @@ namespace BreakoutSystem
         [SerializeField]
         private bool isPlaymode = true;
         [SerializeField]
-        private float delayRelaunch = 3f;
-        [SerializeField]
         private float ballSpeed = 2f;
         private Vector2 newVelocity;
         private Vector3 startingPosition;
@@ -98,7 +96,10 @@ namespace BreakoutSystem
 
         private void OnDisable()
         {
-            EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
+            }
         }
 
         private void OnKillPlayer(KillPlayerEvent e)

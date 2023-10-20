@@ -155,7 +155,7 @@ namespace ScreenSystem
                 if (_currentScreen != null)
                 {
                     _lastScreen = _currentScreen;
-                    Debug.Log($"Caching {_lastScreen}");
+                    Debug.Log($"[{GetType().Name}]: Caching {_lastScreen}");
                 }
 
                 // Instantiate the object into a gameobject.
@@ -177,7 +177,7 @@ namespace ScreenSystem
                 else
                 {
                     // This must be a game screen. Turn off main.
-                    Debug.Log("Game Screen detected.");
+                    Debug.Log($"[{GetType().Name}]: Game Screen detected.");
                     GameObject.Destroy(_lastScreen.gameObject);
                     _currentScreen = _homeScreen;
                     _currentScreen.gameObject.SetActive(false);

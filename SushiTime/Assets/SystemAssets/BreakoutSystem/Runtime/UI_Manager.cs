@@ -3,6 +3,7 @@ namespace BreakoutSystem.UI
     using Core;
     using CustomUI;
     using Sirenix.OdinInspector;
+    using System;
     using System.Collections.Generic;
     using TMPro;
     using UnityEngine;
@@ -45,8 +46,10 @@ namespace BreakoutSystem.UI
         [TabGroup("Power Ups Section")]
         [SerializeField]
         private IconArray powerUpPanel;
+        [TabGroup("Misc")]
+        [SerializeField]
+        private PopUpGraphic pressStart;
         private List<GoalTile> UI_goals = new List<GoalTile>();
-
         public List<GoalTile> UI_Goals => UI_goals;
         private GoalKeeping gameGoal
         {
@@ -77,6 +80,12 @@ namespace BreakoutSystem.UI
 
             InitializeScore();
             InitializeLives();
+            if (pressStart != null)
+            {
+                EventManager.Instance.AddListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.AddListener<LaunchBallEvent>(DeactivateStartPopup);
+            }
+
             EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
         }
 
@@ -336,7 +345,23 @@ namespace BreakoutSystem.UI
             }
         }
         #endregion
-        
+
+        #region Misc
+        private void ActivateStartPopup(ResetGameEvent e)
+        {
+            pressStart.CallPopUp();
+        }
+        private void DeactivateStartPopup(LaunchBallEvent e)
+        {
+            if (pressStart.gameObject.activeInHierarchy)
+            {
+                pressStart.StopAllCoroutines();
+                pressStart.gameObject.SetActive(false);
+            }
+        }
+
+        #endregion
+
         #region Utilities
         private void RemoveChildObject(GameObject obj)
         {
