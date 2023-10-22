@@ -68,7 +68,7 @@ namespace BreakoutSystem.UI
         }
 
         #region Base Methods
-        private void Start()
+        private void OnEnable()
         {
             if (isGoalValid())
             {
@@ -89,6 +89,17 @@ namespace BreakoutSystem.UI
             EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
         }
 
+        private void OnDisable()
+        {
+            if (pressStart != null && EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.RemoveListener<LaunchBallEvent>(DeactivateStartPopup);
+                pressStart = default;
+            }
+
+            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
+        }
         private void Update()
         {
             if (counterText)
