@@ -433,8 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteStates:
-  - {fileID: 21300000, guid: 5b2f66b98724f3d47b8a48bf508b77b1, type: 3}
-  - {fileID: 21300000, guid: 5b2f66b98724f3d47b8a48bf508b77b1, type: 3}
+  - {fileID: 21300000, guid: 575ad87d1dc218f46ac6d4337186b5f6, type: 3}
   - {fileID: 21300000, guid: a9bfb091652c4b24fa32fa68754ac201, type: 3}
   spriteTarget: {fileID: 7823643772400519216}
   startingState: 1
