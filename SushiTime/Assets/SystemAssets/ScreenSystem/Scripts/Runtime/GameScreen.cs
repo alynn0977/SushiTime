@@ -14,8 +14,10 @@ namespace ScreenSystem
         {
             EventManager.Instance.QueueEvent(new FadeScreenEvent(false));
 
+            EventManager.Instance.AddListenerOnce<FadeScreenPostEvent>(e => ActivateSystems());
             // Only add listener once, to prevent spamming and errors.
             EventManager.Instance.AddListenerOnce<GameOverScreenEvent>(OnGameOver);
+
         }
 
         private void OnGameOver(GameOverScreenEvent e)

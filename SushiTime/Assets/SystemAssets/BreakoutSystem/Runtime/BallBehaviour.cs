@@ -12,7 +12,7 @@ namespace BreakoutSystem
     public class BallBehaviour : MonoBehaviour
     {
         private const string boundaryTag = "Boundary";
-        
+        private const float upwardBias = 0.1f;
         [SerializeField]
         private Rigidbody2D rb;
         [SerializeField]
@@ -21,7 +21,7 @@ namespace BreakoutSystem
         private bool isPlaymode = true;
         [SerializeField]
         private float ballSpeed = 2f;
-        private Vector2 newVelocity;
+        private Vector2 newVector;
         private Vector3 startingPosition;
         private SpriteRenderer ballSprite;
         public void OnCollisionEnter2D(Collision2D collider)
@@ -32,19 +32,24 @@ namespace BreakoutSystem
                 interactor.Interact();
             }
 
-            // Provide new velocity, based on what was hit.
-            newVelocity = Vector2.Reflect(newVelocity, collider.contacts[0].normal);
+            CalculateNewVelocity(collider);
 
             // If the ball hits the paddle or wall, add a slight upward bias to the velocity
             if (collider.gameObject.TryGetComponent<PaddleBehaviour>(out _) ||
                 collider.gameObject.CompareTag(boundaryTag))
             {
-                newVelocity += Vector2.up * 0.1f;
+                newVector += Vector2.up * upwardBias;
             }
 
-            Push(newVelocity);
+            Push(newVector);
         }
-        
+
+        private void CalculateNewVelocity(Collision2D collider)
+        {
+            // Provide new velocity, based on what was hit.
+            newVector = Vector2.Reflect(newVector, collider.contacts[0].normal);
+        }
+
         /// <summary>
         /// Launch the ball in an initialize direction.
         /// </summary>
@@ -52,7 +57,7 @@ namespace BreakoutSystem
         {
             isPlaymode = true;
             ballSprite.enabled = true;
-            newVelocity = Vector2.up * 4f;
+            newVector = Vector2.up * 4f;
         }
 
         /// <summary>
@@ -69,9 +74,13 @@ namespace BreakoutSystem
             SpriteOn();
         }
 
+        /// <summary>
+        /// Push the ball using parameter.
+        /// </summary>
+        /// <param name="velocity">The velocity to push towards.</param>
         private void Push(Vector2 velocity)
         {
-            newVelocity = velocity;
+            newVector = velocity;
         }
 
         private void SpriteOn()
@@ -111,7 +120,7 @@ namespace BreakoutSystem
         {
             if (isPlaymode)
             {
-                rb.MovePosition(rb.position + newVelocity * Time.deltaTime * ballSpeed); 
+                rb.MovePosition(rb.position + newVector * Time.deltaTime * ballSpeed); 
             }
         }
 

@@ -30,6 +30,10 @@ namespace BreakoutSystem
         [BoxGroup("UI")]
         private GameObject gameWinScreen;
 
+        [SerializeField]
+        [BoxGroup("Initialized Items")]
+        private GameObject[] initializedObjects;
+
         /// <summary>
         /// Read-only access of current player power stat.
         /// </summary>
@@ -56,17 +60,30 @@ namespace BreakoutSystem
             Debug.Log($"[{GetType().Name}]: YOU WIN!!!!!!!!!!");
         }
 
-        // TODO: What are the goals?
-        private void Start()
+        private void OnEnable()
         {
-            if (!goal )
+            if (!goal)
             {
                 Debug.LogWarning($"[Game Zone]:{gameObject.name} does not have goal data. Is this intentional?");
             }
 
             InitializeModalCanvas();
-
+            InitializeObjects();
             Invoke(nameof(BeginGame), 1.5f);
+        }
+
+        private void InitializeObjects()
+        {
+            if (initializedObjects == null || initializedObjects.Length <= 0)
+            {
+                Debug.LogWarning($"[{GetType().Name}] - {gameObject.name}: Nothing to initialize.");
+                return;
+            }
+
+            foreach (var obj in initializedObjects)
+            {
+                obj.gameObject.SetActive(true);
+            }
         }
 
         private void PlayerPowerIncrease(IncreasePowerEvent e)
@@ -78,6 +95,7 @@ namespace BreakoutSystem
         [ContextMenu("Begin Game")]
         private void BeginGame()
         {
+            MainBall.gameObject.SetActive(true);
             MainBall.LaunchBall();
         }
 

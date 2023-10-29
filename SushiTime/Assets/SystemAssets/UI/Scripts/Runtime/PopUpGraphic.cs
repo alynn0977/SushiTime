@@ -5,7 +5,8 @@ namespace CustomUI
     using UnityEngine;
 
     /// <summary>
-    /// Handles the logic that takes care of showing and hiding the pop-up
+    /// Handles the logic that takes care of showing and hiding the pop-up.
+    /// Pop-up disappears after <see cref="appearForSeconds"/>.
     /// </summary>
     public class PopUpGraphic : MonoBehaviour
     {
