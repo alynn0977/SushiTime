@@ -353,8 +353,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4519454095823402230}
   - component: {fileID: 4432408872419132071}
-  - component: {fileID: 5696230478410532131}
   - component: {fileID: 8269431377879087983}
+  - component: {fileID: 5696230478410532131}
   m_Layer: 0
   m_Name: TimePanel
   m_TagString: Untagged
@@ -393,6 +393,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2905289509636749612}
   m_CullTransparentMesh: 1
+--- !u!114 &8269431377879087983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905289509636749612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4664b3e3ada5b1841aca5fda117e3cba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStartAwake: 0
+  startingValue: 0
+  OnTick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5696230478410532131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,20 +440,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 128
---- !u!114 &8269431377879087983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2905289509636749612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4664b3e3ada5b1841aca5fda117e3cba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStartAwake: 0
-  startingValue: 0
 --- !u!1 &6884322782192375153
 GameObject:
   m_ObjectHideFlags: 0

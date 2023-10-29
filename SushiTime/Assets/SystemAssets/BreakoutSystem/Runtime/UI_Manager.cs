@@ -98,7 +98,10 @@ namespace BreakoutSystem.UI
                 pressStart = default;
             }
 
-            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.AddListener<PowerUpEvent>(PowerUp); 
+            }
         }
         private void Update()
         {

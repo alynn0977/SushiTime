@@ -8,37 +8,15 @@ namespace ScreenSystem
 {
     public class BasicScreen : ScreenTypeBehaviour
     {
-
-        [Header("Components to Initialize")]
-        // List of components to turn off/on.
-        [SerializeField]
-        private MonoBehaviour[] initializeComponents;
-
-        // List of buttons to turn off/on.
-        [SerializeField]
-        private Button[] initializeButtons;
-
         public override void InitializeScreen()
         {
             EventManager.Instance.QueueEvent(new FadeScreenEvent(false));
-            EventManager.Instance.AddListenerOnce<FadeScreenPostEvent>(ActivateSystems);
+            EventManager.Instance.AddListenerOnce<FadeScreenPostEvent>(e => ActivateSystems());
         }
 
-        private void ActivateSystems(FadeScreenPostEvent e)
+        public override void ActivateSystems()
         {
-            foreach(var obj in initializeComponents)
-            {
-                obj.enabled = true;
-                Debug.Log($"[{GetType().Name}]: Activating {gameObject.name}");
-            }
-
-            if (initializeButtons.Length > 0)
-            {
-                foreach(var button in initializeButtons)
-                { 
-                    button.interactable = true;
-                }
-            }
+            base.ActivateSystems();
         }
 
     }
