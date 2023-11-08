@@ -2,6 +2,7 @@ namespace BreakoutSystem
 {
     using UnityEngine;
     using Sirenix.OdinInspector;
+    using BreakoutSystem.UI;
 
     // Tracks globals for this particular level instance.
     public class GameZone : MonoBehaviour
@@ -22,6 +23,10 @@ namespace BreakoutSystem
         [SerializeField]
         [BoxGroup("UI")]
         private Canvas modalCanvas;
+        
+        [SerializeField]
+        [BoxGroup("UI")]
+        private UI_Manager UI_Manager;
         
         [SerializeField]
         [BoxGroup("UI")]
@@ -69,6 +74,12 @@ namespace BreakoutSystem
 
             InitializeModalCanvas();
             InitializeObjects();
+
+            if (UI_Manager)
+            {
+                UI_Manager.InitializeUIManager();
+            }
+
             Invoke(nameof(BeginGame), 1.5f);
         }
 

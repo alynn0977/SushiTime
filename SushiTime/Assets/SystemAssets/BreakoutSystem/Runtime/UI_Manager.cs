@@ -15,7 +15,9 @@ namespace BreakoutSystem.UI
 
         [TabGroup("General Setup")]
         public GameZone GameZone;
-
+        [TabGroup("General Setup")]
+        [SerializeField]
+        private bool isAutoInitialize = false;
         [TabGroup("Level and Goal")]
         [SerializeField]
         private TMP_Text levelText;
@@ -50,7 +52,33 @@ namespace BreakoutSystem.UI
         [SerializeField]
         private PopUpGraphic pressStart;
         private List<GoalTile> UI_goals = new List<GoalTile>();
+        
+
         public List<GoalTile> UI_Goals => UI_goals;
+
+        /// <summary>
+        /// Initialize UI connections for the Gamezone.
+        /// </summary>
+        public void InitializeUIManager()
+        {
+            if (isGoalValid())
+            {
+                if (gameGoal != null)
+                {
+                    SetGoal();
+                }
+            }
+
+            InitializeScore();
+            InitializeLives();
+            if (pressStart != null)
+            {
+                EventManager.Instance.AddListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.AddListener<LaunchBallEvent>(DeactivateStartPopup);
+            }
+
+            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
+        }
         private GoalKeeping gameGoal
         {
             get
@@ -70,23 +98,10 @@ namespace BreakoutSystem.UI
         #region Base Methods
         private void OnEnable()
         {
-            if (isGoalValid())
+            if (isAutoInitialize)
             {
-                if (gameGoal != null)
-                {
-                    SetGoal();
-                }
+                InitializeUIManager(); 
             }
-
-            InitializeScore();
-            InitializeLives();
-            if (pressStart != null)
-            {
-                EventManager.Instance.AddListener<ResetGameEvent>(ActivateStartPopup);
-                EventManager.Instance.AddListener<LaunchBallEvent>(DeactivateStartPopup);
-            }
-
-            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
         }
 
         private void OnDisable()

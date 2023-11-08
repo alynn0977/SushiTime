@@ -68,12 +68,10 @@ namespace BreakoutSystem
         /// <param name="obj">Object to clear.</param>
         private void DeregisterAnyTile(GameObject obj)
         {
-            Debug.LogWarning("Degister Tile method called.");
             if (obj.TryGetComponent(out BrickBehaviour brick))
             {
                 if (goalTiles.Contains(brick))
                 {
-                    Debug.LogWarning($"Regiteresting tile {brick.gameObject.name}");
                     goalTiles.Remove(brick);
                 }
             }
@@ -83,7 +81,7 @@ namespace BreakoutSystem
                 gameZone.CallGameWin();
             }
 
-            Debug.LogWarning($"There are now {goalTiles.Count} tiles left in the goal.");
+            Debug.Log($"There are now {goalTiles.Count} tiles left in the goal.");
         }
 
         /// <summary>
@@ -92,7 +90,6 @@ namespace BreakoutSystem
         /// <param name="obj">Object to clear.</param>
         private void DeregisterTile(GameObject obj)
         {
-            Debug.LogWarning($"Deregistering called on {obj.gameObject.name}");
             // Determine if the brick is registered.
             if (obj.TryGetComponent(out BrickBehaviour brick) && goalTiles.Contains(brick))
             {
@@ -151,8 +148,6 @@ namespace BreakoutSystem
                     // Then make methods that reduce the numbers 
                     break;
             }
-
-            Debug.LogWarning($"Registered with {goalType.ToString()} goal.");
         }
 
         /// <summary>
@@ -163,6 +158,12 @@ namespace BreakoutSystem
             // First find all the tiles.
             BrickBehaviour[] allBricks = FindObjectsOfType<BrickBehaviour>();
             
+            if (allBricks.Length == 0)
+            {
+                Debug.LogError($"[{GetType().Name}]: Unable to count the bricks. This happens when {GetType().Name} initializes before the bricks do. Check initialize procedure.");
+                return;
+            }
+
             // Figure out how many types of special tiles exist.
             for (int i = 0; i <= UI.UI_Goals.Count - 1; i++)
             {
@@ -185,6 +186,11 @@ namespace BreakoutSystem
         private void CountAllTiles()
         {
             GameObject[] allTiles = GameObject.FindGameObjectsWithTag(tileTag);
+            if (allTiles.Length == 0)
+            {
+                Debug.LogError($"[{GetType().Name}]: Unable to count the bricks. This happens when {GetType().Name} initializes before the bricks do. Check initialize procedure.");
+                return;
+            }
 
             foreach (GameObject tile in allTiles)
             {

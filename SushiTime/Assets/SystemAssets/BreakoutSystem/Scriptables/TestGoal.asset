@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestGoal
   m_EditorClassIdentifier: Assembly-CSharp:BreakoutSystem:GoalKeeping
   level: 01
-  levelGoal: 0
+  levelGoal: 2
   goalTiles:
   - GameTile: {fileID: 283858995575174526, guid: 30703cb888a875b4991dd72c44474ccb, type: 3}
     Quantity: 2
