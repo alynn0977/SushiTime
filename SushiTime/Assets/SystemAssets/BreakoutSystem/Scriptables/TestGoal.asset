@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TestGoal
   m_EditorClassIdentifier: Assembly-CSharp:BreakoutSystem:GoalKeeping
   level: 01
-  levelGoal: 2
+  levelGoal: 0
   goalTiles:
-  - GameTile: {fileID: 3049093317492032460, guid: 9294c30ccfa2e8f44b655abaddd86c73, type: 3}
+  - GameTile: {fileID: 283858995575174526, guid: 30703cb888a875b4991dd72c44474ccb, type: 3}
     Quantity: 2
-  - GameTile: {fileID: 8580211427355233397, guid: 064432183fafc6a46aab66c047a5254d, type: 3}
+  - GameTile: {fileID: 283858995575174526, guid: 49e9f058bc883c349ab1bb44cd2eef8b, type: 3}
     Quantity: 3
   timeLimit: 3
   construction: 
