@@ -581,6 +581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializeComponents:
   - {fileID: 2165562492087797256}
+  initializeSubsystems:
+  - {fileID: 0}
   initializeButtons: []
 --- !u!114 &1017482835020216424
 MonoBehaviour:
@@ -1417,7 +1419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390489625514317912, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1390489626390247244, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1560,10 +1562,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
-      propertyPath: UI_Manager
-      value: 
-      objectReference: {fileID: 1430884170118876705}
-    - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: initializedObjects.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1575,11 +1573,26 @@ PrefabInstance:
       propertyPath: initializedObjects.Array.data[1]
       value: 
       objectReference: {fileID: 6853392755550265783}
+    - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: initializedSubsystems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: initializedSubsystems.Array.data[0]
+      value: 
+      objectReference: {fileID: 5176711856593505277}
+    - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: initializedSubsystems.Array.data[1]
+      value: 
+      objectReference: {fileID: 2966919130080368064}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -2836374455567594034, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5187742147204843986, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5176711856593505277}
   m_SourcePrefab: {fileID: 100100000, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
 --- !u!1 &841796460648149053 stripped
 GameObject:
@@ -1602,6 +1615,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deab8eded487d904c89a9746b4b319e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2966919130080368064 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3588866030987443621, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+  m_PrefabInstance: {fileID: 1793184276384622693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853392755550265783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae5b96351858614b8dec8e5bd3853ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6820939212463338083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5064987769283041798, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
@@ -1618,6 +1642,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5187742147204843986, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
   m_PrefabInstance: {fileID: 1793184276384622693}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5176711856593505277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853392755550265783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae5b96351858614b8dec8e5bd3853ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subSystem: {fileID: 1430884170118876705}
 --- !u!114 &7248115526741401033 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}

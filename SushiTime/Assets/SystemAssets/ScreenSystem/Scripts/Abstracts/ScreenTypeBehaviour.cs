@@ -1,3 +1,4 @@
+using Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace ScreenSystem
         [Header("Components to Initialize")]
         [SerializeField]
         protected MonoBehaviour[] initializeComponents;
+
+        [SerializeField]
+        protected InitializeProxy[] initializeSubsystems;
         
         [SerializeField]
         protected Button[] initializeButtons;

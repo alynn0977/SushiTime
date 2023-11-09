@@ -3,6 +3,7 @@ namespace BreakoutSystem
     using UnityEngine;
     using Sirenix.OdinInspector;
     using BreakoutSystem.UI;
+    using Core;
 
     // Tracks globals for this particular level instance.
     public class GameZone : MonoBehaviour
@@ -37,7 +38,8 @@ namespace BreakoutSystem
 
         [SerializeField]
         [BoxGroup("Initialized Items")]
-        private GameObject[] initializedObjects;
+        private InitializeProxy[] initializedSubsystems;
+
 
         /// <summary>
         /// Read-only access of current player power stat.
@@ -73,27 +75,20 @@ namespace BreakoutSystem
             }
 
             InitializeModalCanvas();
-            InitializeObjects();
-
-            if (UI_Manager)
-            {
-                UI_Manager.InitializeUIManager();
-            }
+            InitializeSubSytems();
+            //if (UI_Manager)
+            //{
+            //    UI_Manager.Initialize();
+            //}
 
             Invoke(nameof(BeginGame), 1.5f);
         }
 
-        private void InitializeObjects()
+        private void InitializeSubSytems()
         {
-            if (initializedObjects == null || initializedObjects.Length <= 0)
+            foreach (var proxy in initializedSubsystems) 
             {
-                Debug.LogWarning($"[{GetType().Name}] - {gameObject.name}: Nothing to initialize.");
-                return;
-            }
-
-            foreach (var obj in initializedObjects)
-            {
-                obj.gameObject.SetActive(true);
+                proxy.Initialize();
             }
         }
 

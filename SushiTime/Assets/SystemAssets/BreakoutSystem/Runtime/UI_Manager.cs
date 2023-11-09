@@ -9,7 +9,7 @@ namespace BreakoutSystem.UI
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class UI_Manager : MonoBehaviour
+    public class UI_Manager : MonoBehaviour, ISystemInitializer
     {
         private const int MaxGoalTiles = 3;
 
@@ -53,14 +53,14 @@ namespace BreakoutSystem.UI
         private PopUpGraphic pressStart;
         private List<GoalTile> UI_goals = new List<GoalTile>();
         
-
         public List<GoalTile> UI_Goals => UI_goals;
 
         /// <summary>
         /// Initialize UI connections for the Gamezone.
         /// </summary>
-        public void InitializeUIManager()
+        public void Initialize()
         {
+            Debug.LogWarning("UI MANAGER INITIALIZING!");
             if (isGoalValid())
             {
                 if (gameGoal != null)
@@ -100,7 +100,7 @@ namespace BreakoutSystem.UI
         {
             if (isAutoInitialize)
             {
-                InitializeUIManager(); 
+                Initialize(); 
             }
         }
 
@@ -399,7 +399,7 @@ namespace BreakoutSystem.UI
 #else
                 Destroy(obj);
 #endif
-        } 
+        }
         #endregion
     }
   
