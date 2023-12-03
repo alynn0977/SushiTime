@@ -1,6 +1,5 @@
+using Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScreenSystem
@@ -8,16 +7,28 @@ namespace ScreenSystem
     /// <summary>
     /// A type of game screen.
     /// </summary>
-    public class GameScreen : ScreenTypeBehaviour
+    public class GameScreen : ScreenTypeBehaviour, ISystemInitializer
     {
         public override void InitializeScreen()
+        {
+            Initialize();
+        }
+
+        public override void ActivateSystems()
+        {
+            Debug.Log("Game screen snould be activating.");
+
+            base.ActivateSystems();
+        }
+
+        /// <inheritdoc/>
+        public void Initialize()
         {
             EventManager.Instance.QueueEvent(new FadeScreenEvent(false));
 
             EventManager.Instance.AddListenerOnce<FadeScreenPostEvent>(e => ActivateSystems());
             // Only add listener once, to prevent spamming and errors.
             EventManager.Instance.AddListenerOnce<GameOverScreenEvent>(OnGameOver);
-
         }
 
         private void OnGameOver(GameOverScreenEvent e)

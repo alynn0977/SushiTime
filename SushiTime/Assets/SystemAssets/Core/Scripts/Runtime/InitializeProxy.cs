@@ -1,8 +1,6 @@
 namespace Core
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     [Serializable]
@@ -19,6 +17,10 @@ namespace Core
             if(subSystem.TryGetComponent(out ISystemInitializer initialize))
             {
                 initialize.Initialize();
+            }
+            else
+            {
+                Debug.LogWarning($"[{GetType().Name}]: Sorry, {subSystem.name} is not a proper interface.");
             }
         }
     }

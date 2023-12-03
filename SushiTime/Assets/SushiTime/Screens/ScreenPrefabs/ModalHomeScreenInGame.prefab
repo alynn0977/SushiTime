@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 2429143870557485522}
   - component: {fileID: 3158940133539259737}
   - component: {fileID: 2240879691243320812}
+  - component: {fileID: 5356727715233200774}
   m_Layer: 5
   m_Name: ModalHomeScreenInGame
   m_TagString: Screen
@@ -222,6 +223,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPauseOnAwake: 0
   delayPause: 0
+  isPauseByKey: 1
+  keyToListenFor: 0
+  onPauseKey:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &425866188777539381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15c11692407fb84982b0cc13159bc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeComponents:
-  - {fileID: 4387709932953210747}
+  initializeComponents: []
+  initializeSubsystems:
+  - {fileID: 5356727715233200774}
   initializeButtons: []
 --- !u!225 &2429143870557485522
 CanvasGroup:
@@ -355,6 +362,19 @@ MonoBehaviour:
   OnReverseFinished:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5356727715233200774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425866188777539383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae5b96351858614b8dec8e5bd3853ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subSystem: {fileID: 4387709932953210747}
 --- !u!1 &1123747805425180925
 GameObject:
   m_ObjectHideFlags: 0

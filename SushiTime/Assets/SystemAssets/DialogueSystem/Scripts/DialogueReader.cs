@@ -1,17 +1,18 @@
 namespace DialogueSystem
 {
+    using Core;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
+
     /// <summary>
     /// Reads through a provided <see cref="DialogueObject"/> and
     /// displays it to a UI for users to read a story.
     /// Currently compatible with only two characters.
     /// </summary>
-    public class DialogueReader : MonoBehaviour
+    public class DialogueReader : MonoBehaviour, ISystemInitializer
     {
         private const float DivideScreen = .3f;
         private const float DivideByHalf = .5f;
@@ -20,7 +21,7 @@ namespace DialogueSystem
         [Header("Setup")]
         // It needs to know if it should play on awake/enable
         [SerializeField]
-        private bool isPlayOnStart = true;
+        private bool isAutoInitialize = true;
 
         // This system needs a dialogue object
         [SerializeField]
@@ -85,7 +86,7 @@ namespace DialogueSystem
         /// <summary>
         /// Initialize a Dialogue Scene. Used if scene does not play on start.
         /// </summary>
-        public void InitializeDialogue()
+        public void Initialize()
         {
             // Perform null checks first.
             if (!dialogueObject || !dialogueFrame || !portraitPrefab || !bubblePrefab)
@@ -105,7 +106,6 @@ namespace DialogueSystem
             
             ParseDialogueList();
             InitializeDialogueHolder();
-
         }
 
         public IEnumerator PlayCurrentTrack()
@@ -354,9 +354,9 @@ namespace DialogueSystem
 
         private void Start()
         {
-            if (isPlayOnStart)
+            if (isAutoInitialize)
             {
-                InitializeDialogue();
+                Initialize();
             }
         }
     }
