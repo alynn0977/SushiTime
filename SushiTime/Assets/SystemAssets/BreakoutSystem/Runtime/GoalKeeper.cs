@@ -27,6 +27,7 @@ namespace BreakoutSystem
         /// <param name="UI">Requires UI Manager.</param>
         public void InitializeGoalKeeper(UI_Manager UI)
         {
+            Debug.LogWarning("Goal keeper initializing.");
             // Initialize the Goal Keeper by feeding it the UI.
             if (UI != null)
             {
@@ -79,6 +80,8 @@ namespace BreakoutSystem
             {
                 gameZone.CallGameWin();
             }
+
+            Debug.Log($"There are now {goalTiles.Count} tiles left in the goal.");
         }
 
         /// <summary>
@@ -155,6 +158,12 @@ namespace BreakoutSystem
             // First find all the tiles.
             BrickBehaviour[] allBricks = FindObjectsOfType<BrickBehaviour>();
             
+            if (allBricks.Length == 0)
+            {
+                Debug.LogError($"[{GetType().Name}]: Unable to count the bricks. This happens when {GetType().Name} initializes before the bricks do. Check initialize procedure.");
+                return;
+            }
+
             // Figure out how many types of special tiles exist.
             for (int i = 0; i <= UI.UI_Goals.Count - 1; i++)
             {
@@ -177,6 +186,11 @@ namespace BreakoutSystem
         private void CountAllTiles()
         {
             GameObject[] allTiles = GameObject.FindGameObjectsWithTag(tileTag);
+            if (allTiles.Length == 0)
+            {
+                Debug.LogError($"[{GetType().Name}]: Unable to count the bricks. This happens when {GetType().Name} initializes before the bricks do. Check initialize procedure.");
+                return;
+            }
 
             foreach (GameObject tile in allTiles)
             {

@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 1599251737657643457}
   - component: {fileID: 3637632786963049665}
   - component: {fileID: 1461002309259681568}
+  - component: {fileID: 3364643521923957953}
   - component: {fileID: 6847997498169914128}
   m_Layer: 0
   m_Name: GameUI
@@ -459,6 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameZone: {fileID: 0}
+  isAutoInitialize: 0
   levelText: {fileID: 9112523122130223526}
   goalGroup: {fileID: 979234995119485317}
   textPrefab: {fileID: 2651276698478575197, guid: 1ba01ffc4b4bf9b41a4de16d01bf9580, type: 3}
@@ -470,6 +472,19 @@ MonoBehaviour:
   livesText: {fileID: 177900238642200590}
   powerUpPanel: {fileID: 4985708360071943699}
   pressStart: {fileID: 5925023258592743875}
+--- !u!114 &3364643521923957953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377418302172934326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae5b96351858614b8dec8e5bd3853ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subSystem: {fileID: 1461002309259681568}
 --- !u!114 &6847997498169914128
 MonoBehaviour:
   m_ObjectHideFlags: 0

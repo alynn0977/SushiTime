@@ -1,15 +1,18 @@
 namespace CustomUI
 {
-	using UnityEngine;
+    using Core;
+    using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
 
-    public class ModalController : MonoBehaviour
+    public class ModalController : MonoBehaviour, ISystemInitializer
 	{
         [Header("Screens")]
         [SerializeField]
         private GameObject[] popUpsToActivate;
-
+        [Header("Startup")]
+        [SerializeField]
+        private bool isInitializeOnAwake = false;
         [Space]
         [Header("Controls & Animation")]
         [SerializeField]
@@ -27,22 +30,20 @@ namespace CustomUI
         private UnityEvent onPopUpEnd = new UnityEvent();
 
         private int modalIndex;
-        private void Start()
-        {
-            if (popUpsToActivate == null || popUpsToActivate.Length == 0)
-            {
-                Debug.LogWarning($"[{GetType().Name}] - {gameObject.name}: You're an idiot and should make better choices.");
-                return;
-            }
 
-            if (animator == null)
-            {
-                InitiateFirstPopup();
-            }
+        public void Initialize()
+        {
+            InitiateFirstPopup();
         }
 
         public void InitiateFirstPopup()
         {
+            if (animator == null)
+            {
+                Debug.LogWarning($"[{GetType().Name}]: Null reference to animator component. Cannot initialize.");
+                return;
+            }
+
             popUpsToActivate[0].SetActive(true);
             backButton.interactable = false;
             modalIndex = 0;
@@ -114,6 +115,20 @@ namespace CustomUI
         public void InitializeNext(MonoBehaviour component)
         {
             component.enabled = true;
+        }
+
+        private void Start()
+        {
+            if (popUpsToActivate == null || popUpsToActivate.Length == 0)
+            {
+                Debug.LogWarning($"[{GetType().Name}] - {gameObject.name}: You're an idiot and should make better choices.");
+                return;
+            }
+
+            if (isInitializeOnAwake)
+            {
+                InitiateFirstPopup();
+            }
         }
     }
 

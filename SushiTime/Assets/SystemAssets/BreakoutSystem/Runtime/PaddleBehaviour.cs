@@ -10,7 +10,7 @@ namespace BreakoutSystem
     /// <summary>
     /// Behaviour for paddle interaction.
     /// </summary>
-    public class PaddleBehaviour : MonoBehaviour, IInteractable
+    public class PaddleBehaviour : MonoBehaviour, IInteractable, ISystemInitializer
     {
         [SerializeField]
         private bool isReady = true;
@@ -34,6 +34,11 @@ namespace BreakoutSystem
             OnInteraction?.Invoke();
         }
 
+        public void Initialize()
+        {
+            isReady = true;
+        }
+
         private void OnEnable()
         {
             mainCamera = Camera.main;
@@ -41,6 +46,8 @@ namespace BreakoutSystem
 
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
+
+            isReady = false;
         }
 
         private void OnDisable()

@@ -1,14 +1,12 @@
 namespace Core
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using UnityEngine.Events;
 
     /// <summary>
     /// Allows pausing of a game from a gameobject.
     /// </summary>
-    public class PauseGame : MonoBehaviour
+    public class PauseGame : MonoBehaviour, ISystemInitializer
     {
         [Header("Setup")]
         /// <summary>
@@ -39,6 +37,11 @@ namespace Core
         /// </summary>
         [SerializeField]
         private UnityEvent onPauseKey = new UnityEvent();
+
+        public void Initialize()
+        {
+            PauseGameGlobal();
+        }
 
         /// <summary>
         /// Force Pause a game from a script.
@@ -80,11 +83,11 @@ namespace Core
             if (delayPause > 0 && isPauseOnAwake)
             {
                 Debug.LogWarning($"Delay pause called from {gameObject.name}.");
-                Invoke(nameof(PauseGame), delayPause);
+                Invoke(nameof(Initialize), delayPause);
             }
             else if (isPauseOnAwake)
             {
-                PauseGameGlobal();
+                Initialize();
             }
         }
 
