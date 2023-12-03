@@ -14,13 +14,6 @@ namespace ScreenSystem
             Initialize();
         }
 
-        public override void ActivateSystems()
-        {
-            Debug.Log("Game screen snould be activating.");
-
-            base.ActivateSystems();
-        }
-
         /// <inheritdoc/>
         public void Initialize()
         {

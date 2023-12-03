@@ -13,12 +13,5 @@ namespace ScreenSystem
             EventManager.Instance.QueueEvent(new FadeScreenEvent(false));
             EventManager.Instance.AddListenerOnce<FadeScreenPostEvent>(e => ActivateSystems());
         }
-
-        public override void ActivateSystems()
-        {
-            base.ActivateSystems();
-
-        }
-
     }
 }
