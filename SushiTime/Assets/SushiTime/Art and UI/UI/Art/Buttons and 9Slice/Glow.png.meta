@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 07a47263347ddb045946135b89a94898
+guid: de199e476ad205f42bb8d50a0b1e0561
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,13 +44,13 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 0
-  spriteMeshType: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 108, y: 117, z: 109, w: 87}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteBorder: {x: 85, y: 85, z: 85, w: 85}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
