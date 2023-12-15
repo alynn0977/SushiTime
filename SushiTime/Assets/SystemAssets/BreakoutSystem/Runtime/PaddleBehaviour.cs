@@ -3,15 +3,18 @@ namespace BreakoutSystem
     using Core;
     // using DG.Tweening;
     using PrimeTween;
-    using System;
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.InputSystem;
 
     /// <summary>
     /// Behaviour for paddle interaction.
     /// </summary>
     public class PaddleBehaviour : MonoBehaviour, IInteractable, ISystemInitializer
     {
+        public InputAction leftClick;
+        public InputAction rightClick;
+
         [SerializeField]
         private bool isReady = true;
         [SerializeField] private Camera mainCamera;
@@ -97,7 +100,9 @@ namespace BreakoutSystem
 
         private void MoveByMouse()
         {
+#if ENABLE_LEGACY_INPUT_MANAGER
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
             if (gameZone.Contains(mousePosition))
             {
                 transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
@@ -112,6 +117,24 @@ namespace BreakoutSystem
                     SwingPaddle(Swing);
                 }
             }
+#elif ENABLE_INPUT_SYSTEM
+            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            if (gameZone.Contains(mousePosition))
+            {
+                transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
+
+                if (leftClick.triggered)
+                {
+                    SwingPaddle(Swing * -1);
+                }
+
+                if (rightClick.triggered)
+                {
+                    SwingPaddle(Swing);
+                }
+            }
+#endif
         }
 
         private void SwingPaddle(Vector3 vector3)
