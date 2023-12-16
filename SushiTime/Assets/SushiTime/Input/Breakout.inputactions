@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Swing",
+                    "name": "Swing Left",
                     "type": "Button",
                     "id": "cc612846-f66f-4f50-b370-bbc2048150ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swing Right",
+                    "type": "Button",
+                    "id": "93ef40a0-dd8b-4d65-964d-20ccabbe84ab",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -43,7 +52,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Swing",
+                    "action": "Swing Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d433b4b1-862b-473a-a2aa-2d7c9c103ede",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Swing Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -61,6 +81,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "dd32ed3e-7547-45b4-ad32-8fe637b808bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -72,6 +101,45 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6c920b7-063a-4b05-8033-5b0eca0d1773",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Launch",
+            "id": "15a17cc6-ab64-4eaa-a2ed-71de657aa90d",
+            "actions": [
+                {
+                    "name": "LaunchBall",
+                    "type": "Button",
+                    "id": "e1c3947c-a5c5-4bba-94d0-57afe4f7f2a6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "01829136-898e-4ff3-a6ea-266fad49a613",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LaunchBall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -216,7 +216,6 @@ MonoBehaviour:
   isPauseOnAwake: 0
   delayPause: 0
   isPauseByKey: 1
-  keyToListenFor: 9
   onPauseKey:
     m_PersistentCalls:
       m_Calls:
@@ -232,6 +231,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f2a64437-61c1-4555-b553-3cd81fb6f1d1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c16a72a7-6611-4535-849f-f58147914e61
+      m_Path: <Keyboard>/tab
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &6613587595077245941
 MonoBehaviour:
   m_ObjectHideFlags: 0

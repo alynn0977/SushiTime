@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 5685322827239713825}
   - component: {fileID: 5685322827239713827}
   - component: {fileID: 3975828227851348425}
+  - component: {fileID: 5399879194511426926}
   m_Layer: 0
   m_Name: Paddle
   m_TagString: Paddle
@@ -334,7 +335,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.56094366
+  m_Mass: 0.31239894
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -361,6 +362,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea1931c1d849b54989cf6f2cbd08e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftClick:
+    m_Name: Left Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7c13c8ff-3054-4d45-92cd-8d9d5ffab784
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rightClick:
+    m_Name: Right Click
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a11e4f2a-4106-485d-ac50-8fb5e3fdf232
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   isReady: 1
   mainCamera: {fileID: 0}
   gameZone:
@@ -407,3 +426,33 @@ MonoBehaviour:
   useGlobalAudio: 1
   volume: 0.5
   isRandomized: 1
+--- !u!114 &5399879194511426926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685322827239713828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: e011e17fcecf9fe4a877224d95ee96b6, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: PC
+  m_DefaultActionMap: Paddle
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

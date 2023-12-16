@@ -1,7 +1,6 @@
 namespace BreakoutSystem
 {
     using Core;
-    // using DG.Tweening;
     using PrimeTween;
     using UnityEngine;
     using UnityEngine.Events;
@@ -12,9 +11,6 @@ namespace BreakoutSystem
     /// </summary>
     public class PaddleBehaviour : MonoBehaviour, IInteractable, ISystemInitializer
     {
-        public InputAction leftClick;
-        public InputAction rightClick;
-
         [SerializeField]
         private bool isReady = true;
         [SerializeField] private Camera mainCamera;
@@ -26,6 +22,10 @@ namespace BreakoutSystem
 
         private Vector3 startPosition;
         private bool isLaunchMode = false;
+
+        private PlayerInput playerInput;
+        private InputAction leftClickAction;
+        private InputAction rightClickAction;
 
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
@@ -40,27 +40,76 @@ namespace BreakoutSystem
         public void Initialize()
         {
             isReady = true;
+            playerInput = GetComponent<PlayerInput>();
+            PaddleMode();
         }
 
         private void OnEnable()
         {
             mainCamera = Camera.main;
             startPosition = transform.position;
-
+            isReady = false;
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
+        }
 
-            isReady = false;
+        private void PaddleMode()
+        {
+            playerInput.SwitchCurrentActionMap("Paddle");
+            leftClickAction = playerInput.actions["Paddle/Swing Left"];
+            rightClickAction = playerInput.actions["Paddle/Swing Right"];
+            leftClickAction.performed += context => OnLeftClick();
+            rightClickAction.performed += context => OnRightClick();
+        }
+
+        private void LaunchMode()
+        {
+            playerInput.SwitchCurrentActionMap("Launch");
+            leftClickAction = playerInput.actions["Launch/LaunchBall"];
+            rightClickAction = playerInput.actions["Launch/LaunchBall"];
+
+            leftClickAction.performed -= context => OnLeftClick();
+            rightClickAction.performed -= context => OnRightClick();
+
+            leftClickAction.performed += context => OnLaunchBall();
+            rightClickAction.performed += context => OnLaunchBall();
+        }
+
+        private void OnRightClick()
+        {
+            SwingPaddle(Swing);
+        }
+
+        private void OnLeftClick()
+        {
+            SwingPaddle(Swing * -1);
+        }
+        
+        private void OnLaunchBall()
+        {
+            EventManager.Instance.QueueEvent(new LaunchBallEvent());
+            isReady = true;
+            isLaunchMode = false;
+            PaddleMode();
         }
 
         private void OnDisable()
         {
+            leftClickAction.performed -= context => OnLeftClick();
+            rightClickAction.performed -= context => OnRightClick();
+            leftClickAction.performed -= context => OnLaunchBall();
+            rightClickAction.performed -= context => OnLaunchBall();
+
             if (EventManager.Instance != null)
             {
                 EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
                 EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset); 
             }
+
+            leftClickAction.Disable();
+            rightClickAction.Disable();
         }
+
         private void OnReset(ResetGameEvent e)
         {
             isReady = false;
@@ -89,52 +138,18 @@ namespace BreakoutSystem
 
             if (isLaunchMode)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    EventManager.Instance.QueueEvent(new LaunchBallEvent());
-                    isReady = true;
-                    isLaunchMode = false;
-                }
+                LaunchMode();
             }
         }
 
         private void MoveByMouse()
         {
-#if ENABLE_LEGACY_INPUT_MANAGER
-            Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-
-            if (gameZone.Contains(mousePosition))
-            {
-                transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    SwingPaddle(Swing * -1);
-                }
-
-                if (Input.GetMouseButtonDown(1))
-                {
-                    SwingPaddle(Swing);
-                }
-            }
-#elif ENABLE_INPUT_SYSTEM
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
             if (gameZone.Contains(mousePosition))
             {
                 transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
-
-                if (leftClick.triggered)
-                {
-                    SwingPaddle(Swing * -1);
-                }
-
-                if (rightClick.triggered)
-                {
-                    SwingPaddle(Swing);
-                }
             }
-#endif
         }
 
         private void SwingPaddle(Vector3 vector3)

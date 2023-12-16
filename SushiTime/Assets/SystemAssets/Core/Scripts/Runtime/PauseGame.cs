@@ -1,7 +1,9 @@
 namespace Core
 {
+    using System;
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.InputSystem;
 
     /// <summary>
     /// Allows pausing of a game from a gameobject.
@@ -27,17 +29,13 @@ namespace Core
         public bool isPauseByKey = true;
 
         /// <summary>
-        /// Specify what key pause is bound too.
-        /// </summary>
-        [SerializeField]
-        private KeyCode keyToListenFor;
-
-        /// <summary>
         /// Use events to call a pause function.
         /// </summary>
         [SerializeField]
         private UnityEvent onPauseKey = new UnityEvent();
 
+        [SerializeField]
+        private InputAction pauseAction;
         public void Initialize()
         {
             PauseGameGlobal();
@@ -78,6 +76,20 @@ namespace Core
             }
         }
 
+        private void OnEnable()
+        {
+            pauseAction.performed += context => OnPause();
+        }
+
+        private void OnPause()
+        {
+            if (isPauseByKey && pauseAction.triggered)
+            {
+                // Pause.
+                onPauseKey?.Invoke();
+            }
+        }
+
         private void Start()
         {
             if (delayPause > 0 && isPauseOnAwake)
@@ -88,14 +100,6 @@ namespace Core
             else if (isPauseOnAwake)
             {
                 Initialize();
-            }
-        }
-
-        private void Update()
-        {
-            if (isPauseByKey && Input.GetKeyDown(keyToListenFor))
-            {
-                onPauseKey?.Invoke();
             }
         }
     }
