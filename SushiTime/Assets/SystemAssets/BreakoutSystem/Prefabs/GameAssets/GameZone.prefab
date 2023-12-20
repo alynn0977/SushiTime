@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1390489625514317915
 Transform:
   m_ObjectHideFlags: 0
@@ -515,10 +515,10 @@ MonoBehaviour:
   mainBall: {fileID: 2162546883973909938}
   goal: {fileID: 11400000, guid: 540229c51236bdd4597e2b08c9058e9d, type: 2}
   modalCanvas: {fileID: 3082359682106471333}
+  UI_Manager: {fileID: 0}
   gameOverScreen: {fileID: 7111436670626229629}
   gameWinScreen: {fileID: 4455907561431212889}
-  initializedObjects:
-  - {fileID: 1390489625514317912}
+  initializedSubsystems: []
 --- !u!1 &1390489626503538971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,8 +2162,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5685322827239713825, guid: 16722a13bfa3b1843967b981f4b517d8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

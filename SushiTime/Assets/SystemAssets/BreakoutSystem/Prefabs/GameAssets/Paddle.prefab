@@ -295,7 +295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5685322827239713829}
-  - component: {fileID: 5685322827239713825}
   - component: {fileID: 5685322827239713827}
   - component: {fileID: 3975828227851348425}
   - component: {fileID: 5399879194511426926}
@@ -323,33 +322,6 @@ Transform:
   - {fileID: 6973658939849025092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &5685322827239713825
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5685322827239713828}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.31239894
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 6
 --- !u!114 &5685322827239713827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,37 +334,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea1931c1d849b54989cf6f2cbd08e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftClick:
-    m_Name: Left Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 7c13c8ff-3054-4d45-92cd-8d9d5ffab784
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  rightClick:
-    m_Name: Right Click
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: a11e4f2a-4106-485d-ac50-8fb5e3fdf232
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  isReady: 1
+  isReady: 0
   mainCamera: {fileID: 0}
   gameZone:
     serializedVersion: 2
-    x: -0.78
+    x: -0.72
     y: -4.1
-    width: 4.1
+    width: 4.01
     height: 7.41
   Swing: {x: 0, y: 0, z: 22}
   OnInteraction:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3975828227851348425}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioSystem.RequestMultiAudioClip, AudioSystem
         m_MethodName: PlayAudioClips
         m_Mode: 1
