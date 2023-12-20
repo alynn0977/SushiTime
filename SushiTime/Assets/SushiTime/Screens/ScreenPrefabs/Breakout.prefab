@@ -1530,6 +1530,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6000391565852155694, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: leftClick.m_Id
+      value: dc739139-9767-4f85-a7a9-9e9a9ca6ea63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000391565852155694, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: rightClick.m_Id
+      value: d9d03cc7-bec9-4808-b132-03f66e8c0abd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000391565852155694, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: leftClick.m_Name
+      value: Left Click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6000391565852155694, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: rightClick.m_Name
+      value: Right Click
+      objectReference: {fileID: 0}
     - target: {fileID: 6895814561350584943, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
