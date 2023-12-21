@@ -32,9 +32,8 @@ namespace BreakoutSystem
         public UnityEvent OnInteraction = new UnityEvent();
         private Vector3 movementDirection;
         private float speed = 4f;
-        private float leftZone;
-        private float rightZone;
-
+        private float time = .05f;
+        private Transform currentPaddle;
         /// <inheritdoc/>
         public void Interact()
         {
@@ -45,6 +44,7 @@ namespace BreakoutSystem
         {
             isReady = true;
             playerInput = GetComponent<PlayerInput>();
+            currentPaddle = transform;
             PaddleMode();
         }
 
@@ -55,7 +55,7 @@ namespace BreakoutSystem
             rightClickAction = playerInput.actions["Paddle/Swing Right"];
             moveAction = playerInput.actions["Paddle/Move"];
             moveAction.Enable();
-            moveAction.performed += Move;
+            moveAction.performed += OnMoveDetected;
             moveAction.canceled += OnMoveCanceled;
             leftClickAction.performed += context => OnLeftClick();
             rightClickAction.performed += context => OnRightClick();
@@ -79,7 +79,7 @@ namespace BreakoutSystem
             Debug.LogWarning("Switched to Launch Mode.");
         }
 
-        private void Move(InputAction.CallbackContext context)
+        private void OnMoveDetected(InputAction.CallbackContext context)
         {
             var moveInput = context.ReadValue<Vector2>();
             movementDirection = new Vector3(moveInput.x * speed * Time.deltaTime, 0f, 0f);
@@ -126,6 +126,11 @@ namespace BreakoutSystem
             }
         }
 
+        private void OnSwingComplete()
+        {
+            Tween.LocalRotation(transform, Vector3.zero, .24f);
+        }
+
         private void OnEnable()
         {
             mainCamera = Camera.main;
@@ -137,7 +142,7 @@ namespace BreakoutSystem
         }
         private void OnDisable()
         {
-            moveAction.performed -= Move;
+            moveAction.performed -= OnMoveDetected;
             moveAction.canceled -= OnMoveCanceled;
             leftClickAction.performed -= context => OnLeftClick();
             rightClickAction.performed -= context => OnRightClick();
@@ -153,6 +158,29 @@ namespace BreakoutSystem
             moveAction.Disable();
             leftClickAction.Disable();
             rightClickAction.Disable();
+        }
+
+        private void OnDestroy()
+        {
+            mainCamera = null;
+            startPosition = default;
+            isReady = false;
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
+                EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
+            }
+            leftClickAction.performed -= context => OnLeftClick();
+            rightClickAction.performed -= context => OnRightClick();
+            leftClickAction.performed -= context => OnLaunchBall();
+            rightClickAction.performed -= context => OnLaunchBall();
+            
+            moveAction.performed -= OnMoveDetected;
+            moveAction.canceled -= OnMoveCanceled;
+            currentPaddle = null;
+            moveAction = null;
+            leftClickAction = null;
+            rightClickAction = null;
         }
 
         private void Update()
@@ -181,7 +209,7 @@ namespace BreakoutSystem
         /// <summary>
         /// Translates the paddle based on value in <see cref="movementDirection"/>.
         /// </summary>
-        /// <remarks>Direction is calculated by an input function, like <see cref="Move(InputAction.CallbackContext)"/>.
+        /// <remarks>Direction is calculated by an input function, like <see cref="OnMoveDetected(InputAction.CallbackContext)"/>.
         /// Specifically clamps paddle movement to <see cref="gameZone"/> bounds.</remarks>
         private void MovePaddle()
         {
@@ -194,12 +222,10 @@ namespace BreakoutSystem
 
         private void SwingPaddle(Vector3 vector3)
         {
-            var time = .05f;
-
-            Tween.LocalRotation(transform, endValue: vector3, duration: time).OnComplete(() => 
+            if (currentPaddle != null)
             {
-                Tween.LocalRotation(transform, Vector3.zero, .24f);
-            });
+                Tween.LocalRotation(currentPaddle, endValue: vector3, duration: time).OnComplete(OnSwingComplete);
+            }
         }
 
         /// <summary>
