@@ -16,6 +16,9 @@ namespace BreakoutSystem
         [SerializeField]
         [BoxGroup("Player")]
         private BallBehaviour mainBall;
+        [SerializeField]
+        [BoxGroup("Player")]
+        private PaddleBehaviour paddle;
 
         [SerializeField]
         [BoxGroup("Goal")]
@@ -40,7 +43,6 @@ namespace BreakoutSystem
         [BoxGroup("Initialized Items")]
         private InitializeProxy[] initializedSubsystems;
 
-
         /// <summary>
         /// Read-only access of current player power stat.
         /// </summary>
@@ -51,14 +53,23 @@ namespace BreakoutSystem
         /// </summary>
         public GoalKeeping GameGoal => goal;
 
+        /// <summary>
+        /// Read-only access to the ball.
+        /// </summary>
         public BallBehaviour MainBall => mainBall;
 
+        /// <summary>
+        /// Read-only access to the paddle.
+        /// </summary>
+        public PaddleBehaviour MainPaddle => paddle;
         /// <summary>
         /// Call the gameover screen.
         /// </summary>
         public void CallGameOver()
         {
             gameOverScreen.SetActive(true);
+            Destroy(MainBall);
+            Destroy(MainPaddle);
         }
 
         public void CallGameWin()
@@ -102,7 +113,7 @@ namespace BreakoutSystem
         private void BeginGame()
         {
             MainBall.gameObject.SetActive(true);
-            MainBall.LaunchBall();
+            MainBall.LaunchBall(null);
         }
 
         private void InitializeModalCanvas()

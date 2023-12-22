@@ -9,7 +9,7 @@ namespace Core
         /// </summary>
         public void OnKillPlayer()
         {
-            EventManager.Instance.QueueEvent(new KillPlayerEvent());
+           AppManager.EndGame();
         } 
     }
 }

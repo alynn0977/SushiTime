@@ -53,7 +53,7 @@ namespace BreakoutSystem
         /// <summary>
         /// Launch the ball in an initialize direction.
         /// </summary>
-        public void LaunchBall()
+        public void LaunchBall(LaunchBallEvent e)
         {
             isPlaymode = true;
             ballSprite.enabled = true;
@@ -86,7 +86,7 @@ namespace BreakoutSystem
         private void SpriteOn()
         {
             ballSprite.enabled = true;
-            EventManager.Instance.AddListenerOnce<LaunchBallEvent>(e => LaunchBall());
+            EventManager.Instance.AddListener<LaunchBallEvent>(LaunchBall);
         }
 
         private void OnEnable()
@@ -99,15 +99,16 @@ namespace BreakoutSystem
             if (isPlayOnStart)
             {
                 // Set the initial direction
-                LaunchBall(); 
+                LaunchBall(null);
             }
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (EventManager.Instance != null)
             {
                 EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
+                EventManager.Instance.RemoveListener<LaunchBallEvent>(LaunchBall);
             }
         }
 

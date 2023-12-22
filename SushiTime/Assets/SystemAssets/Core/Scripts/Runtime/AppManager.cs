@@ -38,9 +38,9 @@ namespace Core
             isGlobalPaused = false;
         }
 
-        private static void EndGame()
+        public static void EndGame()
         {
-            throw new NotImplementedException();
+            //EventManager.Instance.QueueEvent(new KillPlayerEvent());
         }
     }
 

@@ -21,20 +21,19 @@ namespace BreakoutSystem
         private Vector3 Swing = new Vector3(0,0, 22f);
 
         private Vector3 startPosition;
-        private bool isLaunchMode = false;
 
         private PlayerInput playerInput;
         private InputAction leftClickAction;
         private InputAction rightClickAction;
+        private InputAction launchAction;
         private InputAction moveAction;
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
         public UnityEvent OnInteraction = new UnityEvent();
         private Vector3 movementDirection;
         private float speed = 4f;
-        private float leftZone;
-        private float rightZone;
-
+        private float time = .05f;
+        private Transform currentPaddle;
         /// <inheritdoc/>
         public void Interact()
         {
@@ -44,42 +43,40 @@ namespace BreakoutSystem
         public void Initialize()
         {
             isReady = true;
-            playerInput = GetComponent<PlayerInput>();
+            playerInput = FindObjectOfType<GameManager>().GetComponent<PlayerInput>();
+            currentPaddle = transform;
+
+            leftClickAction = playerInput.actions["Paddle/Swing Left"];
+            rightClickAction = playerInput.actions["Paddle/Swing Right"];
+            moveAction = playerInput.actions["Paddle/Move"];
+            launchAction = playerInput.actions["Paddle/LaunchBall"];
+
+            moveAction.performed += OnMoveDetected;
+            moveAction.canceled += OnMoveCanceled;
+            leftClickAction.performed += context => OnLeftClick();
+            rightClickAction.performed += context => OnRightClick();
+            launchAction.performed += context => OnLaunchBall();
+
             PaddleMode();
         }
 
         private void PaddleMode()
         {
-            playerInput.SwitchCurrentActionMap("Paddle");
-            leftClickAction = playerInput.actions["Paddle/Swing Left"];
-            rightClickAction = playerInput.actions["Paddle/Swing Right"];
-            moveAction = playerInput.actions["Paddle/Move"];
-            moveAction.Enable();
-            moveAction.performed += Move;
-            moveAction.canceled += OnMoveCanceled;
-            leftClickAction.performed += context => OnLeftClick();
-            rightClickAction.performed += context => OnRightClick();
-
-            leftClickAction.performed -= context => OnLaunchBall();
-            rightClickAction.performed -= context => OnLaunchBall();
+            moveAction?.Enable();
+            leftClickAction?.Enable();
+            rightClickAction?.Enable();
+            launchAction?.Disable();
         }
 
         private void LaunchMode()
         {
-            playerInput.SwitchCurrentActionMap("Launch");
-            leftClickAction = playerInput.actions["Launch/LaunchBall"];
-            rightClickAction = playerInput.actions["Launch/LaunchBall"];
-
-            leftClickAction.performed -= context => OnLeftClick();
-            rightClickAction.performed -= context => OnRightClick();
-
-            leftClickAction.performed += context => OnLaunchBall();
-            rightClickAction.performed += context => OnLaunchBall();
-
-            Debug.LogWarning("Switched to Launch Mode.");
+            moveAction?.Disable();
+            leftClickAction?.Disable();
+            rightClickAction?.Disable();
+            launchAction?.Enable();
         }
 
-        private void Move(InputAction.CallbackContext context)
+        private void OnMoveDetected(InputAction.CallbackContext context)
         {
             var moveInput = context.ReadValue<Vector2>();
             movementDirection = new Vector3(moveInput.x * speed * Time.deltaTime, 0f, 0f);
@@ -104,14 +101,13 @@ namespace BreakoutSystem
         {
             EventManager.Instance.QueueEvent(new LaunchBallEvent());
             isReady = true;
-            isLaunchMode = false;
             PaddleMode();
         }
         private void OnReset(ResetGameEvent e)
         {
             isReady = false;
             transform.position = startPosition;
-            isLaunchMode = true;
+            LaunchMode();
         }
 
         private void OnPauseGame(PauseGameEvent e)
@@ -126,6 +122,11 @@ namespace BreakoutSystem
             }
         }
 
+        private void OnSwingComplete()
+        {
+            Tween.LocalRotation(transform, Vector3.zero, .24f);
+        }
+
         private void OnEnable()
         {
             mainCamera = Camera.main;
@@ -135,24 +136,41 @@ namespace BreakoutSystem
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
         }
-        private void OnDisable()
-        {
-            moveAction.performed -= Move;
-            moveAction.canceled -= OnMoveCanceled;
-            leftClickAction.performed -= context => OnLeftClick();
-            rightClickAction.performed -= context => OnRightClick();
-            leftClickAction.performed -= context => OnLaunchBall();
-            rightClickAction.performed -= context => OnLaunchBall();
 
+        private void OnDestroy()
+        {
+            mainCamera = null;
+            startPosition = default;
+            isReady = false;
             if (EventManager.Instance != null)
             {
                 EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
-                EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset); 
+                EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
             }
 
-            moveAction.Disable();
-            leftClickAction.Disable();
-            rightClickAction.Disable();
+            // Gates against users shutting down before it's initialized.
+            if (playerInput != null)
+            {
+                moveAction?.Disable();
+                leftClickAction?.Disable();
+                rightClickAction?.Disable();
+                launchAction?.Disable();
+
+                leftClickAction.performed -= context => OnLeftClick();
+                rightClickAction.performed -= context => OnRightClick();
+                leftClickAction.performed -= context => OnLaunchBall();
+                rightClickAction.performed -= context => OnLaunchBall();
+
+                moveAction.performed -= OnMoveDetected;
+                moveAction.canceled -= OnMoveCanceled;
+                currentPaddle = null;
+                moveAction = null;
+                leftClickAction = null;
+                rightClickAction = null;
+                launchAction = null;
+
+                playerInput = null; 
+            }
         }
 
         private void Update()
@@ -160,11 +178,6 @@ namespace BreakoutSystem
             if (isReady)
             {
                 MovePaddle();
-            }
-
-            if (isLaunchMode)
-            {
-                LaunchMode();
             }
         }
 
@@ -181,7 +194,7 @@ namespace BreakoutSystem
         /// <summary>
         /// Translates the paddle based on value in <see cref="movementDirection"/>.
         /// </summary>
-        /// <remarks>Direction is calculated by an input function, like <see cref="Move(InputAction.CallbackContext)"/>.
+        /// <remarks>Direction is calculated by an input function, like <see cref="OnMoveDetected(InputAction.CallbackContext)"/>.
         /// Specifically clamps paddle movement to <see cref="gameZone"/> bounds.</remarks>
         private void MovePaddle()
         {
@@ -194,12 +207,10 @@ namespace BreakoutSystem
 
         private void SwingPaddle(Vector3 vector3)
         {
-            var time = .05f;
-
-            Tween.LocalRotation(transform, endValue: vector3, duration: time).OnComplete(() => 
+            if (currentPaddle != null)
             {
-                Tween.LocalRotation(transform, Vector3.zero, .24f);
-            });
+                Tween.LocalRotation(currentPaddle, endValue: vector3, duration: time).OnComplete(OnSwingComplete);
+            }
         }
 
         /// <summary>
