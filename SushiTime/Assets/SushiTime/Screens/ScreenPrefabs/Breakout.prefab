@@ -1587,6 +1587,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: a3bffdcd82468ac438956d7cd6c56592, type: 2}
     - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
+      propertyPath: paddle
+      value: 
+      objectReference: {fileID: 5451334460423714635}
+    - target: {fileID: 8968022771163641260, guid: ee69bf9e290bb7646bbb51254673550a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

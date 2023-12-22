@@ -21,11 +21,11 @@ namespace BreakoutSystem
         private Vector3 Swing = new Vector3(0,0, 22f);
 
         private Vector3 startPosition;
-        private bool isLaunchMode = false;
 
         private PlayerInput playerInput;
         private InputAction leftClickAction;
         private InputAction rightClickAction;
+        private InputAction launchAction;
         private InputAction moveAction;
         [Header("Interaction Actions")]
         [Tooltip("Specify actions for when paddle interaction is called.")]
@@ -45,36 +45,38 @@ namespace BreakoutSystem
             isReady = true;
             playerInput = GetComponent<PlayerInput>();
             currentPaddle = transform;
+
+            leftClickAction = playerInput.actions["Paddle/Swing Left"];
+            rightClickAction = playerInput.actions["Paddle/Swing Right"];
+            moveAction = playerInput.actions["Paddle/Move"];
+            launchAction = playerInput.actions["Launch/LaunchBall"];
+
+            moveAction.performed += OnMoveDetected;
+            moveAction.canceled += OnMoveCanceled;
+            leftClickAction.performed += context => OnLeftClick();
+            rightClickAction.performed += context => OnRightClick();
+            launchAction.performed += context => OnLaunchBall();
+
             PaddleMode();
         }
 
         private void PaddleMode()
         {
             playerInput.SwitchCurrentActionMap("Paddle");
-            leftClickAction = playerInput.actions["Paddle/Swing Left"];
-            rightClickAction = playerInput.actions["Paddle/Swing Right"];
-            moveAction = playerInput.actions["Paddle/Move"];
-            moveAction.Enable();
-            moveAction.performed += OnMoveDetected;
-            moveAction.canceled += OnMoveCanceled;
-            leftClickAction.performed += context => OnLeftClick();
-            rightClickAction.performed += context => OnRightClick();
 
-            leftClickAction.performed -= context => OnLaunchBall();
-            rightClickAction.performed -= context => OnLaunchBall();
+            moveAction?.Enable();
+            leftClickAction?.Enable();
+            rightClickAction?.Enable();
+            launchAction?.Disable();
         }
 
         private void LaunchMode()
         {
             playerInput.SwitchCurrentActionMap("Launch");
-            leftClickAction = playerInput.actions["Launch/LaunchBall"];
-            rightClickAction = playerInput.actions["Launch/LaunchBall"];
-
-            leftClickAction.performed -= context => OnLeftClick();
-            rightClickAction.performed -= context => OnRightClick();
-
-            leftClickAction.performed += context => OnLaunchBall();
-            rightClickAction.performed += context => OnLaunchBall();
+            moveAction?.Disable();
+            leftClickAction?.Disable();
+            rightClickAction?.Disable();
+            launchAction?.Enable();
 
             Debug.LogWarning("Switched to Launch Mode.");
         }
@@ -104,14 +106,13 @@ namespace BreakoutSystem
         {
             EventManager.Instance.QueueEvent(new LaunchBallEvent());
             isReady = true;
-            isLaunchMode = false;
             PaddleMode();
         }
         private void OnReset(ResetGameEvent e)
         {
             isReady = false;
             transform.position = startPosition;
-            isLaunchMode = true;
+            LaunchMode();
         }
 
         private void OnPauseGame(PauseGameEvent e)
@@ -170,17 +171,26 @@ namespace BreakoutSystem
                 EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
                 EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
             }
+
+            moveAction?.Disable();
+            leftClickAction?.Disable();
+            rightClickAction?.Disable();
+            launchAction?.Disable();
+
             leftClickAction.performed -= context => OnLeftClick();
             rightClickAction.performed -= context => OnRightClick();
             leftClickAction.performed -= context => OnLaunchBall();
             rightClickAction.performed -= context => OnLaunchBall();
-            
+
             moveAction.performed -= OnMoveDetected;
             moveAction.canceled -= OnMoveCanceled;
             currentPaddle = null;
             moveAction = null;
             leftClickAction = null;
             rightClickAction = null;
+            launchAction = null;
+
+            playerInput = null;
         }
 
         private void Update()
@@ -188,11 +198,6 @@ namespace BreakoutSystem
             if (isReady)
             {
                 MovePaddle();
-            }
-
-            if (isLaunchMode)
-            {
-                LaunchMode();
             }
         }
 
