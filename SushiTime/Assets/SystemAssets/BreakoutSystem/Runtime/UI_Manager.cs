@@ -60,7 +60,6 @@ namespace BreakoutSystem.UI
         /// </summary>
         public void Initialize()
         {
-            Debug.LogWarning("UI MANAGER INITIALIZING!");
             if (isGoalValid())
             {
                 if (gameGoal != null)

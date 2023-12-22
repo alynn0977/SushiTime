@@ -27,7 +27,6 @@ namespace BreakoutSystem
         /// <param name="UI">Requires UI Manager.</param>
         public void InitializeGoalKeeper(UI_Manager UI)
         {
-            Debug.LogWarning("Goal keeper initializing.");
             // Initialize the Goal Keeper by feeding it the UI.
             if (UI != null)
             {

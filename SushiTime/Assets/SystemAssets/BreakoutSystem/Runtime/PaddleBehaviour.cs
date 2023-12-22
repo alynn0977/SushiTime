@@ -74,8 +74,6 @@ namespace BreakoutSystem
             leftClickAction?.Disable();
             rightClickAction?.Disable();
             launchAction?.Enable();
-
-            Debug.LogWarning("Switched to Launch Mode.");
         }
 
         private void OnMoveDetected(InputAction.CallbackContext context)
@@ -138,25 +136,6 @@ namespace BreakoutSystem
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
             EventManager.Instance.AddListener<ResetGameEvent>(OnReset);
         }
-        private void OnDisable()
-        {
-            moveAction.performed -= OnMoveDetected;
-            moveAction.canceled -= OnMoveCanceled;
-            leftClickAction.performed -= context => OnLeftClick();
-            rightClickAction.performed -= context => OnRightClick();
-            leftClickAction.performed -= context => OnLaunchBall();
-            rightClickAction.performed -= context => OnLaunchBall();
-
-            if (EventManager.Instance != null)
-            {
-                EventManager.Instance.RemoveListener<PauseGameEvent>(OnPauseGame);
-                EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset); 
-            }
-
-            moveAction.Disable();
-            leftClickAction.Disable();
-            rightClickAction.Disable();
-        }
 
         private void OnDestroy()
         {
@@ -169,25 +148,29 @@ namespace BreakoutSystem
                 EventManager.Instance.RemoveListener<ResetGameEvent>(OnReset);
             }
 
-            moveAction?.Disable();
-            leftClickAction?.Disable();
-            rightClickAction?.Disable();
-            launchAction?.Disable();
+            // Gates against users shutting down before it's initialized.
+            if (playerInput != null)
+            {
+                moveAction?.Disable();
+                leftClickAction?.Disable();
+                rightClickAction?.Disable();
+                launchAction?.Disable();
 
-            leftClickAction.performed -= context => OnLeftClick();
-            rightClickAction.performed -= context => OnRightClick();
-            leftClickAction.performed -= context => OnLaunchBall();
-            rightClickAction.performed -= context => OnLaunchBall();
+                leftClickAction.performed -= context => OnLeftClick();
+                rightClickAction.performed -= context => OnRightClick();
+                leftClickAction.performed -= context => OnLaunchBall();
+                rightClickAction.performed -= context => OnLaunchBall();
 
-            moveAction.performed -= OnMoveDetected;
-            moveAction.canceled -= OnMoveCanceled;
-            currentPaddle = null;
-            moveAction = null;
-            leftClickAction = null;
-            rightClickAction = null;
-            launchAction = null;
+                moveAction.performed -= OnMoveDetected;
+                moveAction.canceled -= OnMoveCanceled;
+                currentPaddle = null;
+                moveAction = null;
+                leftClickAction = null;
+                rightClickAction = null;
+                launchAction = null;
 
-            playerInput = null;
+                playerInput = null; 
+            }
         }
 
         private void Update()
