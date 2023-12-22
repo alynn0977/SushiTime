@@ -2,54 +2,6 @@
     "name": "Breakout",
     "maps": [
         {
-            "name": "UI",
-            "id": "79683ac7-1b0b-4c83-b369-de9fba055188",
-            "actions": [
-                {
-                    "name": "Click",
-                    "type": "Button",
-                    "id": "575f1397-66fd-49e1-8420-2d345fea95ca",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "dd32ed3e-7547-45b4-ad32-8fe637b808bf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "fb5f66a9-7474-4664-b3be-e6be19301886",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e6c920b7-063a-4b05-8033-5b0eca0d1773",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Paddle",
             "id": "d5f43599-68ae-42bc-bef6-f3bc3df67df6",
             "actions": [
@@ -75,6 +27,15 @@
                     "name": "Swing Right",
                     "type": "Button",
                     "id": "93ef40a0-dd8b-4d65-964d-20ccabbe84ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LaunchBall",
+                    "type": "Button",
+                    "id": "9ccb00eb-708b-4ba8-970f-d29e4ff679e7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -169,27 +130,10 @@
                     "action": "Swing Right",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Launch",
-            "id": "15a17cc6-ab64-4eaa-a2ed-71de657aa90d",
-            "actions": [
-                {
-                    "name": "LaunchBall",
-                    "type": "Button",
-                    "id": "e1c3947c-a5c5-4bba-94d0-57afe4f7f2a6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "01829136-898e-4ff3-a6ea-266fad49a613",
+                    "id": "ef33c941-23c7-446c-aa12-0c97c8413a14",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -200,7 +144,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6f6982a1-ccf3-484e-95fb-1904c0c2f4d1",
+                    "id": "8bb045dd-c868-4b79-8b0f-d264fdbb88b3",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -211,7 +155,7 @@
                 },
                 {
                     "name": "",
-                    "id": "e5fba7ce-f1ec-4a47-9c83-f016cd820c73",
+                    "id": "99e347e3-076b-4fb3-abad-20e1fce5c9d6",
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
@@ -222,7 +166,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f8103968-34f4-42a2-a546-5dbadced4ae2",
+                    "id": "04713de9-d083-40db-a9a0-df3b482960c0",
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",

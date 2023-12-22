@@ -43,13 +43,13 @@ namespace BreakoutSystem
         public void Initialize()
         {
             isReady = true;
-            playerInput = GetComponent<PlayerInput>();
+            playerInput = FindObjectOfType<GameManager>().GetComponent<PlayerInput>();
             currentPaddle = transform;
 
             leftClickAction = playerInput.actions["Paddle/Swing Left"];
             rightClickAction = playerInput.actions["Paddle/Swing Right"];
             moveAction = playerInput.actions["Paddle/Move"];
-            launchAction = playerInput.actions["Launch/LaunchBall"];
+            launchAction = playerInput.actions["Paddle/LaunchBall"];
 
             moveAction.performed += OnMoveDetected;
             moveAction.canceled += OnMoveCanceled;
@@ -62,8 +62,6 @@ namespace BreakoutSystem
 
         private void PaddleMode()
         {
-            playerInput.SwitchCurrentActionMap("Paddle");
-
             moveAction?.Enable();
             leftClickAction?.Enable();
             rightClickAction?.Enable();
@@ -72,7 +70,6 @@ namespace BreakoutSystem
 
         private void LaunchMode()
         {
-            playerInput.SwitchCurrentActionMap("Launch");
             moveAction?.Disable();
             leftClickAction?.Disable();
             rightClickAction?.Disable();

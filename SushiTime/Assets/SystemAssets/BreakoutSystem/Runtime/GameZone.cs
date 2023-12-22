@@ -113,7 +113,7 @@ namespace BreakoutSystem
         private void BeginGame()
         {
             MainBall.gameObject.SetActive(true);
-            MainBall.LaunchBall();
+            MainBall.LaunchBall(null);
         }
 
         private void InitializeModalCanvas()
