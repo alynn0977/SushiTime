@@ -1,6 +1,7 @@
 namespace ScreenSystem
 {
     using PrimeTween;
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -30,11 +31,16 @@ namespace ScreenSystem
             }
 
             EventManager.Instance.AddListener<FadeScreenEvent>(ScreenFade);
-            
+            EventManager.Instance.AddListener<FadeScreenPostEvent>(PostScreenFade);
             if (canvasGroup.alpha == 1)
             {
                 FadeAway();
             }
+        }
+
+        private void PostScreenFade(FadeScreenPostEvent e)
+        {
+            // Do nothing.
         }
 
         public void ScreenFade(FadeScreenEvent e)

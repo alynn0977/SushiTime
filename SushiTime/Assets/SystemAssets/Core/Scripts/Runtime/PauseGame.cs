@@ -56,7 +56,7 @@ namespace Core
         /// </summary>
         public void ResumeGameGlobal()
         {
-            Debug.LogWarning("Game is resuming.");
+            Debug.Log("Game is resuming.");
             AppManager.GlobalResume();
             EventManager.Instance.QueueEvent(new PauseGameEvent(AppManager.IsGlobalPaused));
         }
