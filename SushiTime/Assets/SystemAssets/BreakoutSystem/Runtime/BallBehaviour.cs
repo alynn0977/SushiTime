@@ -13,6 +13,7 @@ namespace BreakoutSystem
     {
         private const string boundaryTag = "Boundary";
         private const float upwardBias = 0.1f;
+        private const float minVelocity = 4.7f;
         [SerializeField]
         private Rigidbody2D rb;
         [SerializeField]
@@ -21,6 +22,8 @@ namespace BreakoutSystem
         private bool isPlaymode = true;
         [SerializeField]
         private float ballSpeed = 2f;
+        [SerializeField]
+        private float boost = 2f;
         private Vector2 newVector;
         private Vector3 startingPosition;
         private SpriteRenderer ballSprite;
@@ -41,15 +44,15 @@ namespace BreakoutSystem
             {
                 newVector += Vector2.up * upwardBias;
             }
-
+            
             Push(newVector);
         }
 
-        private void CalculateNewVector(Collision2D collider)
+        // Method to boost the ball's velocity
+        public void BoostBall()
         {
-            // Provide new velocity, based on what was hit.
-            newVector = Vector2.Reflect(newVector, collider.contacts[0].normal);
-            Debug.Log($"New Vector {newVector}. Speed is {rb.velocity.magnitude}");
+            Vector3 boostDirection = (4.8f - rb.velocity.magnitude) * rb.velocity.normalized;
+            rb.AddForce(boostDirection * boost, ForceMode2D.Force);
         }
 
         /// <summary>
@@ -74,6 +77,15 @@ namespace BreakoutSystem
             transform.position = startingPosition;
             isPlaymode = false;
             SpriteOn();
+        }
+        private void CalculateNewVector(Collision2D collider)
+        {
+            // Provide new velocity, based on what was hit.
+            newVector = Vector2.Reflect(newVector, collider.contacts[0].normal);
+            if (collider.relativeVelocity.magnitude < minVelocity)
+            {
+                BoostBall();
+            }
         }
 
         /// <summary>
@@ -116,7 +128,7 @@ namespace BreakoutSystem
         {
             if (isPlaymode)
             {
-                rb.MovePosition(rb.position + newVector * Time.deltaTime * ballSpeed); 
+                rb.MovePosition(rb.position + newVector * Time.deltaTime * ballSpeed);
             }
         }
 

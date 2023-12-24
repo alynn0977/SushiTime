@@ -221,7 +221,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 0.07
   m_LinearDrag: 0
-  m_AngularDrag: 0.001
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d2215262dcc644fbf70e6469e1b401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 3905406034867490252}
   isPlayOnStart: 0
   isPlaymode: 1
   ballSpeed: 2
