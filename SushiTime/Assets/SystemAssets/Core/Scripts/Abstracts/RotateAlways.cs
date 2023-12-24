@@ -41,7 +41,7 @@ namespace Core
         {
             if (isReady)
             {
-                target.RotateAround(target.position, rotationalAxis, speed * Time.deltaTime);
+                target.RotateAround(target.position, rotationalAxis, speed * Time.unscaledDeltaTime);
                 Debug.Log($"[{GetType().Name}]: Rotating {target.gameObject.name}");
             }
         }
