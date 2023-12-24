@@ -207,9 +207,17 @@ namespace ScreenSystem
             // Set Canvas as the parent.
             screen.SetParent(GetCanvas.transform);
 
-            // Set the position, rotation, and scale to 0,0,0.
-            screen.anchoredPosition = Vector2.zero;
-            screen.sizeDelta = Vector2.zero;
+            if (GetCanvas.renderMode == RenderMode.ScreenSpaceOverlay)
+            {
+                // Set the position, rotation, and scale to 0,0,0.
+                screen.anchoredPosition = Vector2.zero;
+                screen.sizeDelta = Vector2.zero; 
+            }
+            else if (GetCanvas.renderMode == RenderMode.ScreenSpaceCamera)
+            {
+                // TODO: ScreenController system is better equipped for screen space overly, for now.
+                screen.gameObject.transform.localScale = Vector3.one;
+            }
         }
 
         private bool IsValidIndex(int index)

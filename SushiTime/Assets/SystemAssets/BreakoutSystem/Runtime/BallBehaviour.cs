@@ -24,6 +24,7 @@ namespace BreakoutSystem
         private Vector2 newVector;
         private Vector3 startingPosition;
         private SpriteRenderer ballSprite;
+
         public void OnCollisionEnter2D(Collision2D collider)
         {
             // Activate the interaction of capable objects.
@@ -32,7 +33,7 @@ namespace BreakoutSystem
                 interactor.Interact();
             }
 
-            CalculateNewVelocity(collider);
+            CalculateNewVector(collider);
 
             // If the ball hits the paddle or wall, add a slight upward bias to the velocity
             if (collider.gameObject.TryGetComponent<PaddleBehaviour>(out _) ||
@@ -44,10 +45,11 @@ namespace BreakoutSystem
             Push(newVector);
         }
 
-        private void CalculateNewVelocity(Collision2D collider)
+        private void CalculateNewVector(Collision2D collider)
         {
             // Provide new velocity, based on what was hit.
             newVector = Vector2.Reflect(newVector, collider.contacts[0].normal);
+            Debug.Log($"New Vector {newVector}. Speed is {rb.velocity.magnitude}");
         }
 
         /// <summary>
@@ -92,7 +94,6 @@ namespace BreakoutSystem
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
-            EventManager.Instance.AddListener<KillPlayerEvent>(OnKillPlayer);
             startingPosition = gameObject.transform.position;
             ballSprite = GetComponent<SpriteRenderer>();
 
@@ -107,14 +108,8 @@ namespace BreakoutSystem
         {
             if (EventManager.Instance != null)
             {
-                EventManager.Instance.RemoveListener<KillPlayerEvent>(OnKillPlayer);
                 EventManager.Instance.RemoveListener<LaunchBallEvent>(LaunchBall);
             }
-        }
-
-        private void OnKillPlayer(KillPlayerEvent e)
-        {
-            gameObject.SetActive(false);
         }
 
         private void FixedUpdate()
