@@ -16,7 +16,10 @@ namespace ScreenSystem
 
         private void OnDestroy()
         {
-            EventManager.Instance.RemoveListener<FadeScreenPostEvent>(e => ActivateSystems());
+            if (EventManager.Instance != null)
+            {
+                EventManager.Instance.RemoveListener<FadeScreenPostEvent>(e => ActivateSystems()); 
+            }
         }
     }
 }
