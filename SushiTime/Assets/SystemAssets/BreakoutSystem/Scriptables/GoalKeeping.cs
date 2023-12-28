@@ -29,16 +29,15 @@ namespace BreakoutSystem
         private float timeLimit;
 
         [SerializeField]
-        [ShowIf("levelGoal", GoalType.ClearAll)]
-        [InfoBox("Still under construction.")]
-        public string construction;
+        [HideIf("levelGoal", GoalType.TimeGoal)]
+        private TimeBonuses[] timeBonuses;
+
         #endregion
         public string CurrentLevel => level;
         public GoalType CurrentGoal => levelGoal;
-
         public Goal[] GoalTiles => goalTiles;
-
         public float TimeLimit => timeLimit;
+        public TimeBonuses[] TimeBonuses => timeBonuses;
 
         public enum GoalType{
             TileGoal,
@@ -62,5 +61,23 @@ namespace BreakoutSystem
         /// How many should be hit?
         /// </summary>
         public int Quantity;
+    }
+
+    /// <summary>
+    /// Specify a time bonus. Note: Only applicable to Tile and Clear All Goals.
+    /// </summary>
+    [Serializable]
+    public struct TimeBonuses
+    {
+        /// <summary>
+        /// Minutes.
+        /// </summary>
+        [HorizontalGroup]
+        public int Minute;
+        /// <summary>
+        /// Seconds.
+        /// </summary>
+        [HorizontalGroup]
+        public int Seconds;
     }
 }
