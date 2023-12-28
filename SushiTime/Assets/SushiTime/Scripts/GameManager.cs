@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
         if (e.VolumeToSet == VolumeType.Music)
         {
-            PlayerPrefs.SetFloat(GlobalMusicKey, e.NewVolume * .1f);
+            PlayerPrefs.SetFloat(GlobalMusicKey, e.NewVolume);
             
             // Music player is different and requires direct setting.
             _musicPlayer.SetVolume(PlayerPrefs.GetFloat(GlobalMusicKey));
