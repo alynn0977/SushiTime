@@ -22,7 +22,6 @@ namespace AudioSystem
 
 		public void OnChangeVolume(Slider sliderValue)
 		{
-			Debug.Log($"Changing {volumeType} to {sliderValue.value}.");
 			EventManager.Instance.QueueEvent(new ChangeVolumeEvent(sliderValue.value, volumeType));
         }
 	} 

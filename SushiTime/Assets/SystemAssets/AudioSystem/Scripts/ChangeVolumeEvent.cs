@@ -20,7 +20,6 @@ namespace AudioSystem
         {
             this.NewVolume = newSoundVolume;
             this.VolumeToSet = volumeToSet;
-            Debug.Log($"Updated{VolumeToSet} to {newSoundVolume}");
         }
     }
 

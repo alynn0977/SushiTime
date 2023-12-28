@@ -17,7 +17,7 @@ namespace AudioSystem
         [SerializeField]
         private Slider musicSlider;
 
-        private void Awake()
+        private void OnEnable()
         {
             if (volumeSlider)
             {
