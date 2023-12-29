@@ -62,6 +62,7 @@ namespace BreakoutSystem
         /// Read-only access to the paddle.
         /// </summary>
         public PaddleBehaviour MainPaddle => paddle;
+
         /// <summary>
         /// Call the gameover screen.
         /// </summary>
@@ -72,10 +73,14 @@ namespace BreakoutSystem
             Destroy(MainPaddle);
         }
 
+        [ContextMenu("Call Game Win")]
         public void CallGameWin()
         {
             gameWinScreen.SetActive(true);
-            Debug.Log($"[{GetType().Name}]: YOU WIN!!!!!!!!!!");
+            if (gameWinScreen.TryGetComponent(out WinScreen winScreen))
+            {
+                winScreen.InitializeWinScreen(UI_Manager.CurrentScore, UI_Manager.Counter.RemainingTime, goal);
+            }
         }
 
         private void OnEnable()
@@ -87,10 +92,6 @@ namespace BreakoutSystem
 
             InitializeModalCanvas();
             InitializeSubSytems();
-            //if (UI_Manager)
-            //{
-            //    UI_Manager.Initialize();
-            //}
 
             Invoke(nameof(BeginGame), 1.5f);
         }

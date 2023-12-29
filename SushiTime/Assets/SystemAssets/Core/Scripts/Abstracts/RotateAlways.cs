@@ -33,7 +33,6 @@ namespace Core
             if (target == null)
             {
                 target = transform;
-                Debug.LogWarning($"[{GetType().Name}]: Null target. Defaulting to self.");
             }
         }
 
@@ -42,7 +41,6 @@ namespace Core
             if (isReady)
             {
                 target.RotateAround(target.position, rotationalAxis, speed * Time.unscaledDeltaTime);
-                Debug.Log($"[{GetType().Name}]: Rotating {target.gameObject.name}");
             }
         }
     }

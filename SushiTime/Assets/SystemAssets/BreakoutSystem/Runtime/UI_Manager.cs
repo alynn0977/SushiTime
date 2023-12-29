@@ -3,7 +3,6 @@ namespace BreakoutSystem.UI
     using Core;
     using CustomUI;
     using Sirenix.OdinInspector;
-    using System;
     using System.Collections.Generic;
     using TMPro;
     using UnityEngine;
@@ -266,6 +265,14 @@ namespace BreakoutSystem.UI
 
         #region Time Panel
 
+        /// <summary>
+        /// Read-only access to the game's <see cref="CountDown"/> manager.
+        /// </summary>
+        public CountDown Counter
+        {
+            get => counter;
+        }
+
         public void BindTimer()
         {
             if (counterText)
@@ -299,10 +306,13 @@ namespace BreakoutSystem.UI
         #endregion
 
         #region Stats Panel
-        private int CurrentScore
+        /// <summary>
+        /// Read-only reference to Current score.
+        /// </summary>
+        public int CurrentScore
         {
             get;
-            set;
+            private set;
         }
         private int CurrentLives
         {

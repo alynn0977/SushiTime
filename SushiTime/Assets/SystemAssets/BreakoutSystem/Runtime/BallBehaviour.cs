@@ -48,7 +48,7 @@ namespace BreakoutSystem
             Push(newVector);
         }
 
-        // Method to boost the ball's velocity
+        // Method to boost the ball's velocity if it slows down too much.
         public void BoostBall()
         {
             Vector3 boostDirection = (4.8f - rb.velocity.magnitude) * rb.velocity.normalized;

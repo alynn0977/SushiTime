@@ -93,6 +93,17 @@ public static class CoreUtilities
     }
 
     /// <summary>
+    /// Converts the number of minutes and seconds to a single float.
+    /// </summary>
+    /// <param name="minutes">How many total minutes.</param>
+    /// <param name="seconds">How many total seconds.</param>
+    /// <returns>A float equivalent to total time in seconds.</returns>
+    public static float MinSecToFloat(int minutes, int seconds)
+    {
+        return minutes * 60 + seconds;
+    }
+
+    /// <summary>
     /// Converts total time to seconds only.
     /// </summary>
     /// <param name="time">Total time.</param>

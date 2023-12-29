@@ -8,7 +8,7 @@ namespace Core
         /// <summary>
         /// Initialize this system.
         /// <remarks>
-        /// This method is resonsible for initialize a specific system
+        /// This method is responsible for initializing a specific system
         /// at a given time. This is useful when enforcing an exact order of
         /// activating things, beyond just enable/disable.
         /// </remarks>
