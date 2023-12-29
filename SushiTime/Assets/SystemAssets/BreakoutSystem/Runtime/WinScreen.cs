@@ -1,9 +1,9 @@
 namespace BreakoutSystem
 {
-    using System.Drawing;
-    using System.Net.Sockets;
+    using System.Collections;
+    using System.Reflection;
     using UnityEngine;
-    using UnityEngine.SocialPlatforms.Impl;
+    using UnityEngine.UI;
 
     /// <summary>
     /// Tallies the final score and provides bonuses.
@@ -12,11 +12,31 @@ namespace BreakoutSystem
     /// </summary>
     public class WinScreen : MonoBehaviour
     {
+        private const float DelayForSeconds = .011f;
+
+        [SerializeField]
+        private Text scoreText;
+        [SerializeField]
+        private Text timeText;
+        [SerializeField]
+        private Text totalText;
+
+        [SerializeField]
+        private string[] methodNames;
+
         private int score = 0;
         private float time = 0f;
         private GoalKeeping goal = default;
         private int timeBonus = 0;
         private int finalScore;
+
+        /// <summary>
+        /// Execute the series of methods listed in <see cref="methodNames"/>.
+        /// </summary>
+        public void RunRoutines()
+        {
+            StartCoroutine(RunMethods());
+        }
 
         public void InitializeWinScreen(int score, float time, GoalKeeping goal)
         {
@@ -39,7 +59,7 @@ namespace BreakoutSystem
                 if (goal.TimeBonuses.Length <= 0)
                 {
                     // Proceed to normal rounding.
-                    FinalRounding();
+                    PrepareFinalScore();
                 }
                 else
                 {
@@ -52,14 +72,50 @@ namespace BreakoutSystem
             }
         }
 
-        private void FinalRounding()
+        private void PrepareFinalScore()
         {
             finalScore = score + timeBonus;
-
-            // TO DO: All the animations and flair.
             Debug.Log($"[{GetType().Name}]: Your final score is {finalScore}!!!");
         }
 
+        /// <summary>
+        /// Animate the score text.
+        /// </summary>
+        public void AnimateScore()
+        {
+            // TO DO: All the animations and flair.
+            if (scoreText)
+            {
+                scoreText.gameObject.SetActive(true);
+                StartCoroutine(UpdateScoreText(scoreText, score, "Score: "));
+            }
+
+        }
+        /// <summary>
+        /// Animate the time bonus text.
+        /// </summary>
+        private void AnimateTimeBonus()
+        {
+            // TO DO: All the animations and flair.
+            if (timeText)
+            {
+                timeText.gameObject.SetActive(true);
+                StartCoroutine(UpdateScoreText(timeText, timeBonus, "Time:  "));
+            }
+        }
+
+        /// <summary>
+        /// Animate the final total.
+        /// </summary>
+        private void AnimateTotals()
+        {
+            // TO DO: All the animations and flair.
+            if (totalText)
+            {
+                totalText.gameObject.SetActive(true);
+                StartCoroutine(UpdateScoreText(totalText, finalScore, "TOTAL: "));
+            }
+        }
         /// <summary>
         /// Calculate the time bonus based on the goal tiles.
         /// </summary>
@@ -75,7 +131,7 @@ namespace BreakoutSystem
                 // 0 stands for "zero bonus".
                 timeBonus = 0;
                 Debug.Log($"[{GetType().Name}]: No bonus.");
-                FinalRounding();
+                PrepareFinalScore();
             }
             else if (time <= convertedTimeBonus[convertedTimeBonus.Length - 1])
             {
@@ -83,7 +139,7 @@ namespace BreakoutSystem
                 timeBonus = score;
                 Debug.Log($"[{GetType().Name}]: Double Bonus!!!");
                 // TODO: Add an extra flair for a double bonus.
-                FinalRounding();
+                PrepareFinalScore();
             }
             else
             {
@@ -104,7 +160,8 @@ namespace BreakoutSystem
                         break;
                     }
                 }
-                FinalRounding();
+
+                PrepareFinalScore();
             }
         }
 
@@ -132,6 +189,42 @@ namespace BreakoutSystem
                     }
                 }
             }
+        }
+        private IEnumerator RunMethod(string methodName)
+        {
+            Debug.Log($"Running {methodName}");
+            yield return StartCoroutine(methodName);
+        }
+        private IEnumerator RunMethods()
+        {
+            Debug.Log("Running all methods");
+            scoreText.gameObject.SetActive(true);
+            yield return StartCoroutine(UpdateScoreText(scoreText, score, "Score: "));
+            timeText.gameObject.SetActive(true);
+            if (timeBonus == 0)
+            {
+                timeText.fontSize = 80;
+                timeText.text = "No Time Bonus";
+            }
+            else
+            {
+                yield return StartCoroutine(UpdateScoreText(timeText, timeBonus, "Time:  "));
+            }
+            
+            totalText.gameObject.SetActive(true);
+            yield return StartCoroutine(UpdateScoreText(totalText, finalScore, "TOTAL: "));
+        }
+        private IEnumerator UpdateScoreText(Text text, int targetScore, string prefix)
+        {
+            int currentScore = 0;
+            while (currentScore < targetScore)
+            {
+                currentScore++;
+                string ending = currentScore < 10 ? $"0{currentScore}" : currentScore.ToString();
+                text.text = $"{prefix}{ending}";
+                yield return new WaitForSecondsRealtime(DelayForSeconds);
+            }
+            yield return true;
         }
     } 
 }
