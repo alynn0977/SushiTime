@@ -1,7 +1,7 @@
 namespace BreakoutSystem
 {
+    using Sirenix.OdinInspector;
     using System.Collections;
-    using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -12,6 +12,7 @@ namespace BreakoutSystem
     /// </summary>
     public class WinScreen : MonoBehaviour
     {
+        [InfoBox("Please Note: Win Screen is designed for use when game is paused!")]
         private const float DelayForSeconds = .011f;
 
         [SerializeField]
