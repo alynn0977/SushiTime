@@ -21,9 +21,9 @@ MonoBehaviour:
     Quantity: 1
   timeLimit: 3
   timeBonuses:
+  - Minute: 0
+    Seconds: 35
+  - Minute: 0
+    Seconds: 40
   - Minute: 1
-    Seconds: 30
-  - Minute: 2
-    Seconds: 15
-  - Minute: 4
     Seconds: 0
