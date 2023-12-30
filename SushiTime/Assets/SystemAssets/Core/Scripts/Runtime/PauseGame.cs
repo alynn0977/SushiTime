@@ -1,6 +1,5 @@
 namespace Core
 {
-    using System;
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.InputSystem;
@@ -23,10 +22,9 @@ namespace Core
 
         [Space]
         [Header("Optional Keyboard")]
-        /// <summary>
-        /// If true, will pause when Pause Key is pressed.
-        /// </summary>
-        public bool isPauseByKey = true;
+
+        [SerializeField]
+        public PlayerInput playerInput;
 
         /// <summary>
         /// Use events to call a pause function.
@@ -34,7 +32,6 @@ namespace Core
         [SerializeField]
         private UnityEvent onPauseKey = new UnityEvent();
 
-        [SerializeField]
         private InputAction pauseAction;
         public void Initialize()
         {
@@ -78,16 +75,19 @@ namespace Core
 
         private void OnEnable()
         {
-            pauseAction.performed += context => OnPause();
+            if (playerInput)
+            {
+                Debug.Log($"{gameObject.name} pause key online, and looking for commands.");
+                pauseAction = playerInput.actions["Paddle/Pause"];
+                pauseAction.performed += OnPauseKey;
+            }
         }
 
-        private void OnPause()
+        private void OnPauseKey(InputAction.CallbackContext context)
         {
-            if (isPauseByKey && pauseAction.triggered)
-            {
-                // Pause.
-                onPauseKey?.Invoke();
-            }
+            onPauseKey?.Invoke();
+            //TogglePause();
+            //EventManager.Instance.QueueEvent(new PauseGameEvent(AppManager.IsGlobalPaused));
         }
 
         private void Start()
@@ -103,5 +103,4 @@ namespace Core
             }
         }
     }
-
 }
