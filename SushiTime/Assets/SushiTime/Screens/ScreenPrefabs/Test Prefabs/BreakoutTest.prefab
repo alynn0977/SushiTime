@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 2117604343296320782}
   - component: {fileID: 6025250006473103659}
   m_Layer: 0
-  m_Name: Breakout
+  m_Name: BreakoutTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

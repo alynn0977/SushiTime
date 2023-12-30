@@ -1301,7 +1301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenName: Dialogue01
+  ScreenName: Dialogue00
   delayTime: 1.1
 --- !u!224 &635292666286808820 stripped
 RectTransform:
