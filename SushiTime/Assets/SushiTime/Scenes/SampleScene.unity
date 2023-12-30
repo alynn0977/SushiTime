@@ -137,6 +137,8 @@ GameObject:
   - component: {fileID: 138593001}
   - component: {fileID: 138593000}
   - component: {fileID: 138593002}
+  - component: {fileID: 138593003}
+  - component: {fileID: 138593004}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -411,6 +413,50 @@ MonoBehaviour:
   m_DefaultActionMap: Paddle
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 519420031}
+--- !u!114 &138593003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138592996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fe824b074821149b817d286e5f97fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPauseOnAwake: 0
+  delayPause: 0
+  playerInput: {fileID: 138593002}
+  onPauseKey:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 138593004}
+        m_TargetAssemblyTypeName: ScreenSystem.CallNewScreen, ScreenSystem
+        m_MethodName: OnCallScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &138593004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138592996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb0cb94597b0aa4a9822507507f777c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScreenName: PauseScreen
+  delayTime: 0.1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
