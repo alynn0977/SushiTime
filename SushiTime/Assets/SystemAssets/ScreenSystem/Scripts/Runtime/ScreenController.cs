@@ -2,8 +2,6 @@ namespace ScreenSystem
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using Unity.Collections;
     using UnityEngine;
     using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
@@ -11,12 +9,13 @@ namespace ScreenSystem
     /// Screen Controller class provides access and navigation
     /// through a game screen system.
     /// </summary>
+    /// <remarks>Screens for this object are defined by the <see cref="ScreenArray"/> scriptable object.</remarks>
     public class ScreenController : MonoBehaviour
     {
         private const string ModalScreen = "ModalHomeScreen";
         private static Canvas _canvas;
 
-        [Header("Please update scriptable object.")]
+        [Header("To Edit: Find the ScreenArray Scriptable.")]
         [SerializeField]
         [ReadOnly]
         private ScreenType[] _screens;

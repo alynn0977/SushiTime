@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 3426627614638494559}
   - component: {fileID: 2966418058170669270}
   m_Layer: 5
-  m_Name: Dialogue
+  m_Name: Dialogue00_Intro
   m_TagString: Screen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

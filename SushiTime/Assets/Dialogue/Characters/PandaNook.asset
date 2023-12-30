@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aa9f71015690c4eacde397ef77eff5, type: 3}
   m_Name: PandaNook
   m_EditorClassIdentifier: 
-  characterName: Panda Chef
+  characterName: Panda-Pan
   characterSize: {x: 123, y: 141}
   characterOffset: {x: -1, y: -16, z: 0}
   characterColor: {r: 0.24705884, g: 0.3529412, b: 0.19607845, a: 1}

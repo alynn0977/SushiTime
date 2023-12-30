@@ -20,21 +20,21 @@ MonoBehaviour:
   - Character: 1
     textBubble: Yes! The one and only! Japan's premier Business Tanuki...
   - Character: 1
-    textBubble: '- And I have a proposition for you Panda Nook!'
+    textBubble: '- And I have a proposition for you Panda-Pan!'
   - Character: 0
     textBubble: You do?
   - Character: 1
     textBubble: I've heard from friends far and wide that you are the best up and
       coming sushi chef in all of China.
   - Character: 1
-    textBubble: How would you like to have your own sushi shop, here in Japan?
+    textBubble: How would you like to have your own sushi shop in Japan?
   - Character: 0
     textBubble: That would be a dream come true!
   - Character: 1
     textBubble: Ha ha! That's me! The dream-maker!
   - Character: 1
-    textBubble: Now this is going to be hard work, my friend. You'll have to knock
-      out a lot of orders...
+    textBubble: Now this is going to be hard work, my friend. You'll have to KNOCK
+      OUT a lot of orders...
   - Character: 1
     textBubble: '- Sometimes, your customers will be picky. Sometimes, you won''t
       have a lot of time.'
@@ -45,5 +45,9 @@ MonoBehaviour:
     textBubble: When can you start?
   - Character: 0
     textBubble: Oh, right away, Mr. Serious! Thank you!
-  - Character: 0
-    textBubble: I will not let you down!
+  - Character: 1
+    textBubble: Well that's great news then, Panda-Pan, because I - Mr. Serious -
+      Will be your first customer!
+  - Character: 1
+    textBubble: How about it? Let's have a first ROUND of sushi. I'll eat whatever
+      you give me!
