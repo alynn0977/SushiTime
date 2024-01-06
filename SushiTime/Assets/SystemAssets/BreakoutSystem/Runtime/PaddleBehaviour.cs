@@ -79,7 +79,27 @@ namespace BreakoutSystem
         private void OnMoveDetected(InputAction.CallbackContext context)
         {
             var moveInput = context.ReadValue<Vector2>();
-            movementDirection = new Vector3(moveInput.x * speed * Time.deltaTime, 0f, 0f);
+
+            InputDevice device = context.control.device;
+
+#if UNITY_EDITOR
+                DefaultMovementSpeed(moveInput);
+#elif UNITY_WEBGL || !UNITY_EDITOR
+            // WebGL specific code, to decrease mouse movement speed.
+            if (device is Mouse)
+            {
+                movementDirection = new Vector3((moveInput.x * .1f * speed) * Time.deltaTime, 0f, 0f);
+            }
+            else if (device is Keyboard)
+            {
+                DefaultMovementSpeed(moveInput);
+            }
+#endif
+            void DefaultMovementSpeed(Vector2 moveInput)
+            {
+                movementDirection = new Vector3(moveInput.x * speed * Time.deltaTime, 0f, 0f);
+            }
+
         }
 
         private void OnMoveCanceled(InputAction.CallbackContext obj)
@@ -181,6 +201,7 @@ namespace BreakoutSystem
             }
         }
 
+        // Legacy function.
         private void MoveByMouse()
         {
             Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -188,6 +209,7 @@ namespace BreakoutSystem
             if (gameZone.Contains(mousePosition))
             {
                 transform.position = new Vector3(mousePosition.x, transform.position.y, transform.position.z);
+                Debug.LogError($"Mouse is at {mousePosition}");
             }
         }
 
