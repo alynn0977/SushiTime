@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e36af8d9e9bbd40819e16d33e10659, type: 3}
+  m_Name: Round00Outro
+  m_EditorClassIdentifier: 
+  leftCharacter: {fileID: 11400000, guid: e8624197e797dbc46bb15fff1aeeca0b, type: 2}
+  rightCharacter: {fileID: 11400000, guid: 5e4542f6ad08749458d734959dea4ad3, type: 2}
+  TheScript:
+  - Character: 1
+    textBubble: Oh... I'm so full Panda-Pan.
+  - Character: 0
+    textBubble: Did you like it? You ate everything.
+  - Character: 1
+    textBubble: Like it? I LOVED IT! Panda-Pan, we're going to make you a star!
+  - Character: 1
+    textBubble: Pack your bags. You leave for Japan right away!
