@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e36af8d9e9bbd40819e16d33e10659, type: 3}
+  m_Name: Level01Dialogue
+  m_EditorClassIdentifier: 
+  leftCharacter: {fileID: 11400000, guid: e8624197e797dbc46bb15fff1aeeca0b, type: 2}
+  rightCharacter: {fileID: 11400000, guid: 7f7455a0e1b70d043bab0add9c7e52d1, type: 2}
+  TheScript:
+  - Character: 1
+    textBubble: Surprise Panda-Pan!
+  - Character: 0
+    textBubble: 'Oh wow, I am so surprised... No. Really.
+
+      Who are you?'
+  - Character: 1
+    textBubble: I'm Fernando - Mr. Serious' very best friend and right-hand pup when
+      it comes to all things food and business.
+  - Character: 1
+    textBubble: Mr. Serious sent me here to help you get started with the restaurant.
+  - Character: 0
+    textBubble: Get started? Why would I need help getting started? I've ran a sushi
+      restaurant before.
+  - Character: 1
+    textBubble: Correct! But Mr. Serious has big plans for you, and we want to make
+      sure you have everything you need.
+  - Character: 1
+    textBubble: For example, do you have enough Wasabi in your shop?
+  - Character: 0
+    textBubble: Ahh, well... I was going to the store soon.
+  - Character: 1
+    textBubble: Never fearI Have Wasabi right here! Just in time!
