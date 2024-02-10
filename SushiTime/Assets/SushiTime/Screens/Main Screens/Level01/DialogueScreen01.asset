@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 512a80da1f02c904faaf243efde67a20, type: 3}
-  m_Name: Dialogue00
+  m_Name: DialogueScreen01
   m_EditorClassIdentifier: 
-  _screenName: Dialogue00
-  _screenPrefab: {fileID: 425866188777539383, guid: 653d14a18e33e74429ccf0cf88609bcf, type: 3}
+  _screenName: Dialogue01
+  _screenPrefab: {fileID: 425866188777539383, guid: 22a7ddfae22601349ae38d24409db371, type: 3}
