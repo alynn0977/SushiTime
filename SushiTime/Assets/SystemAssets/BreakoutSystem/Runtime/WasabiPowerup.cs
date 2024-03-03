@@ -1,7 +1,5 @@
 namespace BreakoutSystem
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     public class WasabiPowerup : PowerupBehaviour, IPowerUp

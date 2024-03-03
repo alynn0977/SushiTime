@@ -1,9 +1,5 @@
 namespace BreakoutSystem
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-
     public class PowerUpEvent : GameEvent
     {
         /// <summary>

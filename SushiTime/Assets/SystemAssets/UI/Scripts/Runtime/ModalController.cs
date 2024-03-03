@@ -63,7 +63,7 @@ namespace CustomUI
                 popUpsToActivate[modalIndex].SetActive(true);
 
                 // Should back button be on?
-                if (modalIndex <= 0)
+                if (modalIndex > 0)
                 {
                     backButton.interactable = true;
                 }
