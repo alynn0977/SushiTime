@@ -115,7 +115,6 @@ namespace BreakoutSystem
         {
             MainBall.gameObject.SetActive(true);
             MainBall.LaunchBall(null);
-            EventManager.Instance.AddListener<IncreasePowerEvent>(PlayerPowerIncrease);
         }
 
         private void InitializeModalCanvas()

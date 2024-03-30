@@ -71,7 +71,7 @@ namespace BreakoutSystem.UI
             InitializeLives();
             if (pressStart != null)
             {
-                EventManager.Instance.AddListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.AddListener<ResetGameEvent>(OnGameReset);
                 EventManager.Instance.AddListener<LaunchBallEvent>(DeactivateStartPopup);
             }
 
@@ -106,7 +106,7 @@ namespace BreakoutSystem.UI
         {
             if (pressStart != null && EventManager.Instance != null)
             {
-                EventManager.Instance.RemoveListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.RemoveListener<ResetGameEvent>(OnGameReset);
                 EventManager.Instance.RemoveListener<LaunchBallEvent>(DeactivateStartPopup);
                 pressStart = default;
             }
@@ -382,10 +382,18 @@ namespace BreakoutSystem.UI
                 powerUpPanel.SetIcon(e.PowerUp.PowerPrefab, e.PowerUp.Time);
             }
         }
+
+
         #endregion
 
-        #region Misc
-        private void ActivateStartPopup(ResetGameEvent e)
+        #region Game Rest & Misc
+
+        private void OnGameReset(ResetGameEvent e)
+        {
+            ActivateStartPopup();
+            powerUpPanel.ResetIcons();
+        }
+        private void ActivateStartPopup()
         {
             pressStart.CallPopUp();
         }

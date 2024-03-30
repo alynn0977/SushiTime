@@ -1067,7 +1067,7 @@ MonoBehaviour:
   playerPowr: 1
   mainBall: {fileID: 495470140341364183}
   paddle: {fileID: 5451334460423714635}
-  goal: {fileID: 11400000, guid: 5d8e7017c2c57a94fa290250102b662d, type: 2}
+  goal: {fileID: 11400000, guid: ad6ba50939f3b3644a1012d2976df29c, type: 2}
   modalCanvas: {fileID: 3613037357588650944}
   UI_Manager: {fileID: 1430884170118876705}
   gameOverScreen: {fileID: 8814193595241481496}
@@ -6037,6 +6037,14 @@ PrefabInstance:
     - target: {fileID: 425866188777539383, guid: 2c0775fe9b0d52d4ab82c4e1e288cf74, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025671865691662786, guid: 2c0775fe9b0d52d4ab82c4e1e288cf74, type: 3}
+      propertyPath: delayTime
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025671865691662786, guid: 2c0775fe9b0d52d4ab82c4e1e288cf74, type: 3}
+      propertyPath: ScreenName
+      value: Dialogue01
       objectReference: {fileID: 0}
     - target: {fileID: 4946908684797656601, guid: 2c0775fe9b0d52d4ab82c4e1e288cf74, type: 3}
       propertyPath: m_AnchorMax.y

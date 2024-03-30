@@ -723,7 +723,7 @@ MonoBehaviour:
   playerPowr: 1
   mainBall: {fileID: 495470140341364183}
   paddle: {fileID: 5451334460423714635}
-  goal: {fileID: 11400000, guid: 5d8e7017c2c57a94fa290250102b662d, type: 2}
+  goal: {fileID: 11400000, guid: 36b65381f9fffe043b4ec5d5c9a57f40, type: 2}
   modalCanvas: {fileID: 3613037357588650944}
   UI_Manager: {fileID: 1430884170118876705}
   gameOverScreen: {fileID: 8814193595241481496}
@@ -944,10 +944,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.45
-  m_fontSizeBase: 28
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1155,10 +1155,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.65
-  m_fontSizeBase: 28
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1626,11 +1626,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Condiments are important for Sushi. They should be treated like "Power-Ups".
-    Good thing Fernando brought his favorite.
+  m_text: 'Condiments are important for Sushi. Think of them like POWER-UPS.
 
 
-    Meet Robbie Wasabi!'
+    Meet
+    Robbie Wasabi!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7e0ffbf6118550469c9163548109741, type: 2}
   m_sharedMaterial: {fileID: -5433126387291429426, guid: e7e0ffbf6118550469c9163548109741, type: 2}
@@ -1657,10 +1657,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.4
-  m_fontSizeBase: 28
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -2026,8 +2026,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36.45
-  m_fontSizeBase: 36.45
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3684,7 +3684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7437606800746092859}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
