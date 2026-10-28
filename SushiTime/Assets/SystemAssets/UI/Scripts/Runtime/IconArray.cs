@@ -59,7 +59,7 @@ namespace CustomUI
         }
 
         [ContextMenu("Reset Icons")]
-        private void ResetIcons()
+        public void ResetIcons()
         {
             for (int i = 0; i < Icons.Length; i++)
             {
@@ -73,6 +73,7 @@ namespace CustomUI
             yield return new WaitForSeconds(delayTime);
             CoreUtilities.RemoveAllChildObjects(slotToReset.Slot);
             slotToReset.isAvailable = true;
+
         }
 
         private bool CheckAvailability()

@@ -71,11 +71,9 @@ namespace BreakoutSystem.UI
             InitializeLives();
             if (pressStart != null)
             {
-                EventManager.Instance.AddListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.AddListener<ResetGameEvent>(OnGameReset);
                 EventManager.Instance.AddListener<LaunchBallEvent>(DeactivateStartPopup);
             }
-
-            EventManager.Instance.AddListener<PowerUpEvent>(PowerUp);
         }
         private GoalKeeping gameGoal
         {
@@ -106,14 +104,9 @@ namespace BreakoutSystem.UI
         {
             if (pressStart != null && EventManager.Instance != null)
             {
-                EventManager.Instance.RemoveListener<ResetGameEvent>(ActivateStartPopup);
+                EventManager.Instance.RemoveListener<ResetGameEvent>(OnGameReset);
                 EventManager.Instance.RemoveListener<LaunchBallEvent>(DeactivateStartPopup);
                 pressStart = default;
-            }
-
-            if (EventManager.Instance != null)
-            {
-                EventManager.Instance.AddListener<PowerUpEvent>(PowerUp); 
             }
         }
         private void Update()
@@ -371,7 +364,7 @@ namespace BreakoutSystem.UI
         #endregion
 
         #region PowerUp Panel
-        private void PowerUp(PowerUpEvent e)
+        public void OnPowerUp(PowerUpEvent e)
         {
             if (e.PowerUp.PowerPrefab == null)
             {
@@ -379,13 +372,27 @@ namespace BreakoutSystem.UI
             }
             if (powerUpPanel)
             {
+                if (e.IsReset)
+                {
+                    // TODO: Remove that icon speicifically. But do nothing for now.
+                    return;
+                }
+
                 powerUpPanel.SetIcon(e.PowerUp.PowerPrefab, e.PowerUp.Time);
             }
         }
+
+
         #endregion
 
-        #region Misc
-        private void ActivateStartPopup(ResetGameEvent e)
+        #region Game Rest & Misc
+
+        private void OnGameReset(ResetGameEvent e)
+        {
+            ActivateStartPopup();
+            powerUpPanel.ResetIcons();
+        }
+        private void ActivateStartPopup()
         {
             pressStart.CallPopUp();
         }

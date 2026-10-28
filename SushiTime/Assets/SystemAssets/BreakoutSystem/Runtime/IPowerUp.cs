@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public interface IPowerUp
@@ -18,4 +16,9 @@ public interface IPowerUp
     /// How long will this power-up last?
     /// </summary>
     public float Time { get; }
+
+    /// <summary>
+    /// Is this a reset flag for this powerup?
+    /// </summary>
+    public bool IsReset { get; }
 }

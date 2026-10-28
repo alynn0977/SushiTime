@@ -1,7 +1,5 @@
 namespace BreakoutSystem
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     public class WasabiPowerup : PowerupBehaviour, IPowerUp
@@ -12,17 +10,18 @@ namespace BreakoutSystem
         private GameObject prefab;
         [SerializeField]
         private float time;
-
+        private bool isReset;
         public string PowerName => powerName;
 
         public GameObject PowerPrefab => prefab;
 
         public float Time => time;
 
+        public bool IsReset => isReset;
+
         protected override void PowerUp()
         {
             Debug.Log($"{GetType().Name} powerup activated!");
-            EventManager.Instance.QueueEvent(new IncreasePowerEvent(2));
             EventManager.Instance.QueueEvent(new PowerUpEvent(this));
             Destroy(gameObject);
         }

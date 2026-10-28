@@ -1,0 +1,15 @@
+﻿<Solution>
+  <Project Path="CarterGames.AudioManager.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="CarterGames.AudioManager.Editor.csproj" />
+  <Project Path="Core.csproj" />
+  <Project Path="AudioSystem.csproj" />
+  <Project Path="UI.csproj" />
+  <Project Path="ScreenSystem.csproj" />
+  <Project Path="PrimeTween.Demo.csproj" />
+  <Project Path="CarterGames.AudioManager.Demo.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
+  <Project Path="PrimeTween.Debug.csproj" />
+  <Project Path="PrimeTween.Installer.csproj" />
+</Solution>

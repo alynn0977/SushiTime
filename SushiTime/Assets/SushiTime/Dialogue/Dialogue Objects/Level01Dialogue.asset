@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e36af8d9e9bbd40819e16d33e10659, type: 3}
+  m_Name: Level01Dialogue
+  m_EditorClassIdentifier: 
+  leftCharacter: {fileID: 11400000, guid: e8624197e797dbc46bb15fff1aeeca0b, type: 2}
+  rightCharacter: {fileID: 11400000, guid: 7f7455a0e1b70d043bab0add9c7e52d1, type: 2}
+  TheScript:
+  - Character: 1
+    textBubble: Surprise Panda-Pan!
+  - Character: 0
+    textBubble: "Oh wow, I am so surprised... \nNo. Really. Who are you?"
+  - Character: 1
+    textBubble: I'm Fernando - Mr. Serious' very best friend and right-hand pup.
+  - Character: 1
+    textBubble: I was sent here to help you get started with the restaurant.
+  - Character: 0
+    textBubble: Help? But I've ran my own restaurant before. Why would  I need help?
+  - Character: 1
+    textBubble: Everybody can use a helping hand in the restaurant business.
+  - Character: 1
+    textBubble: For example, do you have all of your ingredients ready?
+  - Character: 0
+    textBubble: ... Well...
+  - Character: 1
+    textBubble: I knew it! Good thing I went to the store already.Look here-
+  - Character: 1
+    textBubble: '- I brought WASABI!'
