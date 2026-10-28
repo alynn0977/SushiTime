@@ -59,7 +59,7 @@ namespace PrimeTween {
             
             Space(8);
             if (Button("Open Demo", boldButtonStyle)) {
-                var rpAsset = GraphicsSettings.renderPipelineAsset;
+                var rpAsset = GraphicsSettings.defaultRenderPipeline;
                 bool isUrp = rpAsset != null && rpAsset.GetType().Name.Contains("Universal");
                 var demoScene = isUrp ? installer.demoSceneUrp : installer.demoScene;
                 if (demoScene == null) {

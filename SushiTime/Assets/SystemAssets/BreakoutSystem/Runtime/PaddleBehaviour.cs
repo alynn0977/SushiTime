@@ -19,6 +19,8 @@ namespace BreakoutSystem
         [Header("Swing Options")]
         [SerializeField]
         private Vector3 Swing = new Vector3(0,0, 22f);
+        [SerializeField]
+        private bool isTween = true;
 
         private Vector3 startPosition;
 
@@ -34,6 +36,9 @@ namespace BreakoutSystem
         private float speed = 4f;
         private float time = .05f;
         private Transform currentPaddle;
+        private Rigidbody2D paddleBody;
+        private float targetX;
+
         /// <inheritdoc/>
         public void Interact()
         {
@@ -53,11 +58,31 @@ namespace BreakoutSystem
 
             moveAction.performed += OnMoveDetected;
             moveAction.canceled += OnMoveCanceled;
-            leftClickAction.performed += context => OnLeftClick();
-            rightClickAction.performed += context => OnRightClick();
+
+            if (isTween)
+            {
+                leftClickAction.performed += context => OnLeftClick();
+                rightClickAction.performed += context => OnRightClick();
+            }
+            else
+            {
+                leftClickAction.performed += context => StartRotating(Swing.z);
+                leftClickAction.canceled += context => StopRotating();
+            }
+            
             launchAction.performed += context => OnLaunchBall();
 
             PaddleMode();
+        }
+
+        private void StartRotating(float angle)
+        {
+            
+        }
+
+        private void StopRotating()
+        {
+
         }
 
         private void PaddleMode()
@@ -127,6 +152,12 @@ namespace BreakoutSystem
         {
             isReady = false;
             transform.position = startPosition;
+            targetX = startPosition.x;
+            if (paddleBody != null)
+            {
+                paddleBody.position = startPosition;
+            }
+
             LaunchMode();
         }
 
@@ -151,6 +182,19 @@ namespace BreakoutSystem
         {
             mainCamera = Camera.main;
             startPosition = transform.position;
+            targetX = transform.position.x;
+
+            // The paddle needs a kinematic rigidbody moved through physics,
+            // otherwise the engine sees a teleporting collider with zero
+            // velocity and the ball reacts badly to fast paddle movement.
+            if (!TryGetComponent(out paddleBody))
+            {
+                paddleBody = gameObject.AddComponent<Rigidbody2D>();
+            }
+
+            paddleBody.bodyType = RigidbodyType2D.Kinematic;
+            paddleBody.useFullKinematicContacts = true;
+            paddleBody.interpolation = RigidbodyInterpolation2D.Interpolate;
 
             isReady = false;
             EventManager.Instance.AddListener<PauseGameEvent>(OnPauseGame);
@@ -220,16 +264,26 @@ namespace BreakoutSystem
         /// Specifically clamps paddle movement to <see cref="gameZone"/> bounds.</remarks>
         private void MovePaddle()
         {
-            // Update the position, but clamped to gameZone.
-            transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x + movementDirection.x, gameZone.xMin, gameZone.xMax),
-                transform.position.y,
-                transform.position.z);
+            // Update the target position, clamped to gameZone. The rigidbody
+            // is moved toward it in FixedUpdate so physics sees the paddle's
+            // real velocity.
+            targetX = Mathf.Clamp(targetX + movementDirection.x, gameZone.xMin, gameZone.xMax);
+        }
+
+        private void FixedUpdate()
+        {
+            paddleBody.MovePosition(new Vector2(targetX, transform.position.y));
         }
 
         private void SwingPaddle(Vector3 vector3)
         {
-            if (currentPaddle != null)
+            if (currentPaddle == null)
+            {
+                Debug.LogError($"[{GetType().Name}]: Paddle object is missing.");
+
+                return;
+            }
+            if (isTween)
             {
                 Tween.LocalRotation(currentPaddle, endValue: vector3, duration: time).OnComplete(OnSwingComplete);
             }

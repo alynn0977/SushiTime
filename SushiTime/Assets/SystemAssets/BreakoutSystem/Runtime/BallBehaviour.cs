@@ -7,14 +7,17 @@ namespace BreakoutSystem
 
     /// <summary>
     /// Core behaviour of the ball.
+    /// The ball is velocity-driven: it keeps a normalized travel direction and
+    /// re-asserts a constant speed every physics step, so it can never slow
+    /// down, stall, or get dragged by friction.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Sprite))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class BallBehaviour : MonoBehaviour
     {
-        private const string boundaryTag = "Boundary";
-        private const float upwardBias = 0.1f;
-        private const float minVelocity = 4.7f;
+        // Minimum vertical share of the travel direction. Prevents the ball
+        // from grinding back and forth in near-horizontal lines.
+        private const float minVerticalComponent = 0.25f;
 
         [SerializeField]
         private Rigidbody2D rb;
@@ -22,10 +25,25 @@ namespace BreakoutSystem
         private bool isPlayOnStart = false;
         [SerializeField]
         private bool isPlaymode = true;
+
+        [Header("Speed")]
         [SerializeField]
-        private float ballSpeed = 2f;
+        [Tooltip("Travel speed in units per second at launch.")]
+        private float ballSpeed = 8f;
         [SerializeField]
+        [Tooltip("Speed added on every paddle hit, for a gradual ramp-up.")]
+        private float paddleHitSpeedGain = 0.25f;
+        [SerializeField]
+        [Tooltip("Speed ceiling after ramp-up and boosts.")]
+        private float maxSpeed = 14f;
+        [SerializeField]
+        [Tooltip("Multiplier applied by BoostBall().")]
         private float boost = 2f;
+        [SerializeField]
+        [Range(0f, 1f)]
+        [Tooltip("How strongly the hit position on the paddle steers the ball. 0 = plain reflection.")]
+        private float paddleControl = 0.75f;
+
         [Header("Ball States")]
         [SerializeField]
         private SpriteRenderer ballSprite;
@@ -34,12 +52,11 @@ namespace BreakoutSystem
         [SerializeField]
         private BallStateProperties[] ballStatus;
 
-        private Vector2 ballVector;
+        private Vector2 direction = Vector2.up;
+        private float currentSpeed;
+        private Vector3 startingPosition;
 
         public Vector2 CurrentDirection { get; private set; }
-
-        private Vector2 cachePosition = Vector2.zero;
-        private Vector3 startingPosition;
 
         public float CurrentAngle { get; private set; }
 
@@ -49,31 +66,33 @@ namespace BreakoutSystem
             Fireball = 1,
         }
 
-        public void OnCollisionEnter2D(Collision2D collider)
+        public void OnCollisionEnter2D(Collision2D collision)
         {
             // Activate the interaction of capable objects.
-            if (collider.gameObject.TryGetComponent(out IInteractable interactor))
+            if (collision.gameObject.TryGetComponent(out IInteractable interactor))
             {
                 interactor.Interact();
             }
 
-            CalculateNewVector(collider);
-
-            // If the ball hits the paddle or wall, add a slight upward bias to the velocity
-            if (collider.gameObject.TryGetComponent<PaddleBehaviour>(out _) ||
-                collider.gameObject.CompareTag(boundaryTag))
+            if (collision.gameObject.TryGetComponent(out PaddleBehaviour _))
             {
-                ballVector += Vector2.up * upwardBias;
+                BounceOffPaddle(collision);
             }
-            
-            Push(ballVector);
+            else
+            {
+                direction = Vector2.Reflect(direction, collision.GetContact(0).normal);
+            }
+
+            ClampDirection();
+            ApplyVelocity();
         }
 
-        // Method to boost the ball's velocity if it slows down too much.
+        /// <summary>
+        /// Give the ball a temporary speed burst, capped at max speed.
+        /// </summary>
         public void BoostBall()
         {
-            Vector3 boostDirection = (4.8f - rb.velocity.magnitude) * rb.velocity.normalized;
-            rb.AddForce(boostDirection * boost, ForceMode2D.Force);
+            currentSpeed = Mathf.Min(currentSpeed * boost, maxSpeed);
         }
 
         /// <summary>
@@ -83,7 +102,26 @@ namespace BreakoutSystem
         {
             isPlaymode = true;
             ballSprite.enabled = true;
-            ballVector = Vector2.up * 4f;
+            direction = Vector2.up;
+            currentSpeed = ballSpeed;
+            ApplyVelocity();
+        }
+
+        public void OnPowerUp(PowerUpEvent e)
+        {
+            switch (e.PowerUp)
+            {
+                case WasabiPowerup wasabiPowerup:
+                    if (e.IsReset)
+                    {
+                        SwitchBallState(BallState.Default);
+                    }
+                    else
+                    {
+                        SwitchBallState(BallState.Fireball, e.PowerUp.Time);
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -94,9 +132,11 @@ namespace BreakoutSystem
             EventManager.Instance.QueueEvent(new ResetGameEvent());
             SwitchBallState(BallState.Default);
             ballSprite.enabled = false;
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
             transform.position = startingPosition;
+            direction = Vector2.up;
+            currentSpeed = ballSpeed;
             isPlaymode = false;
             SpriteOn();
         }
@@ -121,7 +161,7 @@ namespace BreakoutSystem
                     // Parse new state.
                     NewBallState(newState);
                     // Reset after i seconds.
-                    StartCoroutine(CountdownAndResetStatus(time));
+                    // StartCoroutine(CountdownAndResetStatus(time));
                     break;
                 case BallState.Default:
 
@@ -161,24 +201,64 @@ namespace BreakoutSystem
             yield return new WaitForSeconds(convertTime);
             SwitchBallState(BallState.Default);
         }
-        private void CalculateNewVector(Collision2D collider)
-        {
-            // Provide new velocity, based on what was hit.
-            ballVector = Vector2.Reflect(ballVector, collider.contacts[0].normal);
 
-            if (collider.relativeVelocity.magnitude < minVelocity)
+        /// <summary>
+        /// Bounce off the paddle, steered by where the ball landed on it:
+        /// far left edge sends the ball sharply left, center sends it straight
+        /// up, far right sharply right. Also ramps the speed up slightly.
+        /// </summary>
+        private void BounceOffPaddle(Collision2D collision)
+        {
+            Bounds paddleBounds = collision.collider.bounds;
+            float hitOffset = Mathf.Clamp(
+                (rb.position.x - paddleBounds.center.x) / paddleBounds.extents.x, -1f, 1f);
+
+            Vector2 reflected = Vector2.Reflect(direction, collision.GetContact(0).normal);
+            Vector2 steered = new Vector2(hitOffset, 1f).normalized;
+
+            direction = Vector2.Lerp(reflected, steered, paddleControl).normalized;
+
+            // Paddle hits always send the ball upward, even on edge/side
+            // contacts, so it can never get wedged against the paddle.
+            if (direction.y <= 0f)
             {
-                BoostBall();
+                direction = steered;
+            }
+
+            currentSpeed = Mathf.Min(currentSpeed + paddleHitSpeedGain, maxSpeed);
+        }
+
+        /// <summary>
+        /// Normalizes the direction and enforces a minimum vertical angle so
+        /// the ball can't grind along walls in a near-horizontal line.
+        /// </summary>
+        private void ClampDirection()
+        {
+            if (direction.sqrMagnitude < 0.0001f)
+            {
+                direction = Vector2.up;
+                return;
+            }
+
+            direction.Normalize();
+
+            if (Mathf.Abs(direction.y) < minVerticalComponent)
+            {
+                float ySign = direction.y >= 0f ? 1f : -1f;
+                direction.y = ySign * minVerticalComponent;
+                direction.x = Mathf.Sign(direction.x) * Mathf.Sqrt(1f - minVerticalComponent * minVerticalComponent);
             }
         }
 
         /// <summary>
-        /// Push the ball using parameter.
+        /// Pushes the current direction and speed into the rigidbody and
+        /// refreshes <see cref="CurrentDirection"/> / <see cref="CurrentAngle"/>.
         /// </summary>
-        /// <param name="velocity">The velocity to push towards.</param>
-        private void Push(Vector2 velocity)
+        private void ApplyVelocity()
         {
-            ballVector = velocity;
+            rb.linearVelocity = direction * currentSpeed;
+            CurrentDirection = direction;
+            CurrentAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         }
 
         private void SpriteOn()
@@ -187,26 +267,44 @@ namespace BreakoutSystem
             EventManager.Instance.AddListener<LaunchBallEvent>(LaunchBall);
         }
 
-        private void OnPowerUp(PowerUpEvent e)
-        {
-            switch (e.PowerUp)
-            {
-                case WasabiPowerup wasabiPowerup:
-                    SwitchBallState(BallState.Fireball, e.PowerUp.Time);
-                    break;
-            }
-        }
-
         #region Unity Methods
         private void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
             startingPosition = gameObject.transform.position;
-            
+            currentSpeed = ballSpeed;
+
+            // Enforce the physics setup the ball depends on, so prefab
+            // settings can't reintroduce gravity, drag, or tunneling.
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.gravityScale = 0f;
+            rb.linearDamping = 0f;
+            rb.freezeRotation = true;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+            if (TryGetComponent(out Collider2D ballCollider))
+            {
+                ballCollider.sharedMaterial = new PhysicsMaterial2D("Ball (Frictionless)")
+                {
+                    friction = 0f,
+                    bounciness = 0f,
+                };
+            }
+
             if (ballSprite == null)
             {
                 ballSprite = GetComponent<SpriteRenderer>();
             }
+
+            // The ball must hold still until a LaunchBallEvent arrives
+            // (unless explicitly flagged to play on start). The serialized
+            // isPlaymode value can't be trusted for this.
+            isPlaymode = isPlayOnStart;
+
+            // Listen for the launch event from the start; AddListener is
+            // duplicate-safe, so SpriteOn re-registering later is harmless.
+            EventManager.Instance.AddListener<LaunchBallEvent>(LaunchBall);
 
             if (ballStatus == null)
             {
@@ -236,19 +334,15 @@ namespace BreakoutSystem
         {
             if (isPlaymode)
             {
-                if (rb.position != cachePosition)
-                {
-   
-                    Vector2 displacement = rb.position - cachePosition;
-                    CurrentDirection = displacement.normalized;
-
-                    cachePosition = rb.position;
-
-                    float angleRadians = Mathf.Atan2(CurrentDirection.y, CurrentDirection.x);
-                    CurrentAngle = angleRadians * Mathf.Rad2Deg;
-                }
-
-                rb.MovePosition(rb.position + ballVector * Time.deltaTime * ballSpeed);
+                // Re-assert the velocity every physics step. Collisions,
+                // corner catches, or contact friction can never bleed speed.
+                ApplyVelocity();
+            }
+            else
+            {
+                // Hold position while waiting for launch, so paddle bumps
+                // or other contacts can't nudge the idle ball around.
+                rb.linearVelocity = Vector2.zero;
             }
         }
         #endregion

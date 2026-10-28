@@ -4,6 +4,9 @@ namespace BreakoutSystem
     using Sirenix.OdinInspector;
     using BreakoutSystem.UI;
     using Core;
+    using System;
+    using Unity.VisualScripting;
+    using System.Collections;
 
     // Tracks globals for this particular level instance.
     public class GameZone : MonoBehaviour
@@ -92,8 +95,32 @@ namespace BreakoutSystem
 
             InitializeModalCanvas();
             InitializeSubSytems();
-
+            EventManager.Instance.AddListener<PowerUpEvent>(OnPowerUp);
             Invoke(nameof(BeginGame), 1.5f);
+        }
+
+        private void OnPowerUp(PowerUpEvent e)
+        {
+            switch (e.PowerUp)
+            {
+                case WasabiPowerup wasabiPowerup:
+
+                    mainBall.OnPowerUp(e);
+                    UI_Manager.OnPowerUp(e);
+
+                    playerPowr = e.IsReset ? 1 : playerPowr * 2;
+                    if (e.IsReset)
+                    {
+                        Debug.Log($"[GameZone] Resetting {e.PowerUp.PowerName}, power is {PlayerPower}.");
+                        return;
+                    }
+                    else
+                    {
+                        StartCoroutine(CountdownAndResetStatus(e.PowerUp, e.PowerUp.Time));
+                    }
+                   
+                    break;
+            }
         }
 
         private void InitializeSubSytems()
@@ -102,12 +129,6 @@ namespace BreakoutSystem
             {
                 proxy.Initialize();
             }
-        }
-
-        private void PlayerPowerIncrease(IncreasePowerEvent e)
-        {
-            Debug.Log($"Player power increased to {e.SetPower}");
-            playerPowr = e.SetPower;
         }
 
         [ContextMenu("Begin Game")]
@@ -128,6 +149,14 @@ namespace BreakoutSystem
                     return;
                 }
             }
+        }
+
+        private IEnumerator CountdownAndResetStatus(IPowerUp eType, float countdownTime)
+        {
+            var convertTime = CoreUtilities.MinsToSec(countdownTime);
+            yield return new WaitForSeconds(convertTime);
+            // Insert reset version of the power up event here.
+            EventManager.Instance.QueueEvent(new PowerUpEvent(eType, true));
         }
     }
 

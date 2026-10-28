@@ -45,7 +45,7 @@ namespace BreakoutSystem
             {
                 Debug.LogWarning($"[{GetType().Name}]: Null GoalKeeping data. Default scoring will be used.");
 
-                // Proceed to backup rounding method.
+                // TODO: Proceed to backup rounding method.
                 return;
             }
 
@@ -66,10 +66,40 @@ namespace BreakoutSystem
                 {
                     float[] convertedTimeBonus = new float[goal.TimeBonuses.Length];
 
-                    // Convert all entires in time bonus to a float.
-                    ConvertAndSortTimes(convertedTimeBonus);
-                    AssignTimeBonus(convertedTimeBonus);
+                    ConvertEntriesToPrepare(convertedTimeBonus);
                 }
+            }
+            else
+            {
+                //Convert goal to secs.
+                var convertedGoal = CoreUtilities.MinsToSec(goal.TimeLimit);
+                var thirds = convertedGoal * .33f;
+                var timeRemaining = convertedGoal - time;
+
+                // If time left is bigger than two thirds the limit...
+                if (timeRemaining < thirds)
+                {
+                    // max bonus?
+                    timeBonus = (int)convertedGoal;
+                }
+                else if (timeRemaining > thirds * 2)
+                {
+                    // No bonus.
+                    timeBonus = 0;
+                }
+                else
+                {
+                    // somewhere in between
+                    timeBonus = (int)timeRemaining;
+                }
+
+                PrepareFinalScore();
+            }
+
+            void ConvertEntriesToPrepare(float[] convertedTimeBonus)
+            {
+                ConvertAndSortTimes(convertedTimeBonus);
+                AssignTimeBonus(convertedTimeBonus);
             }
         }
 
@@ -120,11 +150,7 @@ namespace BreakoutSystem
         /// <summary>
         /// Calculate the time bonus based on the goal tiles.
         /// </summary>
-        /// <param name="score"></param>
-        /// <param name="time"></param>
-        /// <param name="timeBonus"></param>
-        /// <param name="convertedTimeBonus"></param>
-        /// <returns></returns>
+        /// <param name="convertedTimeBonus">Array of time bonuses.</param>
         private void AssignTimeBonus(float[] convertedTimeBonus)
         {
             if (time >= convertedTimeBonus[0])
